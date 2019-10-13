@@ -75,6 +75,9 @@ function draw(){
     textSize(24);
     text('Archivo no cargado\nEspera unos minutos\nO prueba con otro',width/2,height/2);
   }
+
+  document.getElementById("Duracion").innerHTML = volumenMusica(parseInt(sound.currentTime()))
+    + " - " + volumenMusica(parseInt(sound.duration()));
 }
 
 function toggleSound(){
@@ -91,4 +94,24 @@ function keyPressed(){
 
 function mousePressed(){
   if(mouseX>0&&mouseX<width&&mouseY>0&&mouseY<height) toggleSound();
+}
+
+function volumenMusica(self){
+  var entrada = parseInt(self.value);
+  console.log(volumen);
+  console.log(entrada/10);
+  //volumen =  parseInt(entrada);
+  //volumen = parseInt(entrada)/10;
+  volumen.value(entrada/10);
+
+  document.getElementById("valorVolumenMusica").innerHTML = entrada;
+  console.log(sound.pan());
+
+}
+
+
+function volumenMusica(valor){
+  var minutos = parseInt(valor/60);
+  var segundos= valor%60;
+  return minutos +":"+ segundos;
 }
