@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-  
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
   <!-- JQuery -->
@@ -35,6 +35,20 @@
     src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"
     integrity="sha256-GdlroanCXFgv0ILaTQ1v0qnNxc+FQNjjXADWxmtr7PM="
     crossorigin="anonymous"></script>
+  
+  <div id="Contenedor">
+    <label class="lbl">Duracion: </label>
+    <label class="lbl" id="Duracion"> </label>
+    <br>
+    
+    <label class="lbl">Volumen: </label>
+    <input type="range" id="tamanhoFigura" 
+      onchange="volumenMusica(this)" , value="5" max="10" min="0"/>
+    <label class="lbl" id="valorVolumenMusica" >5 </label>
+
+  </div>
+
   <script src="script/sketch.js"></script>
+  
 </body>
 </html>

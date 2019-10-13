@@ -75,6 +75,9 @@ function draw(){
     textSize(24);
     text('Archivo no cargado\nEspera unos minutos\nO prueba con otro',width/2,height/2);
   }
+
+  $("#Duracion").html(volumenMusica(parseInt(sound.currentTime()))
+    + " - " + volumenMusica(parseInt(sound.duration())));
 }
 
 function toggleSound(){
@@ -100,4 +103,24 @@ function fileHandle(file){
     sound = loadSound(file,()=>{sound.loop();});
     volume.valumen(0.5);
   }
+}
+
+function volumenMusica(self){
+  var entrada = parseInt(self.value);
+  console.log(volumen);
+  console.log(entrada/10);
+  //volumen =  parseInt(entrada);
+  //volumen = parseInt(entrada)/10;
+  volumen.value(entrada/10);
+
+  $("#valorVolumenMusica").html(entrada);
+  console.log(sound.pan());
+
+}
+
+
+function volumenMusica(valor){
+  var minutos = parseInt(valor/60);
+  var segundos= valor%60;
+  return minutos +":"+ segundos;
 }
