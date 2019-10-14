@@ -1,83 +1,99 @@
-let x=0,y=120;
-let volumen, canvas, fqslider;
-let sound, fft;
-
-let points = [];
-
-let cRojo ,cAzul;
+let volumen, canvas, textCanvas;
+let sound, fft, amplitude;
 
 let fileInput;
+let hmap = [];
+let w, small, big;
 
 function setup(){
-  sound = loadSound('assets/megalovania.mp3',()=>{sound.loop();});
-  //sound = loadSound('assets/BohemianRhapsody.mp3',()=>{sound.loop();});
-  
+  /*Archivo de audio por defecto*/
+  sound = loadSound('assets/megalovania.mp3',soundLoaded,soundError);
+  /*Input de archivo*/
   fileInput = createFileInput(fileHandle);
-  
-  canvas = createCanvas(400,400);
-  y = width/2;
-  fft = new p5.FFT(0,256);
+  /*Observer del volumen*/
+  amplitude = new p5.Amplitude();
+  /*trasnformada rapida de fourier, para el espectro*/
+  fft = new p5.FFT(0,32);
+
+
+  canvas = createCanvas(windowWidth,windowHeight,WEBGL);
   volumen = createSlider(0,1,0.5,0.1);
-  //fqslider = createSlider(0,255,128,1);
   
-  for(let i=0;i<fft.bins;++i){
-    points.push({
-      x: random(0,width),
-      y: random(0,height),
-    });
-  }
+  small = min(width,height);
+  big = max(width,height);
+  w = big/16;
+  
+  colorMode(HSB); 
+
+  /*Esto es para mensajes de estado*/
+  /*Al usar un render 3d no acepta dibujar texto normalmente*/
+  textCanvas = createGraphics(400,400);
+    textCanvas.background(0);
+    textCanvas.fill(255);
+    textCanvas.textAlign(CENTER,CENTER);
+    textCanvas.textSize(24);
+    textCanvas.text('Archivo no cargado\nEspera unos minutos\nO prueba con otro',200,200);
 }
 
 function draw(){
-  background(206);
+  background(0);
   if(sound.isLoaded()){
+    
     sound.setVolume(volumen.value());
-    
-    colorMode(HSB); 
-    let spectrum = fft.analyze();
-    for (let i = 0; i< spectrum.length; i++){
-      fill(map(i,0,spectrum.length,0,360),100,100);
-      ellipse(points[i].x, points[i].y, map(spectrum[i],0,255,0,40));
-    }
-    
-    //let spectrum = fft.analyze();
-    for (let i = 0; i< spectrum.length; i++){
-      let theta = map(i, 0, spectrum.length, 0, TAU);
-      let r = map(spectrum[i], 0, 255, 0, width/4);
-      let x = r * sin(theta) + width/2;
-      let y = r * cos(theta) + width/2;
-      stroke(map(i,0,spectrum.length,0,360),100,100);
-      line(width/2,width/2,x,y);
-      //line(x, height, width / spectrum.length, h )
-    }
-     
-    colorMode(RGB);
-    var waveform = fft.waveform();
-    noFill();
+   
+    /*Aca meto el estado actual del espectro a la cola del mapa de altura*/
+    let row = hmap.push([])-1;
+    let spectrum = fft.analyze(32);
+    for(let i=0;i<spectrum.length;++i) hmap[row][i] = spectrum[i];
+    /*Elimino la cabeza si ya hay 32 estados*/
+    if(hmap.length>=32) hmap.shift();
+
+    noStroke();
+ 
+    /*Lo que hace esto es renderizar la matriz del mapa de altura
+     *Como varios triangle_strip, donde la altura es el valor del espectro
+     *Se puede ver como z->tiempo, x->frecuencia, y->amplitud de la freq
+     */
     push();
-    {
-      translate(width/2,height/2);
-      beginShape();
-      stroke(255,0,0); // waveform is red
-      strokeWeight(1);
-      for (var i = 0; i< waveform.length; i++){
-        let theta = map(i, 0, waveform.length, 0, TAU);//*fqslider.value();
-        let r = map( waveform[i], -1, 1, 0, width/2);
-        let x = r * sin(theta);
-        let y = r * cos(theta);
-        vertex(x,y);
+    /*Constantes magicas*/
+    translate(-(w*16),40,-(height));
+    rotateX(10*PI/27);
+    for(let i=0;i<(hmap.length-1);++i){
+      beginShape(TRIANGLE_STRIP);
+      for(let j=0;j<hmap[i].length;++j){
+        fill(map(j,0,spectrum.length,0,360),100,map(hmap[i][j],0,255,0,100));
+        vertex(j*w,big-i*w,hmap[i][j]);
+        fill(map(j,0,spectrum.length,0,360),100,map(hmap[i+1][j],0,255,0,100));
+        vertex(j*w,big-(i+1)*w,hmap[i+1][j]);
       }
       endShape();
     }
     pop();
+
+    /*El circulito de la waveform, habria que hacer algo interesante con este*/
+    let waveform = fft.waveform();
+    fill(255,0);
+    push();
+    {
+      beginShape();
+      stroke(map(amplitude.getLevel(),0,1,0,360),100,100);// color varia con el volumen de la cancion
+      strokeWeight(4);
+      for (var i = 0; i< waveform.length; i++){
+        let theta = map(i, 0, waveform.length, 0, TAU);
+        let r = map( waveform[i], -1, 1, 0, small/2);
+        let x = r * sin(theta);
+        let y = r * cos(theta);
+        vertex(x,y,-10);
+      }
+      endShape(CLOSE);
+    }
+    pop();
   } else {
-    textAlign(CENTER,CENTER);
-    textSize(24);
-    text('Archivo no cargado\nEspera unos minutos\nO prueba con otro',width/2,height/2);
+    texture(textCanvas);
+    plane(400,400);
   }
 
-  $("#Duracion").html(volumenMusica(parseInt(sound.currentTime()))
-    + " - " + volumenMusica(parseInt(sound.duration())));
+  $("#Duracion").html(floor(+sound.currentTime()/60) +":"+ floor(+sound.currentTime()%60)+" - "+floor(+sound.duration()/60) +":"+ floor(+sound.duration()%60));
 }
 
 function toggleSound(){
@@ -89,7 +105,7 @@ function toggleSound(){
 }
 
 function keyPressed(){
-  if(key=='p') toggleSound();
+  if(key=='p' || key == ' ') toggleSound();
 }
 
 function mousePressed(){
@@ -97,12 +113,23 @@ function mousePressed(){
 }
 
 function fileHandle(file){
-  console.log(file);
   if(file.type=="audio"){
+    textCanvas.background(0);
+    textCanvas.text('Archivo no cargado\nEspera unos minutos\nO prueba con otro',200,200);
     sound.stop();
-    sound = loadSound(file,()=>{sound.loop();});
+    sound = loadSound(file,soundLoaded,soundError);
     volume.valumen(0.5);
+  } else {
+    soundError();
   }
+}
+
+function soundLoaded(){
+  sound.loop();
+}
+function soundError(){
+    textCanvas.background(0);
+    textCanvas.text('Archivo no cargado\nPrueba con otro',200,200);
 }
 
 function volumenMusica(self){
