@@ -64,7 +64,7 @@ function draw(){
         fill(map(j,0,spectrum.length,0,360),100,map(hmap[i][j],0,255,0,100));
         vertex(j*w,big-i*w,hmap[i][j]);
         fill(map(j,0,spectrum.length,0,360),100,map(hmap[i+1][j],0,255,0,100));
-        vertex(j*w,big-(i+1)*w,hmap[i+1][j]);
+        vertex((j)*w,big-(i+1)*w,hmap[i+1][j]);
       }
       endShape();
     }
