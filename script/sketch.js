@@ -46,7 +46,7 @@ function draw(){
     let spectrum = fft.analyze(32);
     for(let i=0;i<spectrum.length;++i) hmap[row][i] = spectrum[i];
     /*Elimino la cabeza si ya hay 32 estados*/
-    if(hmap.length>=32) hmap.shift();
+    if(hmap.length>=90) hmap.shift();
 //}
     noStroke();
  
@@ -56,22 +56,22 @@ function draw(){
      */
     push();
     /*Constantes magicas*/
-    translate(-(w*16),40,-(height));
+    translate(-(w*16),0,-(26*50));
     rotateX(10*PI/27);
     for(let i=0;i<(hmap.length-1);++i){
       beginShape(TRIANGLE_STRIP);
       for(let j=0;j<hmap[i].length;++j){
-        fill(map(j,0,hmap.length,0,360),100,map(hmap[i][j],0,255,0,100));
-        vertex(j*w,big-i*w,hmap[i][j]);
-        fill(map(j,0,hmap.length,0,360),100,map(hmap[i+1][j],0,255,0,100));
-        vertex((j)*w,big-(i+1)*w,hmap[i+1][j]);
+        fill(map(j,0,32,0,360),100,map(hmap[i][j],0,255,0,100));
+        vertex(j*w,big-i*(26),hmap[i][j]);
+        fill(map(j,0,32,0,360),100,map(hmap[i+1][j],0,255,0,100));
+        vertex((j)*w,big-(i+1)*(26),hmap[i+1][j]);
       }
       endShape();
     }
     pop();
 
     /*El circulito de la waveform, habria que hacer algo interesante con este*/
-    let waveform = fft.waveform();
+    let waveform = fft.waveform(128);
     fill(255,0);
     push();
     {
@@ -79,11 +79,11 @@ function draw(){
       stroke(map(amplitude.getLevel(),0,1,0,360),100,100);// color varia con el volumen de la cancion
       strokeWeight(4);
       for (var i = 0; i< waveform.length; i++){
-        let theta = map(i, 0, waveform.length, 0, TAU);
-        let r = map( waveform[i], -1, 1, 0, small/2);
+        let theta = map(i, 0, waveform.length-1, 0, TAU);
+        let r = map( waveform[i], -1, 1, small/8, small/4);
         let x = r * sin(theta);
         let y = r * cos(theta);
-        vertex(x,y,-10);
+        curveVertex(x,y,-10);
       }
       endShape(CLOSE);
     }
@@ -93,13 +93,11 @@ function draw(){
     plane(400,400);
   }
 
-  //Actualisaciones de los UI de la demostracion Grafia
+  //Actualizaciones de los UI de la demostracion Grafia
   $("#Duracion1").html(tiempoMusica(sound.currentTime())) ;
   $("#Duracion2").html(tiempoMusica(sound.duration()));
 
-  valorTiempoBarraMusica(sound.currentTime());
-
-  
+  valorTiempoBarraMusica(sound.currentTime()); 
 } 
 
 function toggleSound(){
@@ -131,6 +129,7 @@ function fileHandle(file){
 }
 
 function soundLoaded(){
+  sound.playMode('restart');
   sound.loop();
 }
 function soundError(){
@@ -179,8 +178,7 @@ function valorTiempoBarraMusica(valor){
 
 function tiempoBarraMusica(self){
  var tiempo=parseInt(self.value);
- sound.play(tiempo);
-
-
+ //sound.stop();
+ sound.jump(tiempo);
 }
 
