@@ -36,9 +36,16 @@
     integrity="sha256-GdlroanCXFgv0ILaTQ1v0qnNxc+FQNjjXADWxmtr7PM="
     crossorigin="anonymous"></script>
   
+    <div id="contenedorCanvas">
+      
+    </div>
+
   <div id="Contenedor">
     <label class="lbl">Duracion: </label>
-    <label class="lbl" id="Duracion"> </label>
+    <label class="lbl" id="Duracion1"> </label>
+      <input type="range" id="seekTime" 
+      onchange="volumenMusica(this)" , value="0" max="300" min="0"/>
+    <label class="lbl" id="Duracion2"> </label>
     <br>
     
     <label class="lbl">Volumen: </label>

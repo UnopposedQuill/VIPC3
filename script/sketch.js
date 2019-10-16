@@ -40,14 +40,14 @@ function draw(){
   if(sound.isLoaded()){
     
     sound.setVolume(volumen.value());
-   
+    //if(frameCount%2==0){
     /*Aca meto el estado actual del espectro a la cola del mapa de altura*/
     let row = hmap.push([])-1;
     let spectrum = fft.analyze(32);
     for(let i=0;i<spectrum.length;++i) hmap[row][i] = spectrum[i];
     /*Elimino la cabeza si ya hay 32 estados*/
     if(hmap.length>=32) hmap.shift();
-
+//}
     noStroke();
  
     /*Lo que hace esto es renderizar la matriz del mapa de altura
@@ -61,9 +61,9 @@ function draw(){
     for(let i=0;i<(hmap.length-1);++i){
       beginShape(TRIANGLE_STRIP);
       for(let j=0;j<hmap[i].length;++j){
-        fill(map(j,0,spectrum.length,0,360),100,map(hmap[i][j],0,255,0,100));
+        fill(map(j,0,hmap.length,0,360),100,map(hmap[i][j],0,255,0,100));
         vertex(j*w,big-i*w,hmap[i][j]);
-        fill(map(j,0,spectrum.length,0,360),100,map(hmap[i+1][j],0,255,0,100));
+        fill(map(j,0,hmap.length,0,360),100,map(hmap[i+1][j],0,255,0,100));
         vertex((j)*w,big-(i+1)*w,hmap[i+1][j]);
       }
       endShape();
@@ -93,8 +93,14 @@ function draw(){
     plane(400,400);
   }
 
-  $("#Duracion").html(floor(+sound.currentTime()/60) +":"+ floor(+sound.currentTime()%60)+" - "+floor(+sound.duration()/60) +":"+ floor(+sound.duration()%60));
-}
+  //Actualisaciones de los UI de la demostracion Grafia
+  $("#Duracion1").html(tiempoMusica(sound.currentTime())) ;
+  $("#Duracion2").html(tiempoMusica(sound.duration()));
+
+  valorTiempoBarraMusica(sound.currentTime());
+
+  
+} 
 
 function toggleSound(){
   if(sound.isPlaying()){
@@ -146,9 +152,9 @@ function volumenMusica(self){
 }
 
 
-function volumenMusica(valor){
+function tiempoMusica(valor){
   var minutos = parseInt(valor/60);
-  var segundos= valor%60;
+  var segundos= parseInt(valor%60);
   if(minutos<=9){
     minutos="0"+ minutos;
 
@@ -158,7 +164,21 @@ function volumenMusica(valor){
     segundos="0"+ segundos;
 
   }
-  console.log(minutos +":"+ segundos);
 
   return minutos +":"+ segundos;
 }
+
+function valorBarraMusica(valor){
+  //document.getElementById("myRange").value = "75";
+}
+
+
+function valorTiempoBarraMusica(valor){
+  document.getElementById("seekTime").value = parseInt(valor);
+}
+
+function tiempoBarraMusica(self){
+
+
+}
+
