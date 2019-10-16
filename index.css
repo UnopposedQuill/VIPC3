@@ -10,7 +10,7 @@ body{
 
 .lbl{
 	color: #BCF50C;
-
+	margin-left: 5px;
 }
 
 #tamanhoFigura{
@@ -49,4 +49,48 @@ body{
   border-radius: 50%;
   background: #4CAF50;
   cursor: pointer;
+}
+
+/*----------Bottones----------*/
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  margin-left: 10px;
+}
+
+.button:hover {
+  background-color: #77FF55; /* Green */
+  color: #555555;
+   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+/*
+.button {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.button:hover {background-color: #3e8e41}
+
+*/.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }

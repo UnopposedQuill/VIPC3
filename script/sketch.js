@@ -4,6 +4,7 @@ let sound, fft, amplitude;
 let fileInput;
 let hmap = [];
 let w, small, big;
+let barraDuracionActiva = true;
 
 function setup(){
   /*Archivo de audio por defecto*/
@@ -98,11 +99,12 @@ function draw(){
   $("#Duracion2").html(tiempoMusica(sound.duration()));
 
   valorTiempoBarraMusica(sound.currentTime()); 
+  actualizarbtn();
 } 
 
 function toggleSound(){
   if(sound.isPlaying()){
-    sound.pause();
+    sound.pause(); 
   } else {
     sound.play();
   }
@@ -131,6 +133,7 @@ function fileHandle(file){
 function soundLoaded(){
   sound.playMode('restart');
   sound.loop();
+  document.getElementById("seekTime").max = parseInt(sound.duration());
 }
 function soundError(){
     textCanvas.background(0);
@@ -173,12 +176,38 @@ function valorBarraMusica(valor){
 
 
 function valorTiempoBarraMusica(valor){
-  document.getElementById("seekTime").value = parseInt(valor);
+  if(barraDuracionActiva){
+    document.getElementById("seekTime").value = parseInt(valor);
+
+  }
+  
 }
 
 function tiempoBarraMusica(self){
  var tiempo=parseInt(self.value);
  //sound.stop();
  sound.jump(tiempo);
+ barraDuracionActiva = true;
 }
 
+function noActualizarBarraMusica(){
+  barraDuracionActiva = false;
+}
+
+function ActualSizarBarraMusica(){
+  barraDuracionActiva = true;
+
+}
+
+function btnStop(){
+  sound.stop();
+}
+
+function actualizarbtn(){
+  if(sound.isPlaying()){
+    document.getElementById("btnPausa").innerHTML = "Pause";
+  } else {
+    document.getElementById("btnPausa").innerHTML = "Play";
+  }
+
+}

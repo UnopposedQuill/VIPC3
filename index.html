@@ -45,7 +45,7 @@
     <label class="lbl">Duracion: </label>
     <label class="lbl" id="Duracion1"> </label>
       <input type="range" class="slider" id="seekTime" 
-      onchange="tiempoBarraMusica(this)" , value="0" max="300" min="0"/>
+      onchange="tiempoBarraMusica(this)" onmouseover="noActualizarBarraMusica()" onmouseout="ActualSizarBarraMusica()" , value="0" max="300" min="0"/>
     <label class="lbl">Total: </label>
     <label class="lbl" id="Duracion2"> </label>
     <br>
@@ -54,6 +54,9 @@
     <input type="range" id="tamanhoFigura" class="slider" 
       onchange="volumenMusica(this)" , value="5" max="10" min="0"/>
     <label class="lbl" id="valorVolumenMusica" >5 </label>
+    <br>
+    <button class ="button" id = "btnPausa" onclick="toggleSound()">Pausa</button>
+    <button class ="button" id = "btnStop" onclick="btnStop()">Stop</button>
 
   </div>
 
