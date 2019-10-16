@@ -149,5 +149,16 @@ function volumenMusica(self){
 function volumenMusica(valor){
   var minutos = parseInt(valor/60);
   var segundos= valor%60;
+  if(minutos<=9){
+    minutos="0"+ minutos;
+
+  }
+
+  if(segundos<=9){
+    segundos="0"+ segundos;
+
+  }
+  console.log(minutos +":"+ segundos);
+
   return minutos +":"+ segundos;
 }
