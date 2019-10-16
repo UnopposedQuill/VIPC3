@@ -178,6 +178,8 @@ function valorTiempoBarraMusica(valor){
 }
 
 function tiempoBarraMusica(self){
+ var tiempo=parseInt(self.value);
+ sound.play(tiempo);
 
 
 }

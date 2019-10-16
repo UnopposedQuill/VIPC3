@@ -41,15 +41,17 @@
     </div>
 
   <div id="Contenedor">
+    <br>
     <label class="lbl">Duracion: </label>
     <label class="lbl" id="Duracion1"> </label>
-      <input type="range" id="seekTime" 
-      onchange="volumenMusica(this)" , value="0" max="300" min="0"/>
+      <input type="range" class="slider" id="seekTime" 
+      onchange="tiempoBarraMusica(this)" , value="0" max="300" min="0"/>
+    <label class="lbl">Total: </label>
     <label class="lbl" id="Duracion2"> </label>
     <br>
     
     <label class="lbl">Volumen: </label>
-    <input type="range" id="tamanhoFigura" 
+    <input type="range" id="tamanhoFigura" class="slider" 
       onchange="volumenMusica(this)" , value="5" max="10" min="0"/>
     <label class="lbl" id="valorVolumenMusica" >5 </label>
 
