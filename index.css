@@ -18,7 +18,11 @@ body{
 
 }
 
-/*Satan esta por aca*/
+#barraVelocidad{
+	width: 20%;
+
+}
+/*----------- Sliders----------*/
 
 .slider {
   -webkit-appearance: none;

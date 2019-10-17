@@ -5,6 +5,7 @@ let fileInput;
 let hmap = [];
 let w, small, big;
 let barraDuracionActiva = true;
+let loopActivo = true;
 
 function setup(){
   /*Archivo de audio por defecto*/
@@ -135,6 +136,7 @@ function soundLoaded(){
   sound.loop();
   document.getElementById("seekTime").max = parseInt(sound.duration());
 }
+
 function soundError(){
     textCanvas.background(0);
     textCanvas.text('Archivo no cargado\nPrueba con otro',200,200);
@@ -205,9 +207,41 @@ function btnStop(){
 
 function actualizarbtn(){
   if(sound.isPlaying()){
-    document.getElementById("btnPausa").innerHTML = "Pause";
-  } else {
     document.getElementById("btnPausa").innerHTML = "Play";
+    document.getElementById("btnPausa").style.background = "#77FF55";
+  } else {
+    document.getElementById("btnPausa").innerHTML = "Pause";
+    document.getElementById("btnPausa").style.background = "#4CAF50";
+  }
+
+  if(loopActivo){
+    document.getElementById("btnLoop").innerHTML = "Loop ON";
+    document.getElementById("btnLoop").style.background = "#77FF55";
+  } else {
+    document.getElementById("btnLoop").innerHTML = "Loop OFF";
+    document.getElementById("btnLoop").style.background = "#4CAF50";
   }
 
 }
+
+function Velocidad(self){
+  var entrada = parseInt(self.value);
+  sound.rate(entrada);
+  console.log(entrada);
+  document.getElementById("valorVelocidadMusica").innerHTML = entrada;
+}
+
+function btnLoopMetodo(){
+  if(loopActivo){
+    //sound.stop();
+    //sound.play();
+    loopActivo=false;
+  }
+  else{
+    //sound.stop();
+    //sound.loop();
+    loopActivo=true;
+  }
+}
+
+
