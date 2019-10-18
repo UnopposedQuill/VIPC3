@@ -36,36 +36,42 @@
     integrity="sha256-GdlroanCXFgv0ILaTQ1v0qnNxc+FQNjjXADWxmtr7PM="
     crossorigin="anonymous"></script>
   
-    <div id="contenedorCanvas">
-      
-    </div>
+    <!-- <div id="contenedorCanvas"></div> -->
 
   <div id="Contenedor">
-    <br>
-    <label class="lbl">Duracion: </label>
-    <label class="lbl" id="Duracion1"> </label>
-      <input type="range" class="slider" id="seekTime" 
-      onchange="tiempoBarraMusica(this)" onmouseover="noActualizarBarraMusica()" onmouseout="ActualSizarBarraMusica()" , value="0" max="300" min="0"/>
-    <label class="lbl">Total: </label>
-    <label class="lbl" id="Duracion2"> </label>
-    <br>
     
-    <label class="lbl">Volumen: </label>
-    <input type="range" id="tamanhoFigura" class="slider" 
-      onchange="volumenMusica(this)" , value="5" max="10" min="0"/>
-    <label class="lbl" id="valorVolumenMusica" >5 </label>
-    <label class="lbl">/ </label>
-    <label class="lbl">Velocidad: </label>
-    <input type="range" id="barraVelocidad" class="slider" 
-      onchange="Velocidad(this)" , value="1" max="6" min="1"/>
-      <label class="lbl" id="valorVelocidadMusica" >1 </label>
-    <br>
-    
-    <button class ="button" id = "btnPausa" onclick="toggleSound()">Pausa</button>
-    <button class ="button" id = "btnStop" onclick="btnStop()">Stop</button>
-    <button class ="button" id = "btnLoop" onclick="btnLoopMetodo()">Loop</button>
-    <button class ="button" id = "btnStop" onclick="btnStop()">Reversa OFF</button>
+    <div class="Separador"></div>
 
+    <div class = "Encapsulador">
+      <label class="lbl">Duracion: </label>
+      <label class="lbl" id="Duracion1"> </label>
+        <input type="range" class="slider" id="seekTime" 
+        onchange="tiempoBarraMusica(this)" onmouseover="noActualizarBarraMusica()" onmouseout="ActualSizarBarraMusica()" , value="0" max="300" min="0"/>
+      <label class="lbl">Total: </label>
+      <label class="lbl" id="Duracion2"> </label>
+    </div>
+    
+
+    <div class = "Encapsulador2">
+      <label class="lbl">Volumen: </label>
+      <input type="range" id="tamanhoFigura" class="slider" 
+        onchange="volumenMusica(this)" , value="5" max="10" min="0"/>
+      <label class="lbl" id="valorVolumenMusica" >5 </label>
+    </div>
+
+    <div class = "Encapsulador2">
+      <label class="lbl">Velocidad: </label>
+      <input type="range" id="barraVelocidad" class="slider" 
+        onchange="Velocidad(this)" , value="1" max="6" min="1"/>
+      <label class="lbl" id="valorVelocidadMusica" >1 </label>
+    </div>
+    
+    <div class="Encapsulador3">
+      <button class ="button" id = "btnPausa" onclick="toggleSound()">Pausa</button>
+      <button class ="button" id = "btnStop" onclick="btnStop()">Stop</button>
+      <button class ="button" id = "btnLoop" onclick="btnLoopMetodo()">Loop</button>
+      <button class ="button" id = "btnReversa" onclick="inversorMusical()">Reversa OFF</button>
+    </div>
 
   </div>
 

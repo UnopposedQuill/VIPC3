@@ -6,6 +6,7 @@ let hmap = [];
 let w, small, big;
 let barraDuracionActiva = true;
 let loopActivo = true;
+let invertidor=false;
 
 function setup(){
   /*Archivo de audio por defecto*/
@@ -101,6 +102,7 @@ function draw(){
 
   valorTiempoBarraMusica(sound.currentTime()); 
   actualizarbtn();
+  noEjecutarLoop();
 } 
 
 function toggleSound(){
@@ -172,8 +174,24 @@ function tiempoMusica(valor){
   return minutos +":"+ segundos;
 }
 
-function valorBarraMusica(valor){
-  //document.getElementById("myRange").value = "75";
+function inversorMusical(){
+  if(invertidor){
+    sound.rate(1);
+    invertidor=false;
+
+    document.getElementById("valorVelocidadMusica").innerHTML ="1";
+    document.getElementById("barraVelocidad").value=1;
+  }else{
+    
+    sound.rate(-1);
+    sound.rate(0);
+    sound.rate(-1);
+    invertidor=true;
+
+    document.getElementById("valorVelocidadMusica").innerHTML ="-1";
+    document.getElementById("barraVelocidad").value=1;
+  }
+
 }
 
 
@@ -181,8 +199,7 @@ function valorTiempoBarraMusica(valor){
   if(barraDuracionActiva){
     document.getElementById("seekTime").value = parseInt(valor);
 
-  }
-  
+  }  
 }
 
 function tiempoBarraMusica(self){
@@ -206,6 +223,7 @@ function btnStop(){
 }
 
 function actualizarbtn(){
+  
   if(sound.isPlaying()){
     document.getElementById("btnPausa").innerHTML = "Play";
     document.getElementById("btnPausa").style.background = "#77FF55";
@@ -220,28 +238,47 @@ function actualizarbtn(){
   } else {
     document.getElementById("btnLoop").innerHTML = "Loop OFF";
     document.getElementById("btnLoop").style.background = "#4CAF50";
+  
   }
 
+  if(invertidor){
+    document.getElementById("btnReversa").innerHTML = "Reversa ON";
+    document.getElementById("btnReversa").style.background = "#77FF55";
+  } else {
+    document.getElementById("btnReversa").innerHTML = "Reversa OFF";
+    document.getElementById("btnReversa").style.background = "#4CAF50";
+  }
+  
 }
 
 function Velocidad(self){
   var entrada = parseInt(self.value);
+  if(invertidor){
+    entrada=entrada*-1;
+  }
+
   sound.rate(entrada);
-  console.log(entrada);
   document.getElementById("valorVelocidadMusica").innerHTML = entrada;
+  //invertidor=false;
 }
 
 function btnLoopMetodo(){
   if(loopActivo){
-    //sound.stop();
-    //sound.play();
     loopActivo=false;
   }
   else{
-    //sound.stop();
-    //sound.loop();
     loopActivo=true;
   }
+}
+
+function noEjecutarLoop(){
+  var test1 = parseInt(sound.currentTime());
+  var test2= parseInt(sound.duration());
+  //console.log(test1 + " - " + test2);  
+  if(!loopActivo && test1 == test2 && sound.isLoaded()){
+    sound.stop();
+  }
+
 }
 
 
