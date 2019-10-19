@@ -55,9 +55,12 @@ function draw(){
     if(soundMode) sound.setVolume(volumen.value());
     /*Aca meto el estado actual del espectro a la cola del mapa de altura*/
     let row = hmap.push([])-1;
+    let w = width/12, uv = width/50; //constantes magicas
     let spectrum = fft.analyze(32);
     for(let i=0;i<spectrum.length;++i) hmap[row][i] = spectrum[i];
-    /*Elimino la cabeza si ya hay 32 estados*/
+    /*Elimino la cabeza si ya hay 90 estados
+     *90 es una heruristica empirica que parece funcionar bien
+     */
     if(hmap.length>=90) hmap.shift();
 
     noStroke();
@@ -67,16 +70,25 @@ function draw(){
      *Se puede ver como z->tiempo, x->frecuencia, y->amplitud de la freq
      */
     push();
-    /*Constantes magicas*/
-    translate(-(w*16),0,-(26*50));
-    rotateX(10*PI/27);
+    /*Ajuste a la izquierda para que quede centrado, y con un margen para que asi las filas de atras no se vean pequeñas
+     *Ajuste Vertical para que el origen vertical este en la base de la pantalla
+     *No hay ajuste de Z
+     */
+    translate(-width/2-10*w,height/2,0);
+    /**Rotate para ver el map con angulo**/
+    rotateX(-0.5);
     for(let i=0;i<(hmap.length-1);++i){
       beginShape(TRIANGLE_STRIP);
       for(let j=0;j<hmap[i].length;++j){
+        /*j->columna de la fila, x
+         *i->fila del hmap, z, con un ajuste para que la primera fila (la mas antigua) siempre este fuera de pantalla y no se vea el corte
+         *h[i][j]->altura de la frecuencia, y
+         */
+        /**Color por vertex**/
         fill(map(j,0,32,0,360),100,map(hmap[i][j],0,255,0,100));
-        vertex(j*w,big-i*(26),hmap[i][j]);
+        vertex(j*w,height-hmap[i][j],-i*uv+uv);
         fill(map(j,0,32,0,360),100,map(hmap[i+1][j],0,255,0,100));
-        vertex((j)*w,big-(i+1)*(26),hmap[i+1][j]);
+        vertex(j*w,height-hmap[i+1][j],-i*uv);
       }
       endShape();
     }
@@ -86,16 +98,17 @@ function draw(){
     let waveform = fft.waveform(128);
     fill(255,0);
     push();
+    translate(0,0,-10);
     {
       beginShape();
       stroke(map(amplitude.getLevel(),0,1,0,360),100,100);// color varia con el volumen de la cancion
       strokeWeight(4);
       for (var i = 0; i< waveform.length; i++){
-        let theta = map(i, 0, waveform.length-1, 0, TAU);
+        let theta = map(i, 0, waveform.length, 0, TAU);
         let r = map( waveform[i], -1, 1, small/8, small/4);
         let x = r * sin(theta);
         let y = r * cos(theta);
-        curveVertex(x,y,-10);
+        curveVertex(x,y,0);
       }
       endShape(CLOSE);
     }
@@ -309,10 +322,11 @@ function selChange(){
     }
     soundMode = true;
   } else {
-    if(soundMode) sound.stop(); //sM => esataba con sound
+    if(soundMode && sound.isLoaded()) sound.pause(); //sM => esataba con sound
     mic.getSources(ls=>{
       ls.forEach((d,i)=>{
         if(d.label === value){
+          console.log(d.label);
           mic.setSource(i);
           return;
         }
