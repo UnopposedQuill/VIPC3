@@ -1,6 +1,13 @@
 let volumen, canvas, textCanvas, sel;
 let sound, fft, amplitude, mix;
 let soundMode = true; //true=>archivo, false=>audio de la computadora/microfono
+/*********************************************************
+ *********************************************************
+ **                      CUIDADO                        **
+ **   EL MODO DE AUDIO DE LA COMPUTADORA ES MAS PESADO  **
+ **  SE ESPERA LAG CONSIDERABLE COMPARADO AL DE ARCHIVO **
+ *********************************************************
+ *********************************************************/
 
 let fileInput;
 let hmap = [];
