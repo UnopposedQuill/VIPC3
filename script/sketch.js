@@ -129,8 +129,11 @@ function draw(){
   $("#Duracion1").html(tiempoMusica(sound.currentTime())) ;
   $("#Duracion2").html(tiempoMusica(sound.duration()));
 
+  //metodo encargado de actualizar el Slider de tiempo del UI
   valorTiempoBarraMusica(sound.currentTime()); 
+  //metodo encargado de actualizar los botones en ejecucion dependiendo de su estado
   actualizarbtn();
+  //metodo encargado de revisar si el loop de la cancion esta activo para repertirse
   noEjecutarLoop();
 } 
 
@@ -174,54 +177,89 @@ function soundError(){
     textCanvas.text('Archivo no cargado\nPrueba con otro',200,200);
 }
 
+/*Funcion encargado de actualizar el volumen de la cancion utlizando un slider del UI*/
 function volumenMusica(self){
+  
   if(!soundMode) return;
+  //Obtiene el valor del Slider de volumen del UI y pasa el valor a un numero
   var entrada = parseInt(self.value);
-  console.log(volumen);
-  console.log(entrada/10);
-  //volumen =  parseInt(entrada);
-  //volumen = parseInt(entrada)/10;
+  //Asigna el valor del volumen a la cancion pero lo divide entre 10 porque el radio de valor 0.0 a 1.0
   volumen.value(entrada/10);
-
+  //Se refresca el valor del lbl que despliega el valor del volumen en el UI
   $("#valorVolumenMusica").html(entrada);
-  console.log(sound.pan());
-
 }
 
-
+/*Funcion encargada padar los segundos dados  en eun patron de MM:SS*/
 function tiempoMusica(valor){
+
   if(!soundMode) return;
+  
+  //Variable encargada de obtener los Minutos de la cancion
   var minutos = parseInt(valor/60);
+  
+  //Variable encargada de obtener los Segundos de la cancion
   var segundos= parseInt(valor%60);
+  
+  //If encargado de revizar si el numero es menor a 10 para colocar un cero para que se vea mas estetico
+  //la representacion de los Minutos 
   if(minutos<=9){
     minutos="0"+ minutos;
-
   }
-
+  
+  //If encargado de revizar si el numero es menor a 10 para colocar un cero para que se vea mas estetico
+  //la representacion de los Segundos
   if(segundos<=9){
     segundos="0"+ segundos;
-
   }
 
+  //Retorna un String con los minutos y segundos acomodados de manera estetica
   return minutos +":"+ segundos;
 }
 
+/*Funcion encargada de reproducir en reversa la cancion o rever*/
 function inversorMusical(){
   if(!soundMode) return;
+
+  //if encargo de revisar si la variable de invertido esta en un valor de true y si este 
+  //es el caso colocar la cancion a velocidad de 1 a sonar normal 
   if(invertidor){
+    
+    //se asigna el valor de velocidad 1 a la cancion
     sound.rate(1);
+
+    //se actualiza el valor la variable invertidor
     invertidor=false;
 
+    //Se actualiza el valor del lbl con la velocidad de la cancion
     document.getElementById("valorVelocidadMusica").innerHTML ="1";
+
+    //se asigna el valor de 1 al slider de velocidad
     document.getElementById("barraVelocidad").value=1;
-  }else{
+  }
+
+  //else que se ejecutara si el if anterior no cumple con la condicion, si 
+  //es el caso colocar la cancion a velocidad de -1 a sonar en reversa
+  else{
+  
+    /*Por un error de la libreria se hace un juego con la velocidad negativa para que esta
+    pueda ser ejecutada*/
+
+    //se asigna el valor de velocidad -1 a la cancion    
+    sound.rate(-1);
     
-    sound.rate(-1);
+    //se asigna el valor de velocidad 0 a la cancion
     sound.rate(0);
+    
+    //se asigna el valor de velocidad -1 a la cancion
     sound.rate(-1);
+
+    //se actualiza el valor la variable invertidor
     invertidor=true;
 
+    //Se actualiza el valor del lbl con la velocidad de la cancion
     document.getElementById("valorVelocidadMusica").innerHTML ="-1";
+    
+    //se asigna el valor de 1 al slider de velocidad
     document.getElementById("barraVelocidad").value=1;
   }
 
