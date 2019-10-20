@@ -169,6 +169,8 @@ function soundLoaded(){
   if(!soundMode) return;
   sound.playMode('restart');
   sound.loop();
+
+  //Se le asigna como valor maximo al slider de tiempo la duracion total de la cancion
   document.getElementById("seekTime").max = parseInt(sound.duration());
 }
 
@@ -346,61 +348,116 @@ function actualizarbtn(){
 
     //se actualiza el la palabra dentro del boton a Pause
     document.getElementById("btnPausa").innerHTML = "Pause";
-    
+
     //Se actualiza el color del boton con relacion al valor
     document.getElementById("btnPausa").style.background = "#4CAF50";
   }
 
+  //if encargado de recizar si la cancion se esta ejecutando en loop para actualizar el btnLoop 
   if(loopActivo){
+
+    //Se actualiza el la palabra dentro del boton a Loop ON
     document.getElementById("btnLoop").innerHTML = "Loop ON";
+
+    //Se actualiza el color del boton con relacion al valor
     document.getElementById("btnLoop").style.background = "#77FF55";
-  } else {
+  } 
+
+  //else encargado de actualizar el btnLoop
+  else {
+
+    //Se actualiza el la palabra dentro del boton a Loop OFF
     document.getElementById("btnLoop").innerHTML = "Loop OFF";
+
+    //Se actualiza el color del boton con relacion al valor
     document.getElementById("btnLoop").style.background = "#4CAF50";
   
   }
 
+   //if encargado de recizar si la cancion se esta ejecutando en loop para actualizar el btnReversa
   if(invertidor){
+
+    //Se actualiza el la palabra dentro del boton a Reversa ON
     document.getElementById("btnReversa").innerHTML = "Reversa ON";
+
+    //Se actualiza el color del boton con relacion al valor
     document.getElementById("btnReversa").style.background = "#77FF55";
-  } else {
+  }
+
+  //else encargado de actualizar el btnReversa
+  else {
+
+    //Se actualiza el la palabra dentro del boton a Reversa OFF
     document.getElementById("btnReversa").innerHTML = "Reversa OFF";
+
+    //Se actualiza el color del boton con relacion al valor
     document.getElementById("btnReversa").style.background = "#4CAF50";
   }
-  
 }
 
+/*Funcion a encargada de asignar la velociada a la cacion ya sea en funcion normal o en reversa*/
 function Velocidad(self){
+
+  //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
+
+  //se obpiene el valor del Slider de velocidad 
   var entrada = parseInt(self.value);
+
+  //si la funcion de reversa esta activa el valor del Slider se hara negativo 
   if(invertidor){
+
+    //Se hace negativo el valor del Slider
     entrada=entrada*-1;
   }
 
+  //Se le asigna la velocidad a la cancion
   sound.rate(entrada);
+
+  //Se actualiza el valor del lbl que muestra la velocidad de ejecucion
   document.getElementById("valorVelocidadMusica").innerHTML = entrada;
-  //invertidor=false;
 }
 
+/*funncion encargada de activar y desactivar el loop de la cancion*/
 function btnLoopMetodo(){
+
+  //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
+
+  //if encargadod de desactivar el loop
   if(loopActivo){
+
+    //Se desactiva el loop
     loopActivo=false;
   }
+
+  //if encargadod de activar el loop
   else{
+
+    //Se activar el loop
     loopActivo=true;
   }
 }
 
+/*Funcion encargada de detener la cancion en caso de que el loop este desactivado*/
 function noEjecutarLoop(){
+
+  //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
+
+  //variable encargada de conseguir el tiempo actual de la cacion
   var test1 = parseInt(sound.currentTime());
+
+  //variable encargada de conseguir el tiempo total de la cacion
   var test2= parseInt(sound.duration());
-  //console.log(test1 + " - " + test2);  
+
+  //if encargado de revisar si el loop esta desactualizado y si el tiempo total y tiempo actual
+  //para poder detener la reproducion
   if(!loopActivo && test1 == test2 && sound.isLoaded()){
+    
+    //se detiene la cancion
     sound.stop();
   }
-
 }
 
 function selChange(){
