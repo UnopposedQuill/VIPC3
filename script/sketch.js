@@ -180,6 +180,7 @@ function soundError(){
 /*Funcion encargado de actualizar el volumen de la cancion utlizando un slider del UI*/
 function volumenMusica(self){
   
+  //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
   //Obtiene el valor del Slider de volumen del UI y pasa el valor a un numero
   var entrada = parseInt(self.value);
@@ -192,6 +193,7 @@ function volumenMusica(self){
 /*Funcion encargada padar los segundos dados  en eun patron de MM:SS*/
 function tiempoMusica(valor){
 
+  //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
   
   //Variable encargada de obtener los Minutos de la cancion
@@ -218,6 +220,8 @@ function tiempoMusica(valor){
 
 /*Funcion encargada de reproducir en reversa la cancion o rever*/
 function inversorMusical(){
+
+  //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
 
   //if encargo de revisar si la variable de invertido esta en un valor de true y si este 
@@ -258,50 +262,92 @@ function inversorMusical(){
 
     //Se actualiza el valor del lbl con la velocidad de la cancion
     document.getElementById("valorVelocidadMusica").innerHTML ="-1";
-    
+
     //se asigna el valor de 1 al slider de velocidad
     document.getElementById("barraVelocidad").value=1;
   }
 
 }
 
-
+/*Funcion encargada de Actualizar el Slider seekTime del UI con el valor actual de en 
+cual segundo se encuentra la ejecucion de la cancion*/
 function valorTiempoBarraMusica(valor){
-  if(barraDuracionActiva){
-    document.getElementById("seekTime").value = parseInt(valor);
 
+  //If encargado de revisar que si se pueda actualizar el valor y que este no 
+  //interfiera cuando el usuario intente cambiar el tiempo de ejecucion de la cancion 
+  if(barraDuracionActiva){
+    
+    //se asigna el valor al Slider con los segundos actuales de la cancion
+    document.getElementById("seekTime").value = parseInt(valor);
   }  
 }
 
+/*funcion encargada de hacer un salto en la cancion a los segundos que el usuario 
+quiere hacer*/
 function tiempoBarraMusica(self){
+  
+  //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
+  
+  //Variable encargada de conseguir el valor del tiempo al cual el Usuario quiere
+  //hacer para la reproduccion de la cancion
   var tiempo=parseInt(self.value);
-  //sound.stop();
+  
+  //Se hace el salto en segundos de la cancion
   sound.jump(tiempo);
+
+  //se activa la actualizacion del slider 
   barraDuracionActiva = true;
 }
 
+/*Funcion encargada de desactivar la actualizacion del Slider seekTime*/
 function noActualizarBarraMusica(){
+  
+  //Se desactiva la actualizacion de la barra
   barraDuracionActiva = false;
 }
 
+/*Funcion encargada de activar la actualizacion del Slider seekTime*/
 function ActualSizarBarraMusica(){
-  barraDuracionActiva = true;
 
+  //Se activa la actualizacion de la barra
+  barraDuracionActiva = true;
 }
 
+/*Funcion encargada de detener la reproduccion de la cancion que se esta ejecutando*/
 function btnStop(){
+  
+  //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
+  
+  //Se detiene la reproduccion de la cancion
   sound.stop();
 }
 
+/*Funcion encargada de actualizar el aspecto de los botones dependiendo de los
+valores en el que se encuentren en ejecucion*/
 function actualizarbtn(){
-  if(!soundMode) return; 
+
+  //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
+  if(!soundMode) return;
+
+  //if encargado de recizar si la cancion se esta ejecutando para actualizar el btnPausa 
   if(sound.isPlaying()){
+
+    //Se actualiza el la palabra dentro del boton a Play
     document.getElementById("btnPausa").innerHTML = "Play";
+
+    //Se actualiza el color del boton con relacion al valor
     document.getElementById("btnPausa").style.background = "#77FF55";
-  } else {
+  } 
+
+  //else encargado de actualizar el btnPausa 
+  else {
+
+    //se actualiza el la palabra dentro del boton a Pause
     document.getElementById("btnPausa").innerHTML = "Pause";
+    
+    //Se actualiza el color del boton con relacion al valor
     document.getElementById("btnPausa").style.background = "#4CAF50";
   }
 
