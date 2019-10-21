@@ -43,6 +43,7 @@ function selChange(){
     console.log('No rompre la madre');
     mic.start();
     $("#song-controls").hide();
+    //$("#btnPausa").hide();
     fft.setInput(mic);
     soundMode = false;
   }

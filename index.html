@@ -19,11 +19,11 @@
     <div id="song-controls" style="background:none;margin:0;padding:0;border:none;box-sizing:border-box;">
       <div class = "Encapsulador">
         <label class="lbl">Duracion: </label>
-        <label class="lbl" id="Duracion1"> </label>
+        <label class="lbl" id="Duracion1"> 00:00</label>
           <input type="range" class="slider" id="seekTime" 
           onchange="tiempoBarraMusica(this)" value="0" max="300" min="0"/>
         <label class="lbl">Total: </label>
-        <label class="lbl" id="Duracion2"> </label>
+        <label class="lbl" id="Duracion2">  00:00</label>
       </div>
       
       <div class = "Encapsulador2">
@@ -39,17 +39,23 @@
           onchange="Velocidad(this)" , value="1" max="6" min="1"/>
         <label class="lbl" id="valorVelocidadMusica" >1 </label>
       </div>
+
+      <div class="Encapsulador2" id="Encapsulador4"><!--Aqui se mete el fileInput--></div>
+
       <div class="Encapsulador3">
         <button class ="button" id = "btnPausa" onclick="toggleSound()">Pausa</button>
         <button class ="button" id = "btnStop" onclick="btnStop()">Stop</button>
         <button class ="button" id = "btnLoop" onclick="btnLoopMetodo()">Loop</button>
         <button class ="button" id = "btnReversa" onclick="inversorMusical()">Reversa OFF</button>
       </div>
-      <br>
-      <div class="Encapsulador4" id="Encapsulador4"><!--Aqui se mete el fileInput--></div>
+     
     </div>
-    <br>
-    <div class="Encapsulador5" id="Encapsulador5"><!--Aqui se mete el select --></div>
+    
+    <div class="Encapsulador5" id="Encapsulador5"> 
+        <label class="lbl">Entrada: </label>
+        <!--Aqui se mete el select -->
+      </div>
+
   </div>
 
   <!-- ----------------------------------------------- -->

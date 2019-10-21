@@ -67,11 +67,20 @@ body{
 }
 
 .Encapsulador4{
-	background-color: rgba(125,150,150,0.7);
+	
+	background-color:rgba(125,150,150,0.7);
 	border-radius: 10px 40px 5px;
+	width: 400px;
+	float: left;
+	margin-top: 3px;
+	padding: 6px;
 }
 .Encapsulador5{
-	background-color: rgba(150,125,125,0.7);
+	padding: 1px;
+	margin-top: 3px;
+	width: 200px;
+	float: left;
+	background-color: rgba(0,0,0,0.7);
 	border-radius: 10px 40px 5px;
 }
 
@@ -156,7 +165,13 @@ canvas {
 
 /*--------File Input--------*/
 .fileInputClass{
+	margin-left: 15px;
+	color: white;
+	padding:2px;
+	
 }
 /*--------Selector----------*/
 .selectorClass{
+	margin-left: 15px;
+	width: 50%;
 }
