@@ -42,7 +42,7 @@ function setup(){
   fft = new p5.FFT(0,32);
 
   canvas = createCanvas(windowWidth,windowHeight,WEBGL);
-  //volumen = createSlider(0,1,0.5,0.1);
+  volumen = createSlider(0,1,0.5,0.1);
   sel = createSelect();
   sel.option("Archivo");
   mic.getSources(ls=>{ //lista de sources de audio
@@ -132,7 +132,7 @@ function draw(){
          **/
         fill(map(j,0,32,0,360),100,(heightMap[i][j]/255.)*100);
         vertex(j*tileWidth,height-heightMap[i][j]  ,(1-i)*tileHeight);
-        fill(map(j,0,32,0,360),100,(heightMap[i+1][j])/255.)*100);
+        fill(map(j,0,32,0,360),100,(heightMap[i+1][j]/255.)*100);
         vertex(j*tileWidth,height-heightMap[i+1][j], (-i)*tileHeight);
       }
       endShape();
@@ -168,50 +168,10 @@ function draw(){
   //metodo encargado de actualizar los botones en ejecucion dependiendo de su estado
   actualizarbtn();
   //metodo encargado de revisar si el loop de la cancion esta activo para repertirse
-  noEjecutarLoop();
+  //noEjecutarLoop();
 } 
 
-function toggleSound(){
-  if(!soundMode) return;
-  if(sound.isPlaying()){
-    sound.pause(); 
-  } else {
-    sound.play();
-  }
-}
 
-function keyPressed(){
-  if(key=='p' || key == ' ') toggleSound();
-}
-
-function mousePressed(){
-  if(mouseX>0&&mouseX<width&&mouseY>0&&mouseY<height) toggleSound();
-}
-
-function fileHandle(file){
-  if(file.type=="audio"){
-    textCanvas.background(15);
-    textCanvas.text('Archivo no cargado\nEspera unos minutos\nO prueba con otro',200,200);
-    sound.stop();
-    sound = loadSound(file,soundLoaded,soundError);
-  } else {
-    soundError();
-  }
-}
-
-function soundLoaded(){
-  if(!soundMode) return;
-  sound.playMode('restart');
-  sound.loop();
-
-  //Se le asigna como valor maximo al slider de tiempo la duracion total de la cancion
-  document.getElementById("seekTime").max = parseInt(sound.duration());
-}
-
-function soundError(){
-    textCanvas.background(0);
-    textCanvas.text('Archivo no cargado\nPrueba con otro',200,200);
-}
 
 /*Funcion encargado de actualizar el volumen de la cancion utlizando un slider del UI*/
 function volumenMusica(self){
@@ -221,7 +181,7 @@ function volumenMusica(self){
   //Obtiene el valor del Slider de volumen del UI y pasa el valor a un numero
   var entrada = parseInt(self.value);
   //Asigna el valor del volumen a la cancion pero lo divide entre 10 porque el radio de valor 0.0 a 1.0
-  volumen.value(entrada/10);
+  sound.setVolume(entrada/10);
   //Se refresca el valor del lbl que despliega el valor del volumen en el UI
   $("#valorVolumenMusica").html(entrada);
 }
@@ -236,7 +196,7 @@ function tiempoMusica(valor){
   var minutos = parseInt(valor/60);
   
   //Variable encargada de obtener los Segundos de la cancion
-  var segundos= parseInt(valor%60);
+  var segundos = parseInt(valor%60);
   
   //If encargado de revizar si el numero es menor a 10 para colocar un cero para que se vea mas estetico
   //la representacion de los Minutos 
@@ -318,27 +278,9 @@ function valorTiempoBarraMusica(valor){
   }  
 }
 
-/*funcion encargada de hacer un salto en la cancion a los segundos que el usuario 
-quiere hacer*/
-function tiempoBarraMusica(self){
-  
-  //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
-  if(!soundMode) return;
-  
-  //Variable encargada de conseguir el valor del tiempo al cual el Usuario quiere
-  //hacer para la reproduccion de la cancion
-  var tiempo=parseInt(self.value);
-  
-  //Se hace el salto en segundos de la cancion
-  sound.jump(tiempo);
-
-  //se activa la actualizacion del slider 
-  barraDuracionActiva = true;
-}
 
 /*Funcion encargada de desactivar la actualizacion del Slider seekTime*/
 function noActualizarBarraMusica(){
-  
   //Se desactiva la actualizacion de la barra
   barraDuracionActiva = false;
 }
@@ -371,7 +313,7 @@ function actualizarbtn(){
   if(sound.isPlaying()){
 
     //Se actualiza el la palabra dentro del boton a Play
-    document.getElementById("btnPausa").innerHTML = "Play";
+    document.getElementById("btnPausa").innerHTML = "Playing";
 
     //Se actualiza el color del boton con relacion al valor
     document.getElementById("btnPausa").style.background = "#77FF55";
@@ -381,7 +323,7 @@ function actualizarbtn(){
   else {
 
     //se actualiza el la palabra dentro del boton a Pause
-    document.getElementById("btnPausa").innerHTML = "Pause";
+    document.getElementById("btnPausa").innerHTML = "Paused";
 
     //Se actualiza el color del boton con relacion al valor
     document.getElementById("btnPausa").style.background = "#4CAF50";
@@ -452,76 +394,4 @@ function Velocidad(self){
   document.getElementById("valorVelocidadMusica").innerHTML = entrada;
 }
 
-/*funncion encargada de activar y desactivar el loop de la cancion*/
-function btnLoopMetodo(){
-
-  //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
-  if(!soundMode) return;
-
-  //if encargadod de desactivar el loop
-  if(loopActivo){
-
-    //Se desactiva el loop
-    loopActivo=false;
-  }
-
-  //if encargadod de activar el loop
-  else{
-
-    //Se activar el loop
-    loopActivo=true;
-  }
-}
-
-/*Funcion encargada de detener la cancion en caso de que el loop este desactivado*/
-function noEjecutarLoop(){
-
-  //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
-  if(!soundMode) return;
-
-  //variable encargada de conseguir el tiempo actual de la cacion
-  var test1 = parseInt(sound.currentTime());
-
-  //variable encargada de conseguir el tiempo total de la cacion
-  var test2= parseInt(sound.duration());
-
-  //if encargado de revisar si el loop esta desactualizado y si el tiempo total y tiempo actual
-  //para poder detener la reproducion
-  if(!loopActivo && test1 == test2 && sound.isLoaded()){
-    
-    //se detiene la cancion
-    sound.stop();
-  }
-}
-
-function selChange(){
-  let value = sel.value();
-  if(value==="Archivo"){
-    if(!soundMode){ //!sM => estaba con el mic
-      mic.stop();
-      if(sound.isLoaded())sound.play();
-      fft.setInput(sound);
-    }
-    soundMode = true;
-  } else {
-    if(soundMode && sound.isLoaded()) sound.pause(); //sM => esataba con sound
-    mic.getSources(ls=>{
-      ls.forEach((d,i)=>{
-        if(d.label === value){
-          console.log(d.label);
-          mic.setSource(i);
-          return;
-        }
-      });
-    });
-    if(soundMode) { //sM => archivo, hay que arrancar
-      mic.start();
-      fft.setInput(mic);
-    }
-    soundMode = false;
-  }
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
+function windowResized() {resizeCanvas(windowWidth, windowHeight);}
