@@ -268,7 +268,6 @@ function inversorMusical(){
     //se asigna el valor de 1 al slider de velocidad
     document.getElementById("barraVelocidad").value=1;
   }
-
 }
 
 /*Funcion encargada de Actualizar el Slider seekTime del UI con el valor actual de en 
