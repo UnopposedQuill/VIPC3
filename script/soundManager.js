@@ -3,47 +3,35 @@
  * de manipular o controlar el audio
  * ================================================================== */
 
-/*funncion encargada de activar y desactivar el loop de la cancion*/
-function btnLoopMetodo(){
-
-  //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
+function soundLoaded(){
   if(!soundMode) return;
+  fft.setInput(sound);
+  sound.playMode('restart');
+  sound.setLoop(true);
+  loopActivo = true;
+  sound.play();
 
-  /* Mas o menos, obentgo el estado actual del loop, y lo invierto */
-  console.log(sound.isLooping(),loopActivo);
-  if(!sound.isPlaying()) return;
-  loopActivo = !sound.isLooping();
-  sound.setLoop(loopActivo);
-  /*
-  //if encargadod de desactivar el loop
-  if(loopActivo){
-
-    //Se desactiva el loop
-    loopActivo=false;
-  }
-
-  //if encargadod de activar el loop
-  else{
-
-    //Se activar el loop
-    loopActivo=true;
-  }*/
+  //Se le asigna como valor maximo al slider de tiempo la duracion total de la cancion
+  document.getElementById("seekTime").max = parseInt(sound.duration());
 }
-
+function soundError(){
+  loopActivo = false;
+  textCanvas.background(0);
+  textCanvas.text('Archivo no cargado\nPrueba con otro',200,200);
+}
 
 function selChange(){
   let value = sel.value();
+  mic.stop();
+  if(sound.isLoaded()) sound.pause();
   if(value==="Archivo"){
-    if(!soundMode){ //!sM => estaba con el mic
-      mic.stop();
-      if(sound.isLoaded()) sound.play();
-      fft.setInput(sound);
-    }
-    if(!sound.isPlaying()) sound.play();
+    sound.play();
+    $("#song-controls").show();
     soundMode = true;
+    fft.setInput(sound);
   } else {
-    if(soundMode && sound.isLoaded()) sound.pause(); //sM => esataba con sound
     mic.getSources(ls=>{
+      console.log(ls);
       ls.forEach((d,i)=>{
         if(d.label === value){
           console.log(d.label);
@@ -53,10 +41,9 @@ function selChange(){
       });
     });
     console.log('No rompre la madre');
-    if(soundMode) { //sM => archivo, hay que arrancar
-      mic.start();
-      fft.setInput(mic);
-    }
+    mic.start();
+    $("#song-controls").hide();
+    fft.setInput(mic);
     soundMode = false;
   }
 }

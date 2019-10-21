@@ -1,11 +1,14 @@
 
 /*----------- HTML ----------*/
+
 body{
 	background-color: white;
+  padding:0;
+  margin:0;
+  overflow-x:hidden;
 }
 
 /*----------- Etiquetas ----------*/
-
 .lbl{
 	color: #BCF50C;
 	margin-left: 5px;
@@ -61,6 +64,15 @@ body{
 	background-color: rgba(0,0,0,0.7);
 	border-radius: 10px 40px 5px;
 	padding: 5px;
+}
+
+.Encapsulador4{
+	background-color: rgba(125,150,150,0.7);
+	border-radius: 10px 40px 5px;
+}
+.Encapsulador5{
+	background-color: rgba(150,125,125,0.7);
+	border-radius: 10px 40px 5px;
 }
 
 /*----------- Sliders----------*/
@@ -129,4 +141,22 @@ body{
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
+}
+
+/*--------Canvas------------*/
+canvas {
+  position:relative;
+  margin:0;
+  margin-top:10px;
+  /*left:-8px;*/
+  padding:0;
+  border:none;
+  box-sizing:border-box;
+}
+
+/*--------File Input--------*/
+.fileInputClass{
+}
+/*--------Selector----------*/
+.selectorClass{
 }
