@@ -4,43 +4,18 @@
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <!-- JQuery -->
-  <!--script
-    src="https://code.jquery.com/jquery-3.4.1.min.js"
-    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-    crossorigin="anonymous"></script-->
-  <!-- Bootstrap -->
-  <!--link
-    rel="stylesheet"
-    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-    crossorigin="anonymous">
-  <script
-    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script-->
-  
-  <!-- p5.js -->
-  <!--script 
-    src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"
-    integrity="sha256-WVsM3xrcqyuFNF3W1qtIKbHFsD0977nDQA8DCMp1zCw="
-    crossorigin="anonymous"></script-->
-  <!-- p5.dom.js -->
-  <!--script
-    src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"
-    integrity="sha256-2/3R3NV5zryj0fDjD3cDh+SNiWQ/TJiMVZzAo5FrhiU="
-    crossorigin="anonymous"></script--> 
-  <!-- p5.sound.js -->
-  <!--script
-    src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"
-    integrity="sha256-GdlroanCXFgv0ILaTQ1v0qnNxc+FQNjjXADWxmtr7PM="
-    crossorigin="anonymous"></script-->
-  
-    <!-- <div id="contenedorCanvas"></div> -->
+  <!-- <div id="contenedorCanvas"></div> -->
 
+  <!-- ------------------------------------------------------------ -->
+  <!-- --------------------Contenedor Controles-------------------- -->
+  <!-- ------------------------------------------------------------ -->
   <div id="Contenedor">
     
     <div class="Separador"></div>
+
+    <!-- ------------------------------------------------------------ -->
+    <!-- --------------------Separadores internos-------------------- -->
+    <!-- ------------------------------------------------------------ -->
 
     <div class = "Encapsulador">
       <label class="lbl">Duracion: </label>
@@ -51,7 +26,6 @@
       <label class="lbl" id="Duracion2"> </label>
     </div>
     
-
     <div class = "Encapsulador2">
       <label class="lbl">Volumen: </label>
       <input type="range" id="tamanhoFigura" class="slider" 
@@ -78,9 +52,15 @@
   <script src="lib/jquery.slim.min.js"></script>
   <script src="lib/p5.min.js"></script>
   <script src="lib/p5.sound.min.js"></script>
+  
+  <!-- ----------------------------------------------- -->
+  <!-- --------------------Scripts-------------------- -->
+  <!-- ----------------------------------------------- -->
+
   <script src="script/soundManager.js"></script>
   <script src="script/gui.js"></script>
   <script src="script/sketch.js"></script>
+  
   
 </body>
 </html>
