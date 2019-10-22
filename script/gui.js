@@ -10,8 +10,11 @@ function btnLoopMetodo(){
   if(!soundMode) return;
 
   /* Mas o menos, obentgo el estado actual del loop, y lo invierto */
-  if(!sound.isPlaying()) return;
-  loopActivo = !sound.isLooping();
+  if(!sound.isPlaying()){
+    loopActivo = !loopActivo;
+  } else {
+    loopActivo = !sound.isLooping();
+  }
   sound.setLoop(loopActivo);
 }
 

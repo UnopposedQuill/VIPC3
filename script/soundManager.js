@@ -4,13 +4,24 @@
  * ================================================================== */
 
 function soundLoaded(){
+  
+  const tw = (width/2)/32;
+  const th = height/32;
+  for(let i=0;i<32;++i){
+    points[i]=[];
+    for(let j=0;j<32;++j){
+      points[i][j]={x:i*tw,y:j*th};
+    }
+  }
+  
   if(!soundMode) return;
-  fft.setInput(sound);
+  fftwave.setInput(sound);
+  fftspec.setInput(sound);
+  peaks = sound.getPeaks();
   sound.playMode('restart');
   sound.setLoop(true);
   loopActivo = true;
   sound.play();
-
   //Se le asigna como valor maximo al slider de tiempo la duracion total de la cancion
   document.getElementById("seekTime").max = parseInt(sound.duration());
 }
