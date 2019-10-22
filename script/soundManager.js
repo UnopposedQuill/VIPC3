@@ -38,6 +38,7 @@ function selChange(){
   if(value==="Archivo"){
     sound.play();
     $("#song-controls").show();
+    cambioPropiedades(false);
     soundMode = true;
     fft.setInput(sound);
   } else {
@@ -55,8 +56,25 @@ function selChange(){
     mic.start();
     $("#song-controls").hide();
     //$("#btnPausa").hide();
+    cambioPropiedades(true);
     fft.setInput(mic);
     soundMode = false;
   }
+}
+
+function cambioPropiedades(value){
+  if(value){
+    document.getElementById('Contenedor').style.height = "40px";
+     document.getElementById('Encapsulador5').style.width = "100%";
+  }
+  else{
+    document.getElementById('Contenedor').style.height = "130px";
+
+     document.getElementById('Encapsulador5').style.width = "200px";
+  }
+     
+  
+    //$("#Contenedor").style.height = "130px";
+  
 }
 
