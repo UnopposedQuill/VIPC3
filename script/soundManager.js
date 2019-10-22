@@ -40,7 +40,8 @@ function selChange(){
     $("#song-controls").show();
     cambioPropiedades(false);
     soundMode = true;
-    fft.setInput(sound);
+    fftwave.setInput(sound);
+    fftspec.setInput(sound);
   } else {
     mic.getSources(ls=>{
       console.log(ls);
@@ -57,7 +58,8 @@ function selChange(){
     $("#song-controls").hide();
     //$("#btnPausa").hide();
     cambioPropiedades(true);
-    fft.setInput(mic);
+    fftwave.setInput(mic);
+    fftspec.setInput(mic);
     soundMode = false;
   }
 }
