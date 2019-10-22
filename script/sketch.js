@@ -28,7 +28,8 @@ let invertidor=false;
 let tileWidth, tileHeight;
 
 let peaks = [];
-let points = [];
+let spoints = [];
+let mpoints = [];
 
 let cR=0,cG=0,cB=0;
 
@@ -111,11 +112,11 @@ function draw(){
   /* ========================================= *
    *  Seccion del dibujo
    * ========================================= */
-
+if(soundMode){
   /*ilimpia el buffer de los puntos*/
   backPlot.background(15);
   /*recorre la matriz*/
-  points.forEach((l,i)=>{l.forEach((p,j)=>{
+  spoints.forEach((l,i)=>{l.forEach((p,j)=>{
     let wave = waveform[i*32+j]*5 //el offset o movimiento que se le data a cada punto
       , spec = spectrumfull[i*32+j] //tamaño y alpha
       , pos  = i*32+j;
@@ -136,13 +137,33 @@ function draw(){
   texture(backPlot)
   plane(4*backPlot.width,4*backPlot.height);
   pop();
-//pone la imagen del buffer de los puntos atras de las montañas
-//  translate(0,0,-70*tileHeight);
-//  texture(backPlot)
-  //la escala ya que al dibujarla atras se hace mas pequenha
-//  plane(backPlot.width,backPlot.height);
-//  pop();
-  
+} else {
+  /*ilimpia el buffer de los puntos*/
+  backPlot.background(15);
+  /*recorre la matriz*/
+  mpoints.forEach((l,i)=>{l.forEach((p,j)=>{
+    let wave = waveform[i*32+j]*5 //el offset o movimiento que se le data a cada punto
+      , spec = spectrumfull[i*32+j] //tamaño y alpha
+      , pos  = i*32+j;
+    let nx = wave, ny=wave, r = map(spec,0,255,5,25);
+    backPlot.fill(map(pos,0,waveform.length,0,255),100,100,spec/255.);
+    backPlot.ellipse(p.x,p.y,r,r);
+    backPlot.ellipse(backPlot.width-p.x,p.y,r,r);
+    /*mueve los puntos y hace que ciclen al llegar a los bordes*/
+    p.x += nx;
+    if(p.x<0)p.x+=backPlot.width;
+    if(p.x>backPlot.width)p.x-=backPlot.width;
+    p.y += ny;
+    if(p.y<0)p.y+=height;
+    if(p.y>backPlot.height)p.y-=backPlot.height;
+  })});
+  push();
+  translate(0,0,-4*height);
+  texture(backPlot)
+  plane(4*backPlot.width,4*backPlot.height);
+  pop();
+
+}
   /*Lo que hace esto es renderizar la matriz del mapa de altura
    *Como varios triangle_strip, donde la altura es el valor del espectro
    *Se puede ver como z->tiempo, x->frecuencia, y->amplitud de la freq
