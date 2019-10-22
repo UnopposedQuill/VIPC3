@@ -40,6 +40,7 @@ function selChange(){
     sound.play();
     $("#song-controls").show();
     $("#btnClear").hide();
+    cambioPropiedades(false);
     soundMode = true;
     fftwave.setInput(sound);
     fftspec.setInput(sound);
@@ -58,9 +59,26 @@ function selChange(){
     mic.start();
     $("#song-controls").hide();
     $("#btnClear").show();
+    cambioPropiedades(true);
     fftwave.setInput(mic);
     fftspec.setInput(mic);
     soundMode = false;
   }
+}
+
+function cambioPropiedades(value){
+  if(value){
+    document.getElementById('Contenedor').style.height = "40px";
+     document.getElementById('Encapsulador5').style.width = "100%";
+  }
+  else{
+    document.getElementById('Contenedor').style.height = "130px";
+
+     document.getElementById('Encapsulador5').style.width = "200px";
+  }
+     
+  
+    //$("#Contenedor").style.height = "130px";
+  
 }
 
