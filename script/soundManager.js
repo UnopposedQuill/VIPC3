@@ -44,6 +44,7 @@ function selChange(){
     soundMode = true;
     fftwave.setInput(sound);
     fftspec.setInput(sound);
+    amplitude.setInput(sound);
   } else {
     mic.getSources(ls=>{
       console.log(ls);
@@ -62,6 +63,7 @@ function selChange(){
     cambioPropiedades(true);
     fftwave.setInput(mic);
     fftspec.setInput(mic);
+    amplitude.setInput(mic);
     soundMode = false;
   }
 }
