@@ -17,6 +17,7 @@ function soundLoaded(){
   if(!soundMode) return;
   fftwave.setInput(sound);
   fftspec.setInput(sound);
+  amplitude.setInput(sound);
   peaks = sound.getPeaks();
   sound.playMode('restart');
   sound.setLoop(true);
