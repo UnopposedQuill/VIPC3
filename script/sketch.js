@@ -1,4 +1,5 @@
-let volumen, canvas, textCanvas, backPlot,  sel, fileInput;
+let volumen, canvas, textCanvas, backPlot,  sel, fileInput, celljunior, ditto;
+let puntos=[], curr, past, present, ushade;
 /*sound dummy para que no me de errores por no cargar el archivo default*/
 /*Ya me canse de los primeros 10s de Megalovania*/
 let sound = {
@@ -35,6 +36,10 @@ let cR=0,cG=0,cB=0;
 
 let CanvasEllipsenaitor;
 
+function preload(){
+  ushade = loadShader('shader.vert','shader.frag');
+}
+
 function setup(){
   /*Archivo de audio por defecto*/
   //sound = loadSound('assets/megalovania.mp3',soundLoaded,soundError);
@@ -62,6 +67,12 @@ function setup(){
     });
   });
   sel.changed(selChange);
+  ditto = createSelect().parent('#Encapsulador5');
+  ditto.class('selectorClass');
+  ditto.option('Colinas');
+  ditto.option('Titus');
+  ditto.option('Estrellas');
+  ditto.option('Gotus');
   
   small = min(width,height);
   big = max(width,height);
@@ -77,13 +88,22 @@ function setup(){
     textCanvas.textSize(24);
     textCanvas.text('Archivo no cargado\nEspera unos minutos\nO prueba con otro',200,200);
   
-
   backPlot = createGraphics(width,height);
   backPlot.colorMode(HSB);
   backPlot.noStroke();
 
+  present = createGraphics(width/2,height/2,WEBGL);
+  curr = createGraphics(width/2,height/2);
+  past = createGraphics(width/2,height/2);
+  past.colorMode(HSB);
+  past.noStroke();
+  for(let i=0;i<1024;++i){
+    puntos[i] = {x:random(width/2),y:random(height/2)};
+  }
+
   CanvasEllipsenaitor = createGraphics(width,height);
   
+  clearGrid();
 }
 
 function draw(){
@@ -96,7 +116,7 @@ function draw(){
    *  Calculos matematicos, update fisicos
    *   Y otras cosas no relacionadas al dibujo
    * ========================================= */
-  
+
   let spectrum = fftspec.analyze();
   let spectrumfull = fftwave.analyze();
   /*
@@ -106,6 +126,139 @@ function draw(){
   */
   let waveform = fftwave.waveform();
 
+
+  /* ========================================= *
+   *  Seccion del dibujo
+   * ========================================= */
+   if(ditto.value()==="Colinas"){
+     luces(waveform,spectrumfull);
+     montanha(spectrum);
+   } else if(ditto.value()==="Titus"){
+    push();
+    scale(2,2,0);
+    softSpectre(spectrumfull.filter((v,i)=>i%3==0));
+    pop();
+
+    //llama el metodo que dibuja las ellipses en el canvas de elipses;
+    ellipsinador();
+    push();
+    translate( -(width/2), -(height/2),0);
+    image(CanvasEllipsenaitor,0,0);
+    pop();
+  
+  } else if(ditto.value()==="Estrellas"){
+    push();
+    translate(0,0,-4*height);
+    scale(10,10,0);
+    softSpectre(spectrumfull.filter((v,i)=>i%3==0));
+    pop();
+    montanha(spectrum);
+  } else if(ditto.value()==="Gotus"){
+    push();
+      translate(0,0,-4*height);
+      scale(4,4,0);
+      ellipsinador();
+    translate( -(width/2), -(height/2),0);
+      image(CanvasEllipsenaitor,0,0);
+    pop();
+     montanha(spectrum);
+  }
+  //Actualizaciones de los UI de la demostracion Grafia
+  
+  //metodo encargado de actualizar el Slider de tiempo del UI
+  valorTiempoBarraMusica(sound.currentTime()); 
+  
+  //metodo encargado de actualizar los botones en ejecucion dependiendo de su estado
+  actualizarbtn();
+  
+  //metodo encargado de revisar si el loop de la cancion esta activo para repertirse
+  //noEjecutarLoop();
+} 
+
+function softSpectre(spectrum){
+  if(sound){
+    for(let i=0;i<spectrum.length;++i){
+      past.fill(255*i/spectrum.length,100,100,0.5);
+      past.ellipse(puntos[i].x, puntos[i].y, 20*spectrum[i]/255);
+    }
+  }
+  if(mouseX<width && mouseY<height){
+    past.fill(255);
+    past.push();
+    past.ellipse(mouseX/2,mouseY/2,10,10);
+    past.pop();
+  }
+  present.shader(ushade);
+  ushade.setUniform('curr',curr);
+  ushade.setUniform('prev',past);
+  ushade.setUniform('texelSize',[1.0/width,1.0/height]);
+  present.rect(0,0,width,height);
+  curr.image(present,0,0);
+
+  let tmp = curr;
+  curr = past;
+  past = tmp;
+
+  texture(present);
+  noStroke();
+  plane(present.width,present.height);
+}
+
+function luces(waveform, spectrumfull){
+  if(soundMode){
+    /*ilimpia el buffer de los puntos*/
+    backPlot.background(15);
+    /*recorre la matriz*/
+    spoints.forEach((l,i)=>{l.forEach((p,j)=>{
+      let wave = waveform[i*32+j]*5 //el offset o movimiento que se le data a cada punto
+        , spec = spectrumfull[i*32+j] //tamaño y alpha
+        , pos  = i*32+j;
+      let nx = wave, ny=wave, r = map(spec,0,255,5,25);
+      backPlot.fill(map(pos,0,waveform.length,0,255),100,100,spec/255.);
+      backPlot.ellipse(p.x,p.y,r,r);
+      backPlot.ellipse(backPlot.width-p.x,p.y,r,r);
+      /*mueve los puntos y hace que ciclen al llegar a los bordes*/
+      p.x += nx;
+      if(p.x<0)p.x+=backPlot.width;
+      if(p.x>backPlot.width)p.x-=backPlot.width;
+      p.y += ny;
+      if(p.y<0)p.y+=height;
+      if(p.y>backPlot.height)p.y-=backPlot.height;
+    })});
+    push();
+    translate(0,0,-4*height);
+    texture(backPlot)
+    plane(4*backPlot.width,4*backPlot.height);
+    pop();
+  } else {
+    /*ilimpia el buffer de los puntos*/
+    backPlot.background(15);
+    /*recorre la matriz*/
+    mpoints.forEach((l,i)=>{l.forEach((p,j)=>{
+      let wave = waveform[i*32+j]*5 //el offset o movimiento que se le data a cada punto
+        , spec = spectrumfull[i*32+j] //tamaño y alpha
+        , pos  = i*32+j;
+      let nx = wave, ny=wave, r = map(spec,0,255,5,25);
+      backPlot.fill(map(pos,0,waveform.length,0,255),100,100,spec/255.);
+      backPlot.ellipse(p.x,p.y,r,r);
+      backPlot.ellipse(backPlot.width-p.x,p.y,r,r);
+      /*mueve los puntos y hace que ciclen al llegar a los bordes*/
+      p.x += nx;
+      if(p.x<0)p.x+=backPlot.width;
+      if(p.x>backPlot.width)p.x-=backPlot.width;
+      p.y += ny;
+      if(p.y<0)p.y+=height;
+      if(p.y>backPlot.height)p.y-=backPlot.height;
+    })});
+    push();
+    translate(0,0,-4*height);
+    texture(backPlot)
+    plane(4*backPlot.width,4*backPlot.height);
+    pop();
+  }
+}
+
+function montanha(spectrum){
   /*Aca meto el estado actual del espectro a la cola del mapa de altura*/
   let row = heightMap.push([])-1;
   for(let i=0;i<spectrum.length;i++) heightMap[row][i] = spectrum[i];
@@ -113,62 +266,6 @@ function draw(){
    *60 es una heruristica empirica que parece funcionar bien
    */
   if(heightMap.length>=60) heightMap.shift();
-
-  /* ========================================= *
-   *  Seccion del dibujo
-   * ========================================= */
-if(soundMode){
-  /*ilimpia el buffer de los puntos*/
-  backPlot.background(15);
-  /*recorre la matriz*/
-  spoints.forEach((l,i)=>{l.forEach((p,j)=>{
-    let wave = waveform[i*32+j]*5 //el offset o movimiento que se le data a cada punto
-      , spec = spectrumfull[i*32+j] //tamaño y alpha
-      , pos  = i*32+j;
-    let nx = wave, ny=wave, r = map(spec,0,255,5,25);
-    backPlot.fill(map(pos,0,waveform.length,0,255),100,100,spec/255.);
-    backPlot.ellipse(p.x,p.y,r,r);
-    backPlot.ellipse(backPlot.width-p.x,p.y,r,r);
-    /*mueve los puntos y hace que ciclen al llegar a los bordes*/
-    p.x += nx;
-    if(p.x<0)p.x+=backPlot.width;
-    if(p.x>backPlot.width)p.x-=backPlot.width;
-    p.y += ny;
-    if(p.y<0)p.y+=height;
-    if(p.y>backPlot.height)p.y-=backPlot.height;
-  })});
-  push();
-  translate(0,0,-4*height);
-  texture(backPlot)
-  plane(4*backPlot.width,4*backPlot.height);
-  pop();
-} else {
-  /*ilimpia el buffer de los puntos*/
-  backPlot.background(15);
-  /*recorre la matriz*/
-  mpoints.forEach((l,i)=>{l.forEach((p,j)=>{
-    let wave = waveform[i*32+j]*5 //el offset o movimiento que se le data a cada punto
-      , spec = spectrumfull[i*32+j] //tamaño y alpha
-      , pos  = i*32+j;
-    let nx = wave, ny=wave, r = map(spec,0,255,5,25);
-    backPlot.fill(map(pos,0,waveform.length,0,255),100,100,spec/255.);
-    backPlot.ellipse(p.x,p.y,r,r);
-    backPlot.ellipse(backPlot.width-p.x,p.y,r,r);
-    /*mueve los puntos y hace que ciclen al llegar a los bordes*/
-    p.x += nx;
-    if(p.x<0)p.x+=backPlot.width;
-    if(p.x>backPlot.width)p.x-=backPlot.width;
-    p.y += ny;
-    if(p.y<0)p.y+=height;
-    if(p.y>backPlot.height)p.y-=backPlot.height;
-  })});
-  push();
-  translate(0,0,-4*height);
-  texture(backPlot)
-  plane(4*backPlot.width,4*backPlot.height);
-  pop();
-
-}
   /*Lo que hace esto es renderizar la matriz del mapa de altura
    *Como varios triangle_strip, donde la altura es el valor del espectro
    *Se puede ver como z->tiempo, x->frecuencia, y->amplitud de la freq
@@ -224,29 +321,7 @@ if(soundMode){
       endShape();
     }
   pop();
-
-  //llama el metodo que dibuja las ellipses en el canvas de elipses;
-  ellipsinador();
-  push();
-  translate( -(width/2), -(height/2));
-  
-  image(CanvasEllipsenaitor,0,0);
-
-  pop();
-
-  //Actualizaciones de los UI de la demostracion Grafia
-  
-  //metodo encargado de actualizar el Slider de tiempo del UI
-  valorTiempoBarraMusica(sound.currentTime()); 
-  
-  //metodo encargado de actualizar los botones en ejecucion dependiendo de su estado
-  actualizarbtn();
-  
-  //metodo encargado de revisar si el loop de la cancion esta activo para repertirse
-  //noEjecutarLoop();
-} 
-
-
+}
 
 /*Funcion encargada de desactivar la actualizacion del Slider seekTime*/
 /*function noActualizarBarraMusica(){
