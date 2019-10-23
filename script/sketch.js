@@ -37,7 +37,9 @@ let cR=0,cG=0,cB=0;
 let CanvasEllipsenaitor;
 
 function preload(){
-  ushade = loadShader('shader.vert','shader.frag');
+  ushade = loadShader(
+    'https://raw.githubusercontent.com/UnopposedQuill/VIPC3/master/shader.vert?token=AETROEE73E3XYGMYOT3WGDS5XIH7A'
+   ,'https://raw.githubusercontent.com/UnopposedQuill/VIPC3/master/shader.frag?token=AETROEHX3XJCXGGVHV77P5K5XIH4O');
 }
 
 function setup(){
