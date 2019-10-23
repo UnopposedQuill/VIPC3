@@ -130,7 +130,7 @@ body{
   background-color: #4CAF50; /* Green */
   border: none;
   color: white;
-  padding: 5px 32px;
+  padding: 5px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -138,6 +138,7 @@ body{
   transition-duration: 0.4s;
   margin-left: 10px;
   border-radius: 10px 40px 5px;
+  width: 20%;
 }
 
 .button:hover {
