@@ -33,6 +33,8 @@ let mpoints = [];
 
 let cR=0,cG=0,cB=0;
 
+let CanvasEllipsenaitor;
+
 function setup(){
   /*Archivo de audio por defecto*/
   //sound = loadSound('assets/megalovania.mp3',soundLoaded,soundError);
@@ -79,6 +81,9 @@ function setup(){
   backPlot = createGraphics(width,height);
   backPlot.colorMode(HSB);
   backPlot.noStroke();
+
+  CanvasEllipsenaitor = createGraphics(width,height);
+  
 }
 
 function draw(){
@@ -219,6 +224,16 @@ if(soundMode){
       endShape();
     }
   pop();
+
+  //llama el metodo que dibuja las ellipses en el canvas de elipses;
+  ellipsinador();
+  push();
+  translate( -(width/2), -(height/2));
+  
+  image(CanvasEllipsenaitor,0,0);
+
+  pop();
+
   //Actualizaciones de los UI de la demostracion Grafia
   
   //metodo encargado de actualizar el Slider de tiempo del UI
@@ -249,4 +264,115 @@ if(soundMode){
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   tileWidth = width/32, tileHeight = width/50; //constantes magicas
+}
+
+/*funcion encargada de dibujar ellipses dentro del canvas*/
+function ellipsinador(){
+  CanvasEllipsenaitor.background(15);
+  CanvasEllipsenaitor.rectMode(CENTER);
+
+  var ancho = amplitude.getLevel();
+
+  // creacion de Titusineitor
+
+  //creaccion del cuerpo del bot
+
+  CanvasEllipsenaitor.fill(0,155*ancho+150,0);
+  
+  CanvasEllipsenaitor.ellipse(width/2, height/2 - 150,50 ,50);
+
+  //Oreja 2 verde
+  CanvasEllipsenaitor.rect(width/2, height/2 ,370 ,25);
+
+
+  //Oreja 1 verde
+  CanvasEllipsenaitor.rect(width/2, height/2 ,350 ,50);
+  
+  CanvasEllipsenaitor.ellipse(width/2 + 170, height/2 - 165, 30 ,30);
+  CanvasEllipsenaitor.ellipse(width/2 - 170 , height/2 - 165, 30 ,30);
+
+
+  //brazo1
+
+  CanvasEllipsenaitor.rect(width/2 , height/2 + 190, 600, 60);
+
+
+  //brazo1
+
+  CanvasEllipsenaitor.rect(width/2 , height/2 + 190, 500, 110);
+
+  //cabeza Cuadrada
+  CanvasEllipsenaitor.fill("#333333");
+  CanvasEllipsenaitor.rect(width/2, height/2, 300, 300);
+  //Orejas del Bot
+  CanvasEllipsenaitor.rectMode(CORNER);
+  CanvasEllipsenaitor.rect(width/2 + 165, height/2 - 150, 10, 175);
+  CanvasEllipsenaitor.rect(width/2 - 175 , height/2 - 150, 10, 175);
+
+  //reset center
+  CanvasEllipsenaitor.rectMode(CENTER);
+  //Base de Ojos y Boca
+  CanvasEllipsenaitor.fill("#FFFFFF");
+
+  
+  CanvasEllipsenaitor.rect(width/2 , height/2 +20, 100, ancho*200 +10);
+
+  CanvasEllipsenaitor.ellipse(width/2 - 50, height/2 -75, 80, 80);
+  
+  CanvasEllipsenaitor.ellipse(width/2 + 50, height/2 -75, 80, 80);
+
+  //Colores de Ojos y Boca
+  
+  CanvasEllipsenaitor.fill(0,155*ancho+175,0);
+
+  CanvasEllipsenaitor.rect(width/2 , height/2 +20, 95, ancho*200 +5);
+
+
+  CanvasEllipsenaitor.ellipse(width/2 - 50, height/2 -75, 75, 75);
+  
+  CanvasEllipsenaitor.ellipse(width/2 + 50, height/2 -75, 75, 75);
+
+  //internos de Ojos y Boca
+  CanvasEllipsenaitor.fill("#FFFFFF");
+
+  CanvasEllipsenaitor.rect(width/2 , height/2 +20, 95, ancho*200);
+  
+  CanvasEllipsenaitor.ellipse(width/2 - 50, height/2 -75, 70, 70);
+  
+  CanvasEllipsenaitor.ellipse(width/2 + 50, height/2 -75, 70, 70);
+
+  //Cuerpo
+
+  CanvasEllipsenaitor.rectMode(CORNER);
+  CanvasEllipsenaitor.fill("#333333");
+  CanvasEllipsenaitor.rect(width/2 - 220, height/2 + 100, 440, 440);
+  
+  CanvasEllipsenaitor.rect(width/2 - 275, height/2 + 125, 25, 440);
+
+  CanvasEllipsenaitor.rect(width/2 + 250, height/2 + 125, 25, 440);
+
+  CanvasEllipsenaitor.rectMode(CENTER);
+
+  //contenedor placa
+  CanvasEllipsenaitor.fill("#444444");
+  CanvasEllipsenaitor.rect(width/2 , height/2 + 190, 350, 110);
+
+  //Panel de control
+
+  CanvasEllipsenaitor.fill(0,155*ancho+175,0);
+  
+
+  CanvasEllipsenaitor.rect(width/2 - 150, height/2 + 190, 10, 100);  
+
+    CanvasEllipsenaitor.ellipse(width/2 - 100, height/2 + 190, 10, 100);
+
+      CanvasEllipsenaitor.rect(width/2 - 50, height/2 + 190, 10, 100);
+
+        CanvasEllipsenaitor.rect(width/2 , height/2 + 190, 20, 100);
+
+      CanvasEllipsenaitor.rect(width/2 + 50, height/2 + 190, 10, 100);
+
+    CanvasEllipsenaitor.ellipse(width/2 + 100, height/2 + 190, 10, 100);
+
+  CanvasEllipsenaitor.rect(width/2 + 150, height/2 + 190, 10, 100);
 }
