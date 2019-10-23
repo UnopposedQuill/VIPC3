@@ -68,6 +68,9 @@ function setup(){
       sel.option(d.label);
     });
   });
+
+
+  createSpan("Visualizavion:").parent('#Encapsulador5').class('lbl');
   sel.changed(selChange);
   ditto = createSelect().parent('#Encapsulador5');
   ditto.class('selectorClass');

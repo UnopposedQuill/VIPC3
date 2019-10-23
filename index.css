@@ -78,7 +78,7 @@ body{
 .Encapsulador5{
 	padding: 5px;
 	margin-top: 3px;
-	width: 350px;
+	width: 500px;
 	float: left;
 	background-color: rgba(0,0,0,0.7);
 	border-radius: 10px 40px 5px;
@@ -127,18 +127,19 @@ body{
 /*----------Bottones----------*/
 
 .button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 5px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  transition-duration: 0.4s;
-  margin-left: 10px;
-  border-radius: 10px 40px 5px;
-  width: 20%;
+  	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 5px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	transition-duration: 0.4s;
+	margin-left: 10px;
+	border-radius: 10px 40px 5px;
+	width: 20%;
+
 }
 
 .button:hover {

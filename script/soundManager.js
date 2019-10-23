@@ -76,7 +76,7 @@ function cambioPropiedades(value){
   else{
     document.getElementById('Contenedor').style.height = "130px";
 
-     document.getElementById('Encapsulador5').style.width = "200px";
+     document.getElementById('Encapsulador5').style.width = "500px";
   }
      
   
