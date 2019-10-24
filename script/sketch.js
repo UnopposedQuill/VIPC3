@@ -348,7 +348,8 @@ function windowResized() {
 
 /*funcion encargada de dibujar ellipses dentro del canvas*/
 function ellipsinador(){
-  //CanvasEllipsenaitor.background(15);
+  CanvasEllipsenaitor.clear();
+  
   CanvasEllipsenaitor.rectMode(CENTER);
 
   var ancho = amplitude.getLevel();

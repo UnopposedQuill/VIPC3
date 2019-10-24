@@ -56,7 +56,23 @@ function keyPressed(){
 }
 
 function fileHandle(file){
+  console.log(file);
   if(file.type=="audio"){
+    window.jsmediatags.read(file.file, {
+      onSuccess: (data)=>{
+      let tags = data.tags;
+      /*Example
+      album: "Relaxer"
+      artist: "alt-J"
+      picture: Object { format: "image/jpeg", type: "Cover (front)", description: "", data:[...], ... }<=Esta picture.data es la imagen del cover, util a futuro
+      title: "Adeline"
+      track: "6/8"
+      year: "2017"
+      */
+        console.log(tags.title,tags.artist,tags.album, tags);
+      },
+      onError: (error)=>{console.error(error);}
+    });
     textCanvas.background(15);
     textCanvas.text('Archivo no cargado\nEspera unos minutos\nO prueba con otro',200,200);
     sound.stop();
