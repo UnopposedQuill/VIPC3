@@ -93,6 +93,10 @@ function setup(){
     textCanvas.textSize(24);
     textCanvas.text('Archivo no cargado\nEspera unos minutos\nO prueba con otro',200,200);
   
+  celljunior = createGraphics(width,height);
+  celljunior.background(15);
+  celljunior.noFill();
+  
   backPlot = createGraphics(width,height);
   backPlot.colorMode(HSB);
   backPlot.noStroke();
@@ -102,7 +106,7 @@ function setup(){
   past = createGraphics(width/2,height/2);
   past.colorMode(HSB);
   past.noStroke();
-  puntos = Array.from(Array(256),(v,i)=>{return {x:random(width/2),y:random(height/2)}});
+  puntos = Array.from(Array(ceil(1024/3)),(v,i)=>{return {x:random(width/2),y:random(height/2)}});
   
   CanvasEllipsenaitor = createGraphics(width,height);
   
@@ -122,11 +126,11 @@ function draw(){
 
   let spectrum = fftspec.analyze();
   let spectrumfull = fftwave.analyze();
-  /*
-  cR = (cR+fftspec.getEnergy("treble"))/2
-  cG = (cG+fftspec.getEnergy("mid"))/2
-  cB = (cB+fftspec.getEnergy("bass"))/2
-  */
+  
+  cR = (cR+fftwave.getEnergy("treble"))/2
+  cG = (cG+fftwave.getEnergy("mid"))/2
+  cB = (cB+fftwave.getEnergy("bass"))/2
+  
   let waveform = fftwave.waveform();
 
 
@@ -135,11 +139,11 @@ function draw(){
    * ========================================= */
    if(ditto.value()==="Colinas"){
      luces(waveform,spectrumfull);
-     montanha(spectrum);
+     montanha(spectrum,0,300);
    } else if(ditto.value()==="Titus"){
     push();
     scale(2,2,0);
-    softSpectre(spectrumfull.filter((v,i)=>i%4==0));
+    softSpectre(spectrumfull.filter((v,i)=>i%3==0));
     pop();
 
     //llama el metodo que dibuja las ellipses en el canvas de elipses;
@@ -155,16 +159,18 @@ function draw(){
     scale(10,10,0);
     softSpectre(spectrumfull.filter((v,i)=>i%3==0));
     pop();
-    montanha(spectrum);
+    montanha(spectrum,0,255);
   } else if(ditto.value()==="Gotus"){
     push();
       translate(0,0,-4*height);
       scale(4,4,0);
+      circulos(amplitude);
       ellipsinador();
     translate( -(width/2), -(height/2),0);
+      image(celljunior,0,0);
       image(CanvasEllipsenaitor,0,0);
     pop();
-     montanha(spectrum);
+     montanha(spectrum,160,250,42);
   }
   //Actualizaciones de los UI de la demostracion Grafia
   
@@ -174,6 +180,14 @@ function draw(){
   //metodo encargado de actualizar los botones en ejecucion dependiendo de su estado
   actualizarbtn();
 } 
+
+function circulos(amplitude){
+  celljunior.background(15,10);
+  celljunior.stroke(cR,cG,cB);
+  celljunior.strokeWeight(20);
+  celljunior.noFill();
+  celljunior.ellipse(width/2,height/2,amplitude.getLevel()*width/2+width/4);
+}
 
 function softSpectre(spectrum){
   if(sound){
@@ -214,7 +228,7 @@ function luces(waveform, spectrumfull){
         , spec = spectrumfull[i*32+j] //tamaño y alpha
         , pos  = i*32+j;
       let nx = wave, ny=wave, r = map(spec,0,255,5,25);
-      backPlot.fill(map(pos,0,waveform.length,0,255),100,100,spec/255.);
+      backPlot.fill(map(pos,0,waveform.length,0,300),100,100,spec/255.);
       backPlot.ellipse(p.x,p.y,r,r);
       backPlot.ellipse(backPlot.width-p.x,p.y,r,r);
       /*mueve los puntos y hace que ciclen al llegar a los bordes*/
@@ -258,7 +272,7 @@ function luces(waveform, spectrumfull){
   }
 }
 
-function montanha(spectrum){
+function montanha(spectrum,cBase,cAlto,saturation=100){
   /*Aca meto el estado actual del espectro a la cola del mapa de altura*/
   let row = heightMap.push([])-1;
   for(let i=0;i<spectrum.length;i++) heightMap[row][i] = spectrum[i];
@@ -294,9 +308,9 @@ function montanha(spectrum){
          ** (i+1,j)_(i+1,j+1)_(i+1,j+2)
          ** => En cada iteracion coloca los dos puntos que tienen la misma vertical
          **/
-        fill(map(j,0,32,0,360),100,(heightMap[i][j]/255.)*100);
+        fill(map(j,0,32,cBase,cAlto),saturation,(heightMap[i][j]/255.)*100);
         vertex(j*(tileWidth)-width/2,height-heightMap[i][j]  ,(1-i)*tileHeight);
-        fill(map(j,0,32,0,360),100,(heightMap[i+1][j]/255.)*100);
+        fill(map(j,0,32,cBase,cAlto),saturation,(heightMap[i+1][j]/255.)*100);
         vertex(j*(tileWidth)-width/2,height-heightMap[i+1][j], (-i)*tileHeight);
       }
       /*reflejo simetrico*/
@@ -312,9 +326,9 @@ function montanha(spectrum){
          ** (i+1,j)_(i+1,j+1)_(i+1,j+2)
          ** => En cada iteracion coloca los dos puntos que tienen la misma vertical
          **/
-        fill(map(j,0,32,0,360),100,(heightMap[i][j]/255.)*100);
+        fill(map(j,0,32,cBase,cAlto),saturation,(heightMap[i][j]/255.)*100);
         vertex(width-j*(tileWidth)+width/2,height-heightMap[i][j]  ,(1-i)*tileHeight);
-        fill(map(j,0,32,0,360),100,(heightMap[i+1][j]/255.)*100);
+        fill(map(j,0,32,cBase,cAlto),saturation,(heightMap[i+1][j]/255.)*100);
         vertex(width-j*(tileWidth)+width/2,height-heightMap[i+1][j], (-i)*tileHeight);
       }
       endShape();
