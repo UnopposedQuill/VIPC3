@@ -16,7 +16,7 @@ void main() {
           + texture2D(prev,uv+vec2(0.,texelSize.y))
           + texture2D(prev,uv-vec2(0.,texelSize.y));
        pi = pi / 2.0 - ci;
-       pi = pi * 0.99;
+       pi = pi * 0.9;
   gl_FragColor = vec4(pi.rgb,1.);
 }
 

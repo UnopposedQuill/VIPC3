@@ -102,10 +102,8 @@ function setup(){
   past = createGraphics(width/2,height/2);
   past.colorMode(HSB);
   past.noStroke();
-  for(let i=0;i<1024;++i){
-    puntos[i] = {x:random(width/2),y:random(height/2)};
-  }
-
+  puntos = Array.from(Array(256),(v,i)=>{return {x:random(width/2),y:random(height/2)}});
+  
   CanvasEllipsenaitor = createGraphics(width,height);
   
   clearGrid();
@@ -141,7 +139,7 @@ function draw(){
    } else if(ditto.value()==="Titus"){
     push();
     scale(2,2,0);
-    softSpectre(spectrumfull.filter((v,i)=>i%3==0));
+    softSpectre(spectrumfull.filter((v,i)=>i%4==0));
     pop();
 
     //llama el metodo que dibuja las ellipses en el canvas de elipses;
@@ -175,9 +173,6 @@ function draw(){
   
   //metodo encargado de actualizar los botones en ejecucion dependiendo de su estado
   actualizarbtn();
-  
-  //metodo encargado de revisar si el loop de la cancion esta activo para repertirse
-  //noEjecutarLoop();
 } 
 
 function softSpectre(spectrum){
@@ -284,7 +279,6 @@ function montanha(spectrum){
   push();
     translate(-width/2,0,0);
     /**Rotate para ver el map con angulo**/
-    //rotateX(-0.5);
     for(let i=0;i<(heightMap.length-1);++i){
       /*normal*/
       beginShape(TRIANGLE_STRIP)
@@ -327,19 +321,6 @@ function montanha(spectrum){
     }
   pop();
 }
-
-/*Funcion encargada de desactivar la actualizacion del Slider seekTime*/
-/*function noActualizarBarraMusica(){
-  //Se desactiva la actualizacion de la barra
-  barraDuracionActiva = false;
-}*/
-
-/*Funcion encargada de activar la actualizacion del Slider seekTime*/
-/*function ActualSizarBarraMusica(){
-
-  //Se activa la actualizacion de la barra
-  barraDuracionActiva = true;
-}*/
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
