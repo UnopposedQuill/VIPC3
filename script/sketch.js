@@ -153,11 +153,13 @@ function draw(){
     pop();
 
     //llama el metodo que dibuja las ellipses en el canvas de elipses;
-    ellipsinador();
+    colorMode(RGB);
+    ellipsinador(color(0,map(amplitude.getLevel(),0,0.5,0,255),0));
     push();
     translate( -(width/2), -(height/2),0);
     image(CanvasEllipsenaitor,0,0);
     pop();
+    colorMode(HSB);
   
   } else if(ditto.value()==="Estrellas"){
     push();
@@ -171,11 +173,13 @@ function draw(){
       translate(0,0,-4*height);
       scale(4,4,0);
       circulos(amplitude);
-      ellipsinador();
+    colorMode(HSB);
+    ellipsinador(color(60,69,map(amplitude.getLevel(),0,0.5,0,100)));
     translate( -(width/2), -(height/2),0);
       image(celljunior,0,0);
       image(CanvasEllipsenaitor,0,0);
     pop();
+      colorMode(HSB);
      montanha(spectrum,160,250,42);
   } else if(ditto.value()==="Clasic++"){
     push();
@@ -356,7 +360,7 @@ function windowResized() {
 }
 
 /*funcion encargada de dibujar un Robot dentro del canvas*/
-function ellipsinador(){
+function ellipsinador(eColor){
 
   //Limpia el canvas donde se muestra el elipsinador
   CanvasEllipsenaitor.clear();
@@ -373,7 +377,8 @@ function ellipsinador(){
 
   //Se asigna el color Verde a las siguientes partes y a su vez este se 
   //saturara mas dependiendo del alto de la frecuencia de la cancion
-  CanvasEllipsenaitor.fill(0,155*ancho+150,0);
+
+  CanvasEllipsenaitor.fill(eColor);
   //Bolita de la cabeza del Robot
   CanvasEllipsenaitor.ellipse(width/2, height/2 - 150,50 ,50);
   
@@ -427,7 +432,7 @@ function ellipsinador(){
 
   //Se asigna el color verde para que sea la base de las figuras a divujar 
   // ademas la saturacion va a variar con relacion a las frecuencias
-  CanvasEllipsenaitor.fill(0,155*ancho+175,0);
+  CanvasEllipsenaitor.fill(eColor);
     //Creacion de la parte verde de la boca
     CanvasEllipsenaitor.rect(width/2 , height/2 +20, 95, ancho*200 +5);
     //Creacion de la parte verde de los ojos
@@ -471,7 +476,7 @@ function ellipsinador(){
 
   //Se asigna el color verde para que sea la base de las figuras a divujar 
   // ademas la saturacion va a variar con relacion a las frecuencias
-  CanvasEllipsenaitor.fill(0,155*ancho+175,0);
+  CanvasEllipsenaitor.fill(eColor);
     // Barras verdes del panel de control del Robot
     CanvasEllipsenaitor.rect(width/2 - 150, height/2 + 190, 10, 100);  
       CanvasEllipsenaitor.ellipse(width/2 - 100, height/2 + 190, 10, 100);
