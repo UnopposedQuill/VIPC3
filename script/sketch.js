@@ -183,6 +183,7 @@ function draw(){
       circulos(amplitude);
       image(celljunior,0,0);
       lineFactory(waveform,spectrumfull);
+      image(lineaLoca,0,0);
     pop();
   }
   //Actualizaciones de los UI de la demostracion Grafia
@@ -472,4 +473,16 @@ function lineFactory(waveform,spectrum){
   lineaLoca.clear();
   lineaLoca.noFill();
   lineaLoca.stroke(255);
+  var ancho = amplitude.getLevel();
+
+  lineaLoca.noFill();
+  lineaLoca.beginShape();
+  lineaLoca.stroke(0,155*ancho+175,0); // waveform is red
+  lineaLoca.strokeWeight(2);
+  for (var i = 0; i< waveform.length; i++){
+    let x = map(i, 0, waveform.length, 0, lineaLoca.width);
+    let y = map( waveform[i], -1, 1, 0, lineaLoca.height);
+    lineaLoca.vertex(x,y);
+  }
+  lineaLoca.endShape();
 }
