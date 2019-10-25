@@ -1,4 +1,5 @@
 let volumen, canvas, textCanvas, backPlot,  sel, fileInput, celljunior, ditto;
+let lineaLoca;
 let puntos=[], curr, past, present, ushade;
 /*sound dummy para que no me de errores por no cargar el archivo default*/
 /*Ya me canse de los primeros 10s de Megalovania*/
@@ -78,6 +79,7 @@ function setup(){
   ditto.option('Titus');
   ditto.option('Estrellas');
   ditto.option('Gotus');
+  ditto.option('Clasic++');
   
   small = min(width,height);
   big = max(width,height);
@@ -92,6 +94,10 @@ function setup(){
     textCanvas.textAlign(CENTER,CENTER);
     textCanvas.textSize(24);
     textCanvas.text('Archivo no cargado\nEspera unos minutos\nO prueba con otro',200,200);
+  
+  lineaLoca = createGraphics(width,height);
+  lineaLoca.background(15);
+  lineaLoca.noFill();
   
   celljunior = createGraphics(width,height);
   celljunior.background(15);
@@ -171,6 +177,13 @@ function draw(){
       image(CanvasEllipsenaitor,0,0);
     pop();
      montanha(spectrum,160,250,42);
+  } else if(ditto.value()==="Clasic++"){
+    push();
+      translate( -(width/2), -(height/2),0);
+      circulos(amplitude);
+      image(celljunior,0,0);
+      lineFactory(waveform,spectrumfull);
+    pop();
   }
   //Actualizaciones de los UI de la demostracion Grafia
   
@@ -451,4 +464,12 @@ function ellipsinador(){
     CanvasEllipsenaitor.ellipse(width/2 + 100, height/2 + 190, 10, 100);
 
   CanvasEllipsenaitor.rect(width/2 + 150, height/2 + 190, 10, 100);
+}
+
+
+function lineFactory(waveform,spectrum){
+  /*My super funcion*/
+  lineaLoca.clear();
+  lineaLoca.noFill();
+  lineaLoca.stroke(255);
 }
