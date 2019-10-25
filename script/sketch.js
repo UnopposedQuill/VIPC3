@@ -480,7 +480,6 @@ function ellipsinador(){
         CanvasEllipsenaitor.rect(width/2 + 50, height/2 + 190, 10, 100);
       CanvasEllipsenaitor.ellipse(width/2 + 100, height/2 + 190, 10, 100);
     CanvasEllipsenaitor.rect(width/2 + 150, height/2 + 190, 10, 100);
-
 }
 
 

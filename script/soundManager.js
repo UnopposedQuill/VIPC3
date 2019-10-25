@@ -69,19 +69,24 @@ function selChange(){
   }
 }
 
+/*Funcion encargada de cambiar el tamanno de dos componentes de la visualizacion
+en caso de cambio entre microfono y archivo*/
 function cambioPropiedades(value){
-  if(value){
-    document.getElementById('Contenedor').style.height = "40px";
-     document.getElementById('Encapsulador5').style.width = "100%";
-  }
-  else{
-    document.getElementById('Contenedor').style.height = "130px";
 
-     document.getElementById('Encapsulador5').style.width = "500px";
+  //If del valor de entrada que va a ser un booleano en caso de que se ocupe
+  //hacer mas pequenna
+  if(value){
+    //se le cambia ancho a contenedor
+    document.getElementById('Contenedor').style.height = "40px";
+    //se le cambia ancho a Encapsulador5 
+    document.getElementById('Encapsulador5').style.width = "100%";
   }
-     
-  
-    //$("#Contenedor").style.height = "130px";
-  
+  //Else que coloca los tamannos originales 
+  else{
+    //se le cambia ancho a contenedor
+    document.getElementById('Contenedor').style.height = "130px";
+    //se le cambia ancho a Encapsulador5
+    document.getElementById('Encapsulador5').style.width = "500px";
+  }     
 }
 
