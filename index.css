@@ -1,17 +1,27 @@
+@font-face{
+		font-family: 'fontBase';
+		src: url('Font/Overlock-Black.ttf'); 
+}
+
+*{
+	font-family: 'fontBase';
+}
 
 /*----------- HTML ----------*/
 
 body{
 	background-color: white;
-  padding:0;
-  margin:0;
-  overflow-x:hidden;
+  	padding:0;
+	margin:0;
+	overflow-x:hidden;
 }
 
 /*----------- Etiquetas ----------*/
 .lbl{
 	color: #BCF50C;
 	margin-left: 5px;
+	font-family: 'fontBase';
+
 }
 
 #tamanhoFigura{
