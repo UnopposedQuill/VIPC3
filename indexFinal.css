@@ -27,9 +27,8 @@ body{
 }
 
 #divicion1{
-	height: 110px;
-  	align-items: center;
-  	justify-content: center;
+	height: 75px;
+
 }
 
 #divicion2{
@@ -41,54 +40,42 @@ body{
 }
 
 #contenedorCanvas{
-	width: calc(83% - 50px);
+	width: calc(80% - 6px);
 	float: left;
-	height: calc(100% - 155px);
+	height: calc(100% - 110px);
 }
 
 #divicion3{
 	float: left;
-	height: calc(100% - 155px);
+	height: calc(100% - 110px);
 	width: 35px;
 	display: flex;
   	align-items: center;
   	justify-content: center;
+  	margin: 3px 0px 0px 3px ;
 }
 #divicion4{
 	float: left;
-	height: calc(100% - 155px);
-	width: calc(20% - 50px);
+	height: calc(100% - 110px);
+	width: calc(20% - 44px);
 }
 
-/*-------------------- Botones --------------------*/
-.misBotones{
-	background-color: #4CAF50; /* Green */
-	border: none;
-	color: white;
-	padding: 5px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	transition-duration: 0.4s;
-	margin-left: 10px;
-	border-radius: 5px 5px 5px 5px;
-	margin: 0 auto;
-
-}
 
 /*-------------------- Encapsuladores --------------------*/
 
 .Encapsulador{
 	margin: 3px 3px 3px 3px;
-	background-color: rgba(0,0,0,0.7);
-	border-radius: 10px 40px 5px;
+	background-color: rgba(0,150,0,0.2);
+	border-radius: 10px 10px 60px 60px ;
 	padding: 2px;
 }
 
 .Encapsulador2{
-
+	margin-top: 2px:;
+	padding: 5px;
+	background-color: rgba(0,150,0,0.2);
 	text-align: center;
+	border-radius: 60px 60px 10px 10px ;
 }
 
 /*--------------------- Sliders--------------------*/
@@ -130,6 +117,22 @@ body{
 
 /*-------------------- Bottones --------------------*/
 
+.misBotones{
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 5px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	transition-duration: 0.4s;
+	margin-left: 10px;
+	border-radius: 5px 5px 5px 5px;
+	margin: 0 auto;
+
+}
+
 .button {
   	background-color: #4CAF50; /* Green */
 	border: none;
@@ -139,7 +142,7 @@ body{
 	text-decoration: none;
 	display: inline-block;
 	font-size: 16px;
-	transition-duration: 0.4s;
+	
 	margin-left: 10px;
 	border-radius: 10px 40px 10px 40px;
 	width: 20%;
