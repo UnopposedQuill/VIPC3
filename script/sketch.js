@@ -39,8 +39,8 @@ let CanvasEllipsenaitor;
 
 function preload(){
   ushade = loadShader(
-    'https://raw.githubusercontent.com/UnopposedQuill/VIPC3/master/shader.vert?token=AETROEE73E3XYGMYOT3WGDS5XIH7A'
-   ,'https://raw.githubusercontent.com/UnopposedQuill/VIPC3/master/shader.frag?token=AETROEHX3XJCXGGVHV77P5K5XIH4O');
+   'https://raw.githubusercontent.com/UnopposedQuill/VIPC3/master/shader.vert?token=ADTYVSODVAIXI5RJFNY2TAK5YNNR6'
+  ,'https://raw.githubusercontent.com/UnopposedQuill/VIPC3/master/shader.frag?token=ADTYVSJKUBO5DFC7VE7J3HC5YNNQE');
 }
 
 function setup(){
@@ -220,7 +220,7 @@ function softSpectre(spectrum){
   ushade.setUniform('curr',curr);
   ushade.setUniform('prev',past);
   ushade.setUniform('texelSize',[1.0/width,1.0/height]);
-  present.rect(0,0,width,height);
+  //present.rect(0,0,width,height);
   curr.image(present,0,0);
 
   let tmp = curr;

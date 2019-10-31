@@ -1,0 +1,167 @@
+@font-face{
+		font-family: 'fontBase';
+		src: url('Font/Overlock-Black.ttf'); 
+}
+
+*{
+	font-family: 'fontBase';
+	color: #BCF50C;
+}
+
+body{
+	background-color: rgba(0,0,0,0.7);
+}
+
+.lbl{
+	color: #BCF50C;
+	margin-left: 7px;
+}
+/* --------------------Contenedores--------------------*/
+
+.Contenedor{
+	background-color: rgba(0,0,0,0.7);
+	margin: 3px 3px 0px 3px ;
+	width: 100%;
+	border-radius: 5px 5px 5px 5px;
+	
+}
+
+#divicion1{
+	height: 110px;
+  	align-items: center;
+  	justify-content: center;
+}
+
+#divicion2{
+	float: top;
+	height: 35px;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+
+#contenedorCanvas{
+	width: calc(83% - 50px);
+	float: left;
+	height: calc(100% - 155px);
+}
+
+#divicion3{
+	float: left;
+	height: calc(100% - 155px);
+	width: 35px;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+#divicion4{
+	float: left;
+	height: calc(100% - 155px);
+	width: calc(20% - 50px);
+}
+
+/*-------------------- Botones --------------------*/
+.misBotones{
+	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 5px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	transition-duration: 0.4s;
+	margin-left: 10px;
+	border-radius: 5px 5px 5px 5px;
+	margin: 0 auto;
+
+}
+
+/*-------------------- Encapsuladores --------------------*/
+
+.Encapsulador{
+	margin: 3px 3px 3px 3px;
+	background-color: rgba(0,0,0,0.7);
+	border-radius: 10px 40px 5px;
+	padding: 2px;
+}
+
+.Encapsulador2{
+
+	text-align: center;
+}
+
+/*--------------------- Sliders--------------------*/
+
+.slider {
+  -webkit-appearance: none;
+  width: 40%;
+  height: 15px;
+  border-radius: 5px;  
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%; 
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #4CAF50;
+  cursor: pointer;
+}
+
+#tamanhoFigura{
+	width: 20%;
+}
+
+
+/*-------------------- Bottones --------------------*/
+
+.button {
+  	background-color: #4CAF50; /* Green */
+	border: none;
+	color: white;
+	padding: 5px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	transition-duration: 0.4s;
+	margin-left: 10px;
+	border-radius: 10px 40px 10px 40px;
+	width: 20%;
+
+}
+
+.button:hover {
+  background-color: #77FF55; /* Green */
+  color: #555555;
+   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#btnReversa{
+	border-radius: 40px 10px 40px 10px ;
+}
+
+#btnLoop{
+	border-radius: 40px 10px 40px 10px ;
+}
