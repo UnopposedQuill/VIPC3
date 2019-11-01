@@ -220,7 +220,7 @@ function softSpectre(spectrum){
   ushade.setUniform('curr',curr);
   ushade.setUniform('prev',past);
   ushade.setUniform('texelSize',[1.0/width,1.0/height]);
-  //present.rect(0,0,width,height);
+  present.rect(0,0,width,height);
   curr.image(present,0,0);
 
   let tmp = curr;
@@ -517,3 +517,34 @@ function lineFactory(waveform,spectrum){
   //Finalizacion de la creacion de la linea
   lineaLoca.endShape();
 }
+
+/*js no tiene string multiniea, y quien le diga lo contrario le esta mientiendo*/
+var shaderFrag = 
+"precision mediump float;\n"+
+"varying vec2 vTexCoord;\n"+
+"uniform sampler2D curr;\n"+
+"uniform sampler2D prev;\n"+
+"uniform vec2 texelSize;\n"+
+"void main() {\n"+
+"  vec2 uv = vTexCoord;\n"+
+"  uv = vec2(uv.x,1.-uv.y);\n"+
+"  vec4 ci = texture2D(curr,uv);\n"+
+"  vec4 pi = texture2D(prev,uv+vec2(texelSize.x,0.))\n"+
+"          + texture2D(prev,uv-vec2(texelSize.x,0.))\n"+
+"          + texture2D(prev,uv+vec2(0.,texelSize.y))\n"+
+"          + texture2D(prev,uv-vec2(0.,texelSize.y));\n"+
+"       pi = pi / 2.0 - ci;\n"+
+"       pi = pi * 0.9;\n"+
+"  gl_FragColor = vec4(pi.rgb,1.);\n"+
+"}\n";
+
+var shaderVert =
+"attribute vec3 aPosition;\n" +
+"attribute vec2 aTexCoord;\n"+
+"varying vec2 vTexCoord;\n"+
+"void main() {\n"+
+"  vTexCoord = aTexCoord;\n"+
+"  positionVec4.xy = positionVec4.xy * 2.0 - 1.0;\n"+
+"  gl_Position = positionVec4;\n"+
+"}\n";
+
