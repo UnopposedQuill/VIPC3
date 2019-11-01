@@ -8,7 +8,8 @@
 	
 	<body>
 
-		<div class = "Contenedor" id="divicion1">	
+		<div class = "Contenedor" id="divicion1">
+			<div id="espacio"></div>	
 			<div class = "Encapsulador">
 		        
 		        <label class="lbl">Duracion: </label>
@@ -25,10 +26,15 @@
       		</div>	
 
       		<div class="Encapsulador2">
-		        <button class ="button" id = "btnPausa" onclick="toggleSound()">Pausa</button>
-		        <button class ="button" id = "btnStop" onclick="btnStop()">Stop</button>
-		        <button class ="button" id = "btnLoop" onclick="btnLoopMetodo()">Loop</button>
-		        <button class ="button" id = "btnReversa" onclick="inversorMusical()">Reversa OFF</button>
+      			<button class ="button" title="Back" id= "btnBack" onclick="inversorMusical()"></button>
+      			<button class ="button" title="Rewind" id= "btnReversa" onclick="inversorMusical()"></button>
+
+      			<button class ="button" title="Stop" id= "btnStop" onclick="btnStop()"></button>
+		        <button class ="button" title="Play/Pause" id= "btnPausa" onclick="toggleSound()"></button>
+		        <button class ="button" title="Loop" id= "btnLoop" onclick="btnLoopMetodo()"></button>
+
+		        <button class ="button" title="Fast Forward" id = "btnSpeed" onclick="inversorMusical()"></button>	       
+		        <button class ="button" title="Next" id = "btnNext" onclick="inversorMusical()"></button>
       		</div>
 
 		</div>
@@ -39,16 +45,16 @@
 		</div>
 		
 		<div class = "Contenedor" id="contenedorCanvas">
-			
+			<div id="superContenedor"></div>
 		</div>
 		<div class = "Contenedor" id="divicion3">
 			<button class="misBotones" id="btnLateral" onclick="ocultarLateral()" > ► </button>
 		</div>
 		<div class = "Contenedor" id="divicion4">
-			 <button class ="button" id = "btnTest" ">test</button>
-			 <button class ="button" id = "btnTest" ">test</button>
-			 <button class ="button" id = "btnTest" ">test</button>
-			 <button class ="button" id = "btnTest" ">test</button>
+			<div class="Encapsulador3">
+				<input type="text" id="inEscanor" placeholder="Buscar(Artista,Album,...)" /> 
+			 	<button class ="button" id= "btnEscanor"> </button>
+			</div>
 		</div>
 
 		<script src="guiFinal.js"></script>

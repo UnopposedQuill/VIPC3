@@ -13,7 +13,7 @@ body{
 }
 
 .lbl{
-	color: #BCF50C;
+	color: rgb(230,230,230); 
 	margin-left: 7px;
 }
 /* --------------------Contenedores--------------------*/
@@ -38,9 +38,19 @@ body{
 }
 
 #contenedorCanvas{
-	width: calc(80% - 6px);
+	width: calc(70% - 6px);
 	float: left;
 	height: calc(100% - 110px);
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+
+#superContenedor{
+	background-color: hsl(60, 69%,60%);
+	margin:3px 3px 3px 3px;
+	width: calc(60vw);
+	height: calc(60vh);
 }
 
 #divicion3{
@@ -56,24 +66,37 @@ body{
 #divicion4{
 	float: left;
 	height: calc(100% - 110px);
-	width: calc(20% - 41px);
+	width: calc(30% - 41px);
 }
 
 /*-------------------- Encapsuladores --------------------*/
 
 .Encapsulador{
-	margin: 3px 3px 3px 3px;
-	background-color: rgba(0,150,0,0.2);
-	border-radius: 10px 10px 60px 60px ;
+	margin: 3px;
+	background-color: rgba(150,150,150,0.4);
+	border-radius: 10px;
 	padding: 2px;
 }
 
 .Encapsulador2{
-	margin-top: 2px:;
-	padding: 5px;
-	background-color: rgba(0,150,0,0.2);
+	margin: 0px 5px 5px 5px;
+	padding: 3px;
+	background-color: rgba(150,150,150,0.4);
 	text-align: center;
-	border-radius: 60px 60px 10px 10px ;
+	border-radius:10px;
+
+}
+
+.Encapsulador3{
+	margin: 5px;
+	padding: 5px;
+	background-color: rgba(150,150,150,0.4);
+	text-align: center;
+	border-radius: 10px 10px 10px 10px ;
+}
+#espacio{
+	width: 100%;
+	height: 1px;
 }
 
 /*--------------------- Sliders--------------------*/
@@ -83,7 +106,7 @@ body{
   width: 40%;
   height: 15px;
   border-radius: 5px;  
-  background: #d3d3d3;
+  background: #AAAAAA;
   outline: none;
   opacity: 0.7;
   -webkit-transition: .2s;
@@ -96,7 +119,7 @@ body{
   width: 25px;
   height: 25px;
   border-radius: 50%; 
-  background: #4CAF50;
+  background: white;
   cursor: pointer;
 }
 
@@ -116,9 +139,9 @@ body{
 /*-------------------- Bottones --------------------*/
 
 .misBotones{
-	background-color: #4CAF50; /* Green */
+	background-color: rgb(200,200,200) /* Green */
 	border: none;
-	color: white;
+	color: #555555;
 	padding: 5px;
 	text-align: center;
 	text-decoration: none;
@@ -131,13 +154,14 @@ body{
 }
 
 .misBotones:hover {
-  background-color: #77FF55; /* Green */
-  color: #555555;
-   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  background-color: rgb(230,230,230); /* Gris Claro */
+  color: #333333;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .misBotones:active {
-  background-color: #3e8e41;
+  background-color: #555555;
+  color: white;
   box-shadow: 0 5px #666;
   transform: translateY(2px);
 }
@@ -150,35 +174,85 @@ body{
 }
 
 .button {
-  	background-color: #4CAF50; /* Green */
+  	background-color:rgba(0,0,0,0); /*#4CAF50; /* Green */
 	border: none;
 	color: white;
-	padding: 5px;
+	padding: 10px;
 	text-align: center;
 	text-decoration: none;
 	display: inline-block;
 	font-size: 16px;
 	margin:0px 10px 0px;
-	border-radius: 10px 40px 10px 40px;
-	width: 20%;
+	border-radius: 4px 4px 4px 4px;
+	height: 35px;
+	width: 35px;
 }
 
 .button:hover {
-  background-color: #77FF55; /* Green */
-  color: #555555;
-   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  background-color: rgb(230,230,230); /* Green */
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .button:active {
-  background-color: #3e8e41;
+  background-color: #FFFFFF;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+#btnPausa{
+	background-image:url("Multimedia/btn/pause.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+}
+#btnStop{
+	background-image:url("Multimedia/btn/stop-2.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+}
 
 #btnReversa{
-	border-radius: 40px 10px 40px 10px ;
+	
+	background-image:url("Multimedia/btn/rewind.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+	
 }
 
 #btnLoop{
-	border-radius: 40px 10px 40px 10px ;
+	background-image:url("Multimedia/btn/replay.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+}
+#btnEscanor{
+	background-image:url("Multimedia/btn/search.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+	
+}
+
+#btnBack{
+	background-image:url("Multimedia/btn/back.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+	
+}
+
+#btnNext{
+	background-image:url("Multimedia/btn/next.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+	
+}
+
+#btnSpeed{
+	background-image:url("Multimedia/btn/fast-forward.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+	
+}
+/* -------------------- Imputs --------------------*/
+
+#inEscanor{
+	color: black;
+	width: 70%;
+	margin-left: 2px;
 }
