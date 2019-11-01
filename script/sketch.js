@@ -80,12 +80,12 @@ function setup(){
   ditto.option('Estrellas');
   ditto.option('Gotus');
   ditto.option('Clasic++');
-  
+
   small = min(width,height);
   big = max(width,height);
-  
+
   tileWidth = width/32, tileHeight = width/50; //constantes magicas
-  
+
   /*Esto es para mensajes de estado*/
   /*Al usar un render 3d no acepta dibujar texto normalmente*/
   textCanvas = createGraphics(400,400);
@@ -94,15 +94,15 @@ function setup(){
     textCanvas.textAlign(CENTER,CENTER);
     textCanvas.textSize(24);
     textCanvas.text('Archivo no cargado\nEspera unos minutos\nO prueba con otro',200,200);
-  
+
   lineaLoca = createGraphics(width,height);
   lineaLoca.background(15);
   lineaLoca.noFill();
-  
+
   celljunior = createGraphics(width,height);
   celljunior.background(15);
   celljunior.noFill();
-  
+
   backPlot = createGraphics(width,height);
   backPlot.colorMode(HSB);
   backPlot.noStroke();
@@ -113,9 +113,9 @@ function setup(){
   past.colorMode(HSB);
   past.noStroke();
   puntos = Array.from(Array(ceil(1024/3)),(v,i)=>{return {x:random(width/2),y:random(height/2)}});
-  
+
   CanvasEllipsenaitor = createGraphics(width,height);
-  
+
   clearGrid();
 }
 
@@ -132,11 +132,11 @@ function draw(){
 
   let spectrum = fftspec.analyze();
   let spectrumfull = fftwave.analyze();
-  
+
   cR = (cR+fftwave.getEnergy("treble"))/2
   cG = (cG+fftwave.getEnergy("mid"))/2
   cB = (cB+fftwave.getEnergy("bass"))/2
-  
+
   let waveform = fftwave.waveform();
 
 
@@ -153,12 +153,14 @@ function draw(){
     pop();
 
     //llama el metodo que dibuja las ellipses en el canvas de elipses;
-    ellipsinador();
+    colorMode(RGB);
+    ellipsinador(color(0,map(amplitude.getLevel(),0,0.5,0,255),0));
     push();
     translate( -(width/2), -(height/2),0);
     image(CanvasEllipsenaitor,0,0);
     pop();
-  
+    colorMode(HSB);
+
   } else if(ditto.value()==="Estrellas"){
     push();
     translate(0,0,-4*height);
@@ -171,7 +173,7 @@ function draw(){
       translate(0,0,-4*height);
       scale(4,4,0);
       circulos(amplitude);
-      ellipsinador();
+      ellipsinador(color(60,69,map(amplitude.getLevel(),0,0.5,0,100)));
     translate( -(width/2), -(height/2),0);
       image(celljunior,0,0);
       image(CanvasEllipsenaitor,0,0);
@@ -187,13 +189,13 @@ function draw(){
     pop();
   }
   //Actualizaciones de los UI de la demostracion Grafia
-  
+
   //metodo encargado de actualizar el Slider de tiempo del UI
-  valorTiempoBarraMusica(sound.currentTime()); 
-  
+  valorTiempoBarraMusica(sound.currentTime());
+
   //metodo encargado de actualizar los botones en ejecucion dependiendo de su estado
   actualizarbtn();
-} 
+}
 
 function circulos(amplitude){
   celljunior.background(15,10);
@@ -220,7 +222,7 @@ function softSpectre(spectrum){
   ushade.setUniform('curr',curr);
   ushade.setUniform('prev',past);
   ushade.setUniform('texelSize',[1.0/width,1.0/height]);
-  //present.rect(0,0,width,height);
+  present.rect(0,0,width,height);
   curr.image(present,0,0);
 
   let tmp = curr;
@@ -303,7 +305,7 @@ function montanha(spectrum,cBase,cAlto,saturation=100){
    *Ajuste Vertical para que el origen vertical este en la base de la pantalla
    *No hay ajuste de Z
    */
-  
+
   push();
     translate(-width/2,0,0);
     /**Rotate para ver el map con angulo**/
@@ -356,11 +358,11 @@ function windowResized() {
 }
 
 /*funcion encargada de dibujar un Robot dentro del canvas*/
-function ellipsinador(){
+function ellipsinador(eColor){
 
   //Limpia el canvas donde se muestra el elipsinador
   CanvasEllipsenaitor.clear();
-  
+
   //comando encargado de crear los rectangulos en P5 desde el centro
   CanvasEllipsenaitor.rectMode(CENTER);
 
@@ -371,18 +373,18 @@ function ellipsinador(){
 
   //creaccion de las partes verdes que van de base para Orejas y Brazos
 
-  //Se asigna el color Verde a las siguientes partes y a su vez este se 
+  //Se asigna el color Verde a las siguientes partes y a su vez este se
   //saturara mas dependiendo del alto de la frecuencia de la cancion
-  CanvasEllipsenaitor.fill(0,155*ancho+150,0);
+  CanvasEllipsenaitor.fill(eColor);
   //Bolita de la cabeza del Robot
   CanvasEllipsenaitor.ellipse(width/2, height/2 - 150,50 ,50);
-  
+
   //Orejas del Robot
     //Parte Externa de la Oreja
     CanvasEllipsenaitor.rect(width/2, height/2 ,370 ,25);
     //Parte Interna de la Oreja
     CanvasEllipsenaitor.rect(width/2, height/2 ,350 ,50);
-  
+
     //Bolitas de la parte superior de las Orejas
     CanvasEllipsenaitor.ellipse(width/2 + 170, height/2 - 165, 30 ,30);
     CanvasEllipsenaitor.ellipse(width/2 - 170 , height/2 - 165, 30 ,30);
@@ -398,9 +400,9 @@ function ellipsinador(){
   //Se asigna el color para las partes Grices de la cabeza
   CanvasEllipsenaitor.fill("#333333");
 
-  //Se crea la base de la cabeza del robot 
+  //Se crea la base de la cabeza del robot
   CanvasEllipsenaitor.rect(width/2, height/2, 300, 300);
-  
+
   //Orejas del Robot
 
     //Comenaod encargado de crear los rectangulos desde la esquina superior derecha
@@ -411,10 +413,10 @@ function ellipsinador(){
     CanvasEllipsenaitor.rect(width/2 - 175 , height/2 - 150, 10, 175);
     //Se reinicia la creacion de rectangulos desde su centro
     CanvasEllipsenaitor.rectMode(CENTER);
-  
+
   //Creacion de los Ojos t la boca del Robot
 
-  //Se asigna el color blanco para que sea la base de las figuras a divujar 
+  //Se asigna el color blanco para que sea la base de las figuras a divujar
   CanvasEllipsenaitor.fill("#FFFFFF");
   //Base de los Ojos y la Boca
     //Creacion de la base de la boca
@@ -425,9 +427,9 @@ function ellipsinador(){
 
   //Colores de Ojos y Boca
 
-  //Se asigna el color verde para que sea la base de las figuras a divujar 
+  //Se asigna el color verde para que sea la base de las figuras a divujar
   // ademas la saturacion va a variar con relacion a las frecuencias
-  CanvasEllipsenaitor.fill(0,155*ancho+175,0);
+  CanvasEllipsenaitor.fill(eColor);
     //Creacion de la parte verde de la boca
     CanvasEllipsenaitor.rect(width/2 , height/2 +20, 95, ancho*200 +5);
     //Creacion de la parte verde de los ojos
@@ -436,7 +438,7 @@ function ellipsinador(){
 
   //Parte interna de  los Ojos y la Boca
 
-  //Se asigna el color blanco para que sea la base de las figuras a divujar 
+  //Se asigna el color blanco para que sea la base de las figuras a divujar
   CanvasEllipsenaitor.fill("#FFFFFF");
     //Creacion de la parte interna de la boca
     CanvasEllipsenaitor.rect(width/2 , height/2 +20, 95, ancho*200);
@@ -450,9 +452,9 @@ function ellipsinador(){
   CanvasEllipsenaitor.rectMode(CORNER);
   //Se asigna el color para las partes Grices del cuerpo
   CanvasEllipsenaitor.fill("#333333");
-  
+
   //Base del cuerpo del Robot
-  
+
     //Creacion del pecho del Robot
     CanvasEllipsenaitor.rect(width/2 - 220, height/2 + 100, 440, 440);
     //Creacion de los brazos del Robot
@@ -469,11 +471,11 @@ function ellipsinador(){
 
   //Panel de control
 
-  //Se asigna el color verde para que sea la base de las figuras a divujar 
+  //Se asigna el color verde para que sea la base de las figuras a divujar
   // ademas la saturacion va a variar con relacion a las frecuencias
-  CanvasEllipsenaitor.fill(0,155*ancho+175,0);
+  CanvasEllipsenaitor.fill(eColor);
     // Barras verdes del panel de control del Robot
-    CanvasEllipsenaitor.rect(width/2 - 150, height/2 + 190, 10, 100);  
+    CanvasEllipsenaitor.rect(width/2 - 150, height/2 + 190, 10, 100);
       CanvasEllipsenaitor.ellipse(width/2 - 100, height/2 + 190, 10, 100);
         CanvasEllipsenaitor.rect(width/2 - 50, height/2 + 190, 10, 100);
           CanvasEllipsenaitor.rect(width/2 , height/2 + 190, 20, 100);//Barra del Centro
@@ -483,23 +485,23 @@ function ellipsinador(){
 }
 
 
-/*Funcion encargada de duvujar una linea que ondule con la frecuencia de la 
+/*Funcion encargada de duvujar una linea que ondule con la frecuencia de la
 cancion y desplegarlo en el canvas*/
 function lineFactory(waveform,spectrum){
-  
+
   //Funciones encargadas de limpiar y preparar el canvas para dibujar la linea
   //con la cual se va a visualizar las frecuencias del la cancion
   lineaLoca.clear();
   lineaLoca.noFill();
   lineaLoca.stroke(255);
   lineaLoca.noFill();
-  
+
   //Inicion de la creacion de la linea
   lineaLoca.beginShape();
 
   //Se le asigna el color verde a la lina de la visualizacion
   lineaLoca.stroke(0,255,0)
-  
+
   //Se le asigna un ancho de 3 px a la linea
   lineaLoca.strokeWeight(3);
 
