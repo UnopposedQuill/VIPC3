@@ -26,7 +26,7 @@ let heightMap = [];
 let small, big;
 let barraDuracionActiva = true;
 let loopActivo = true;
-let invertidor=false;
+let invertidor,fastForward=false;
 let tileWidth, tileHeight;
 
 let peaks = [];

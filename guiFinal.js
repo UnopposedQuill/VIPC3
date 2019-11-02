@@ -159,27 +159,28 @@ function actualizarbtn(){
   //if encargado de recizar si la cancion se esta ejecutando en loop para actualizar el btnLoop 
   if(loopActivo){
     //Se actualiza el color del boton con relacion al valor
-    document.getElementById("btnLoop").style.backgroundColor = "rgba(200,200,200,0.7)";
+    document.getElementById("btnLoop").style.backgroundImage = "url('Multimedia/btn/replay ON.png')";
+    
   } 
 
   //else encargado de actualizar el btnLoop
   else {
 
     //Se actualiza el color del boton con relacion al valor
-    document.getElementById("btnLoop").style.backgroundColor = "rgba(0,0,0,0)";
-  
+    document.getElementById("btnLoop").style.backgroundImage = "url('Multimedia/btn/replay.png')";
+    
   }
 
    //if encargado de recizar si la cancion se esta ejecutando en loop para actualizar el btnReversa
   if(invertidor){
     //Se actualiza el color del boton con relacion al valor
-    document.getElementById("btnReversa").style.backgroundColor = "rgba(200,200,200,0.7)";
+    document.getElementById("btnReversa").style.backgroundImage = "url('Multimedia/btn/rewind ON.png')";
   }
 
   //else encargado de actualizar el btnReversa
   else {
     //Se actualiza el color del boton con relacion al valor
-    document.getElementById("btnReversa").style.backgroundColor = "rgba(0,0,0,0)";
+    document.getElementById("btnReversa").style.backgroundImage = "url('Multimedia/btn/rewind.png')";
   }
 }
 
@@ -243,26 +244,28 @@ function valorTiempoBarraMusica(valor){
 }
 
 /*Funcion a encargada de asignar la velociada a la cacion ya sea en funcion normal o en reversa*/
-function Velocidad(self){
-
+function Velocidad(){
+  console.log("test");
   //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
-
-  //se obpiene el valor del Slider de velocidad 
-  var entrada = parseInt(self.value);
+  if(invertidor) inversorMusical();
 
   //si la funcion de reversa esta activa el valor del Slider se hara negativo 
-  if(invertidor){
-
-    //Se hace negativo el valor del Slider
-    entrada=entrada*-1;
+  if(fastForward){
+    //Se le asigna la velocidad a la cancion
+     sound.rate(1);
+     document.getElementById("btnSpeed").style.backgroundImage = "url('Multimedia/btn/fast-forward.png')";
+  
   }
+  else{
+    //Se le asigna la velocidad a la cancion
+     sound.rate(2);
+     document.getElementById("btnSpeed").style.backgroundImage = "url('Multimedia/btn/fast-forward ON.png')";
+  }
+  fastForward = !fastForward;
 
-  //Se le asigna la velocidad a la cancion
-  sound.rate(entrada);
+  
 
-  //Se actualiza el valor del lbl que muestra la velocidad de ejecucion
-  document.getElementById("valorVelocidadMusica").innerHTML = entrada;
 }
 
 /*Funcion encargado de actualizar el volumen de la cancion utlizando un slider del UI*/
@@ -283,6 +286,8 @@ function inversorMusical(){
   //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
 
+  if(fastForward) Velocidad();
+
   //if encargo de revisar si la variable de invertido esta en un valor de true y si este 
   //es el caso colocar la cancion a velocidad de 1 a sonar normal 
   if(invertidor){
@@ -293,11 +298,7 @@ function inversorMusical(){
     //se actualiza el valor la variable invertidor
     invertidor=false;
 
-    //Se actualiza el valor del lbl con la velocidad de la cancion
-    document.getElementById("valorVelocidadMusica").innerHTML ="1";
-
-    //se asigna el valor de 1 al slider de velocidad
-    document.getElementById("barraVelocidad").value=1;
+   
   }
 
   //else que se ejecutara si el if anterior no cumple con la condicion, si 
@@ -319,10 +320,5 @@ function inversorMusical(){
     //se actualiza el valor la variable invertidor
     invertidor=true;
 
-    //Se actualiza el valor del lbl con la velocidad de la cancion
-    document.getElementById("valorVelocidadMusica").innerHTML ="-1";
-
-    //se asigna el valor de 1 al slider de velocidad
-    document.getElementById("barraVelocidad").value=1;
   }
 }
