@@ -5,7 +5,6 @@
 
 *{
 	font-family: 'fontBase';
-	color: #BCF50C;
 }
 
 body{
@@ -47,10 +46,10 @@ body{
 }
 
 #superContenedor{
-	background-color: hsl(60, 69%,60%);
+	
 	margin:3px 3px 3px 3px;
-	width: calc(60vw);
-	height: calc(60vh);
+	width: calc(65vw);
+	height: calc(65vh);
 }
 
 #divicion3{
@@ -94,6 +93,40 @@ body{
 	text-align: center;
 	border-radius: 10px 10px 10px 10px ;
 }
+
+.Encapsulador4{
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+
+.Encapsulador5{
+	margin: 5px;
+	padding: 5px;
+	background-color: rgba(150,150,150,0.4);
+	border-radius: 10px 10px 10px 10px ;
+
+}
+.Encapsulador6{
+	margin: 5px;
+	padding: 5px;
+	background-color: rgba(200,200,200,0.4);
+	border-radius: 10px 10px 10px 10px ;
+
+}
+
+.canvasDatos{
+	width: calc(25vw);
+	height: calc(30vh);
+	background-color: red;
+}
+
+.cuadroDatos{
+	width: calc(25vw);
+	height: calc(20vh);
+	background-color: red;
+}
+
 #espacio{
 	width: 100%;
 	height: 1px;
@@ -255,4 +288,23 @@ body{
 	color: black;
 	width: 70%;
 	margin-left: 2px;
+}
+/*-------------------- Selector --------------------*/
+.selectorClass{
+	margin-left: 15px;
+	width: 150px;
+	background-color:rgb(200,200,200);
+  	border: none;
+  	color: rgb(50,50,50);
+  	padding: 5px 32px;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-size: 16px;
+  	border-radius: 100px 10px 100px 5px;
+}
+.selectorClass:hover {
+  background-color: #FFFFFF; /* Green */
+  color: #555555;
+   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
