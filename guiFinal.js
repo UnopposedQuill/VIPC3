@@ -147,13 +147,14 @@ function actualizarbtn(){
   //if encargado de recizar si la cancion se esta ejecutando para actualizar el btnPausa 
   if(sound.isPlaying()){
     //Se actualiza el la palabra dentro del boton a Play
-    document.getElementById("btnPausa").style.backgroundImage = "url('Multimedia/btn/play.png')";
+    document.getElementById("btnPausa").style.backgroundImage = "url('Multimedia/btn/pause.png')";
   } 
+
 
   //else encargado de actualizar el btnPausa 
   else {
     //se actualiza el la palabra dentro del boton a Pause
-    document.getElementById("btnPausa").style.backgroundImage = "url('Multimedia/btn/pause.png')";
+    document.getElementById("btnPausa").style.backgroundImage = "url('Multimedia/btn/play.png')";
   }
 
   //if encargado de recizar si la cancion se esta ejecutando en loop para actualizar el btnLoop 
