@@ -59,7 +59,7 @@ function setup(){
   fftspec = new p5.FFT(0,32);
 
   canvas = createCanvas(windowWidth,windowHeight,WEBGL);
-  
+
   colorMode(HSB);
   frameRate(24);
   //volumen = createSlider(0,1,0.5,0.1);
@@ -527,7 +527,7 @@ function lineFactory(waveform,spectrum){
 }
 
 /*js no tiene string multiniea, y quien le diga lo contrario le esta mientiendo*/
-var shaderFrag = 
+var shaderFrag =
 "precision mediump float;"+
 "varying vec2 vTexCoord;"+
 "uniform sampler2D curr;"+
@@ -545,7 +545,7 @@ var shaderFrag =
 "       pi = pi * 0.9;"+
 "  gl_FragColor = vec4(pi.rgb,1.);"+
 "}";
-var shaderVert = 
+var shaderVert =
 "attribute vec3 aPosition;"+
 "attribute vec2 aTexCoord;"+
 "varying vec2 vTexCoord;"+

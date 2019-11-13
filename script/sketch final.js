@@ -1,6 +1,7 @@
-let volumen, canvas, textCanvas, backPlot,  sel, fileInput, celljunior, ditto;
+let volumen, canvas, textCanvas, backPlot,  sel, fileInput, celljunior, ditto, svgSearches;
 let lineaLoca;
 let puntos=[], curr, past, present, ushade;
+let flag=false;
 /*sound dummy para que no me de errores por no cargar el archivo default*/
 /*Ya me canse de los primeros 10s de Megalovania*/
 let sound = {
@@ -61,7 +62,7 @@ function setup(){
   let contenedor = document.getElementById("superContenedor");
 
   canvas = createCanvas(contenedor.offsetWidth,contenedor.offsetHeight,WEBGL).parent('#superContenedor');;
-  
+
   colorMode(HSB);
   frameRate(24);
   //volumen = createSlider(0,1,0.5,0.1);
@@ -84,7 +85,7 @@ function setup(){
   ditto.option('Titus');
   ditto.option('Estrellas');
   ditto.option('Gotus');
-  
+
 
   small = min(width,height);
   big = max(width,height);
@@ -532,7 +533,7 @@ function lineFactory(waveform,spectrum){
 }
 
 /*js no tiene string multiniea, y quien le diga lo contrario le esta mientiendo*/
-var shaderFrag = 
+var shaderFrag =
 "precision mediump float;"+
 "varying vec2 vTexCoord;"+
 "uniform sampler2D curr;"+
@@ -550,7 +551,7 @@ var shaderFrag =
 "       pi = pi * 0.9;"+
 "  gl_FragColor = vec4(pi.rgb,1.);"+
 "}";
-var shaderVert = 
+var shaderVert =
 "attribute vec3 aPosition;"+
 "attribute vec2 aTexCoord;"+
 "varying vec2 vTexCoord;"+
@@ -560,3 +561,18 @@ var shaderVert =
 "  positionVec4.xy = positionVec4.xy * 2.0 - 1.0;"+
 "  gl_Position = positionVec4;"+
 "}";
+
+function switcher() {
+  if(!flag){
+    let contenedor = document.getElementById("searchGraphic");
+    let hijo = $('#svgSearches').detach();
+    $('#superContenedor').append(hijo);
+    canvas = createCanvas(contenedor.offsetWidth,contenedor.offsetHeight,WEBGL).parent('#searchGraphic');
+  } else {
+    let contenedor = document.getElementById("superContenedor");
+    let hijo = $('#svgSearches').detach();
+    $('#searchGraphic').append(hijo);
+    canvas = createCanvas(contenedor.offsetWidth,contenedor.offsetHeight,WEBGL).parent('#superContenedor');
+  }
+  flag=!flag;
+}
