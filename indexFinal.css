@@ -76,6 +76,9 @@ body{
 	height: calc(100% - 120px);
 	width: calc(30% - 41px);
 	border-radius: 10px 0px 0px 10px;
+	display: flex;
+	flex-direction: column;
+
 }
 
 /*-------------------- Encapsuladores --------------------*/
@@ -130,9 +133,13 @@ body{
 	background-color: red;
 }
 
+#contenedorDatos{
+    flex: 1;
+}
+
 .cuadroDatos{
 	width: calc(25vw);
-	height: calc(20vh);
+	height: 100%;
 	background-color: red;
 }
 
