@@ -3,27 +3,32 @@ let superiorOculta,superiorLateral= false;
 function ocultarSuperior(){
 
 	var componente = document.getElementById("divicion1");
-	
+
 	if(superiorOculta){
+
+		// Cambiar a visible
 		componente.style.visibility='visible';
-		componente.style.height="75px";
-		document.getElementById("btnSuperior").innerHTML = "▲";
-		document.getElementById("contenedorCanvas").style.height= "calc(100% - 110px)";	
-		document.getElementById("divicion3").style.height= "calc(100% - 110px)";
-		document.getElementById("divicion4").style.height= "calc(100% - 110px)";	
+
+		// Cambiar tamaño para tomar espacio
+		document.getElementById("divicion3").style.top = "120px";
+		document.getElementById("divicion4").style.top = "120px";
+
+		// Eliminar altura requerida por componente
+		document.getElementById("divicion3").style.height = "calc(100% - 120px)";
+		document.getElementById("divicion4").style.height = "calc(100% - 120px)";
 	}
 	else{
-
-		
+		// Cambiar a oculto
 		componente.style.visibility='hidden';
-		componente.style.height="0px";
-		document.getElementById("btnSuperior").innerHTML = "▼";
-		document.getElementById("contenedorCanvas").style.height= "calc(100% - 40px)";
-		document.getElementById("divicion3").style.height= "calc(100% - 40px)";
-		document.getElementById("divicion4").style.height= "calc(100% - 40px)";
 
+		// Eliminar espacio por ocultar el componente
+		document.getElementById("divicion3").style.top = "45px";
+		document.getElementById("divicion4").style.top = "45px";
 
-	} 	
+		// Agregar altura extra ya no requerida por componente
+		document.getElementById("divicion3").style.height = "calc(100% - 45px)";
+		document.getElementById("divicion4").style.height = "calc(100% - 45px)";
+	}
 
 	superiorOculta=!superiorOculta;
 }
@@ -31,19 +36,13 @@ function ocultarSuperior(){
 function ocultarLateral(){
 
 	var componente = document.getElementById("divicion4");
-	
+
 	if(superiorLateral){
-		componente.style.width="calc(30% - 44px)";
 		componente.style.visibility='visible';
-		document.getElementById("btnLateral").innerHTML = "►";
-		document.getElementById("contenedorCanvas").style.width= "calc(70% - 6px)";		
 	}
 	else{
 		componente.style.visibility='hidden';
-		componente.style.width="0px";
-		document.getElementById("btnLateral").innerHTML = "◄";
-		document.getElementById("contenedorCanvas").style.width= "calc(100% - 55px)";
-	} 	
+	}
 
 	superiorLateral=!superiorLateral;
 }
@@ -72,7 +71,7 @@ function toggleSound(){
   if(!soundMode) return;
   if(sound.isPlaying()){
     barraDuracionActiva = false;
-    sound.pause(); 
+    sound.pause();
   } else {
     barraDuracionActiva = true;
     sound.play();
@@ -92,10 +91,10 @@ function clearGrid(){
 
 /*Funcion encargada de detener la reproduccion de la cancion que se esta ejecutando*/
 function btnStop(){
-  
+
   //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
-  
+
   //Se detiene la reproduccion de la cancion
   sound.stop();
 }
@@ -144,32 +143,32 @@ function actualizarbtn(){
   //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
 
-  //if encargado de recizar si la cancion se esta ejecutando para actualizar el btnPausa 
+  //if encargado de recizar si la cancion se esta ejecutando para actualizar el btnPausa
   if(sound.isPlaying()){
     //Se actualiza el la palabra dentro del boton a Play
     document.getElementById("btnPausa").style.backgroundImage = "url('Multimedia/btn/pause.png')";
-  } 
+  }
 
 
-  //else encargado de actualizar el btnPausa 
+  //else encargado de actualizar el btnPausa
   else {
     //se actualiza el la palabra dentro del boton a Pause
     document.getElementById("btnPausa").style.backgroundImage = "url('Multimedia/btn/play.png')";
   }
 
-  //if encargado de recizar si la cancion se esta ejecutando en loop para actualizar el btnLoop 
+  //if encargado de recizar si la cancion se esta ejecutando en loop para actualizar el btnLoop
   if(loopActivo){
     //Se actualiza el color del boton con relacion al valor
     document.getElementById("btnLoop").style.backgroundImage = "url('Multimedia/btn/replay ON.png')";
-    
-  } 
+
+  }
 
   //else encargado de actualizar el btnLoop
   else {
 
     //Se actualiza el color del boton con relacion al valor
     document.getElementById("btnLoop").style.backgroundImage = "url('Multimedia/btn/replay.png')";
-    
+
   }
 
    //if encargado de recizar si la cancion se esta ejecutando en loop para actualizar el btnReversa
@@ -185,14 +184,14 @@ function actualizarbtn(){
   }
 }
 
-/*funcion encargada de hacer un salto en la cancion a los segundos que el usuario 
+/*funcion encargada de hacer un salto en la cancion a los segundos que el usuario
 quiere hacer*/
 function tiempoBarraMusica(self){
   //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
   //Detiene la ejecucion atual de la cancion
   sound.stop();
-  //se activa la actualizacion del slider 
+  //se activa la actualizacion del slider
   barraDuracionActiva = true;
   //Variable encargada de conseguir el valor del tiempo al cual el Usuario quiere
   //hacer para la reproduccion de la cancion
@@ -207,19 +206,19 @@ function tiempoMusica(valor){
 
   //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
-  
+
   //Variable encargada de obtener los Minutos de la cancion
   var minutos = parseInt(valor/60);
-  
+
   //Variable encargada de obtener los Segundos de la cancion
   var segundos = parseInt(valor%60);
-  
+
   //If encargado de revizar si el numero es menor a 10 para colocar un cero para que se vea mas estetico
-  //la representacion de los Minutos 
+  //la representacion de los Minutos
   if(minutos<=9){
     minutos="0"+ minutos;
   }
-  
+
   //If encargado de revizar si el numero es menor a 10 para colocar un cero para que se vea mas estetico
   //la representacion de los Segundos
   if(segundos<=9){
@@ -230,18 +229,18 @@ function tiempoMusica(valor){
   return minutos +":"+ segundos;
 }
 
-/*Funcion encargada de Actualizar el Slider seekTime del UI con el valor actual de en 
+/*Funcion encargada de Actualizar el Slider seekTime del UI con el valor actual de en
 cual segundo se encuentra la ejecucion de la cancion*/
 function valorTiempoBarraMusica(valor){
 
-  //If encargado de revisar que si se pueda actualizar el valor y que este no 
-  //interfiera cuando el usuario intente cambiar el tiempo de ejecucion de la cancion 
+  //If encargado de revisar que si se pueda actualizar el valor y que este no
+  //interfiera cuando el usuario intente cambiar el tiempo de ejecucion de la cancion
   if(barraDuracionActiva){
     $("#Duracion1").html(tiempoMusica(sound.currentTime()));
     $("#Duracion2").html(tiempoMusica(sound.duration()));
     //se asigna el valor al Slider con los segundos actuales de la cancion
     document.getElementById("seekTime").value = parseInt(valor);
-  }  
+  }
 }
 
 /*Funcion a encargada de asignar la velociada a la cacion ya sea en funcion normal o en reversa*/
@@ -251,12 +250,12 @@ function Velocidad(){
   if(!soundMode) return;
   if(invertidor) inversorMusical();
 
-  //si la funcion de reversa esta activa el valor del Slider se hara negativo 
+  //si la funcion de reversa esta activa el valor del Slider se hara negativo
   if(fastForward){
     //Se le asigna la velocidad a la cancion
      sound.rate(1);
      document.getElementById("btnSpeed").style.backgroundImage = "url('Multimedia/btn/fast-forward.png')";
-  
+
   }
   else{
     //Se le asigna la velocidad a la cancion
@@ -265,7 +264,7 @@ function Velocidad(){
   }
   fastForward = !fastForward;
 
-  
+
 
 }
 
@@ -289,32 +288,32 @@ function inversorMusical(){
 
   if(fastForward) Velocidad();
 
-  //if encargo de revisar si la variable de invertido esta en un valor de true y si este 
-  //es el caso colocar la cancion a velocidad de 1 a sonar normal 
+  //if encargo de revisar si la variable de invertido esta en un valor de true y si este
+  //es el caso colocar la cancion a velocidad de 1 a sonar normal
   if(invertidor){
-    
+
     //se asigna el valor de velocidad 1 a la cancion
     sound.rate(1);
 
     //se actualiza el valor la variable invertidor
     invertidor=false;
 
-   
+
   }
 
-  //else que se ejecutara si el if anterior no cumple con la condicion, si 
+  //else que se ejecutara si el if anterior no cumple con la condicion, si
   //es el caso colocar la cancion a velocidad de -1 a sonar en reversa
   else{
-  
+
     /*Por un error de la libreria se hace un juego con la velocidad negativa para que esta
     pueda ser ejecutada*/
 
-    //se asigna el valor de velocidad -1 a la cancion    
+    //se asigna el valor de velocidad -1 a la cancion
     sound.rate(-1);
-    
+
     //se asigna el valor de velocidad 0 a la cancion
     sound.rate(0);
-    
+
     //se asigna el valor de velocidad -1 a la cancion
     sound.rate(-1);
 

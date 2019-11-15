@@ -9,6 +9,7 @@
 
 body{
 	background-color: rgba(0,0,0,0.7);
+	margin: 0px;
 }
 
 .lbl{
@@ -18,14 +19,18 @@ body{
 /* --------------------Contenedores--------------------*/
 
 .Contenedor{
+	z-index: 2;
 	background-color: rgba(0,0,0,0.7);
-	margin: 3px 3px 0px 3px ;
+	position: absolute;
+	margin:0px;
 	width: 100%;
 	border-radius: 5px 5px 5px 5px;
 }
 
 #divicion1{
 	height: 75px;
+	top: 35px;
+	border-radius: 0px 0px 5px 5px;
 }
 
 #divicion2{
@@ -34,12 +39,14 @@ body{
 	display: flex;
   	align-items: center;
   	justify-content: center;
+	border-radius: 5px 5px 0px 0px;
 }
 
 #contenedorCanvas{
-	width: calc(70% - 6px);
+	z-index: -1;
 	float: left;
-	height: calc(100% - 110px);
+	width: 100%;
+	height: 100%;
 	display: flex;
   	align-items: center;
   	justify-content: center;
@@ -47,25 +54,28 @@ body{
 
 #superContenedor{
 
-	margin:3px 3px 3px 3px;
-	width: calc(65vw);
-	height: calc(65vh);
+	margin:0px;
+	width: 90%;
+	height: 80%;
 }
 
 #divicion3{
-	float: left;
-	height: calc(100% - 110px);
+	top: 120px;
+	right: 0px;
+	height: calc(100% - 120px);
 	width: 35px;
 	display: flex;
   	align-items: center;
   	justify-content: center;
-  	margin: 3px 0px 0px 0px ;
+	border-radius: 0px 10px 10px 0px;
 }
 
 #divicion4{
-	float: left;
-	height: calc(100% - 110px);
+	top: 120px;
+	right: 35px;
+	height: calc(100% - 120px);
 	width: calc(30% - 41px);
+	border-radius: 10px 0px 0px 10px;
 }
 
 /*-------------------- Encapsuladores --------------------*/
@@ -83,7 +93,6 @@ body{
 	background-color: rgba(150,150,150,0.4);
 	text-align: center;
 	border-radius:10px;
-
 }
 
 .Encapsulador3{
@@ -105,8 +114,8 @@ body{
 	padding: 5px;
 	background-color: rgba(150,150,150,0.4);
 	border-radius: 10px 10px 10px 10px ;
-
 }
+
 .Encapsulador6{
 	margin: 5px;
 	padding: 5px;
@@ -119,7 +128,6 @@ body{
 	width: calc(25vw);
 	height: calc(30vh);
 	background-color: red;
-	background-image: url("Multimedia/heat.jpeg");
 }
 
 .cuadroDatos{
@@ -199,6 +207,7 @@ body{
   box-shadow: 0 5px #666;
   transform: translateY(2px);
 }
+
 #btnSuperior{
 	width: 15%;
 }
@@ -232,11 +241,13 @@ body{
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
+
 #btnPausa{
 	background-image:url("Multimedia/btn/pause.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 }
+
 #btnStop{
 	background-image:url("Multimedia/btn/stop-2.png");
 	background-repeat:no-repeat;
@@ -256,6 +267,7 @@ body{
 	background-repeat:no-repeat;
 	background-size: contain;
 }
+
 #btnEscanor{
 	background-image:url("Multimedia/btn/search.png");
 	background-repeat:no-repeat;
@@ -304,6 +316,7 @@ body{
   	font-size: 16px;
   	border-radius: 100px 10px 100px 5px;
 }
+
 .selectorClass:hover {
   background-color: #FFFFFF; /* Green */
   color: #555555;
