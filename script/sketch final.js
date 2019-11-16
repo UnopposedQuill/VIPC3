@@ -563,16 +563,38 @@ var shaderVert =
 "}";
 
 function switcher() {
+  
   if(!flag){
     let contenedor = document.getElementById("searchGraphic");
     let hijo = $('#svgSearches').detach();
     $('#superContenedor').append(hijo);
     canvas = createCanvas(contenedor.offsetWidth,contenedor.offsetHeight,WEBGL).parent('#searchGraphic');
+    document.getElementById('btnChange').style.backgroundImage ="url('Multimedia/btn/change ON.png')";
+    
+    document.getElementById('btnChange').addEventListener('mouseenter', function(){
+       document.getElementById('btnChange').style.backgroundImage ="url('Multimedia/btn/change ON-Hover.png')";
+    });
+
+    document.getElementById('btnChange').addEventListener('mouseleave', function(){
+       document.getElementById('btnChange').style.backgroundImage ="url('Multimedia/btn/change ON.png')";
+    });
+
+
   } else {
     let contenedor = document.getElementById("superContenedor");
     let hijo = $('#svgSearches').detach();
     $('#searchGraphic').append(hijo);
     canvas = createCanvas(contenedor.offsetWidth,contenedor.offsetHeight,WEBGL).parent('#superContenedor');
+  
+     document.getElementById('btnChange').style.backgroundImage ="url('Multimedia/btn/change.png')";
+
+     document.getElementById('btnChange').addEventListener('mouseenter', function(){
+       document.getElementById('btnChange').style.backgroundImage ="url('Multimedia/btn/change-Hover.png')";
+    });
+
+     document.getElementById('btnChange').addEventListener('mouseleave', function(){
+       document.getElementById('btnChange').style.backgroundImage ="url('Multimedia/btn/change.png')";
+    });
   }
   flag=!flag;
 }

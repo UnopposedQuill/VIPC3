@@ -207,6 +207,7 @@ function actualizarbtn(){
     }
   }
 
+
    //if encargado de recizar si la cancion se esta ejecutando en loop para actualizar el btnReversa
   if(invertidor){
     //Se actualiza el color del boton con relacion al valor

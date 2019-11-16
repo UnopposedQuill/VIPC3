@@ -140,7 +140,7 @@ body{
 .cuadroDatos{
 	width: calc(25vw);
 	height: 100%;
-	background-color: red;
+	background-color: rgba(200,200,200,0.5);
 }
 
 #espacio{
@@ -339,6 +339,20 @@ body{
 #btnSpeed:hover{
 	background-image:url("Multimedia/btn/fast-forward-Hover.png");
 }
+
+
+/*-------------------- btnChange --------------------*/
+#btnChange{
+	background-image:url("Multimedia/btn/change.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+
+}
+
+#btnChange:hover{
+	background-image:url("Multimedia/btn/change-Hover.png");
+}
+
 
 /* -------------------- Imputs --------------------*/
 
