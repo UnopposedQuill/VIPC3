@@ -55,8 +55,8 @@ body{
 #superContenedor{
 
 	margin:0px;
-	width: 90%;
-	height: 80%;
+	width: 100%;
+	height: 100%;
 }
 
 #divicion3{
@@ -170,6 +170,7 @@ body{
   border-radius: 50%;
   background: white;
   cursor: pointer;
+  background:  #45f5e7;
 }
 
 .slider::-moz-range-thumb {
@@ -188,7 +189,7 @@ body{
 /*-------------------- Bottones --------------------*/
 
 .misBotones{
-	background-color: rgb(200,200,200) /* Green */
+	background-color: #45f5e7; /* Green */
 	border: none;
 	color: #555555;
 	padding: 5px;
@@ -203,7 +204,7 @@ body{
 }
 
 .misBotones:hover {
-  background-color: rgb(230,230,230); /* Gris Claro */
+  background-color: #92f9f6; /* Gris Claro */
   color: #333333;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
@@ -236,73 +237,111 @@ body{
 	border-radius: 4px 4px 4px 4px;
 	height: 35px;
 	width: 35px;
+
 }
 
 .button:hover {
-  background-color: rgb(230,230,230); /* Green */
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  /*background-color: #01B2FF;*/
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);transition-duration: 0.4s;
 }
 
 .button:active {
-  background-color: #FFFFFF;
+  /*background-color: #FFFFFF;*/
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-
+/*-------------------- btnStop --------------------*/
 #btnPausa{
 	background-image:url("Multimedia/btn/pause.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 }
 
+#btnPausa:hover{
+	background-image:url("Multimedia/btn/pause-Hover.png");
+}
+/*-------------------- btnStop --------------------*/
 #btnStop{
 	background-image:url("Multimedia/btn/stop-2.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 }
 
+#btnStop:hover{
+	background-image:url("Multimedia/btn/stop-Hover.png");
+}
+
+/*-------------------- btnReversa --------------------*/
 #btnReversa{
 
 	background-image:url("Multimedia/btn/rewind.png");
 	background-repeat:no-repeat;
 	background-size: contain;
-
 }
 
+#btnReversa:hover{
+	background-image:url("Multimedia/btn/rewind-Hover.png");
+}
+
+/*-------------------- btnBack --------------------*/
+
+#btnBack{
+	background-image:url("Multimedia/btn/back.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+}
+
+#btnBack:hover{
+	background-image:url("Multimedia/btn/back-Hover.png");
+}
+
+/*-------------------- btnLoop --------------------*/
 #btnLoop{
 	background-image:url("Multimedia/btn/replay.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 }
 
+#btnLoop:hover{
+	background-image:url("Multimedia/btn/replay-Hover.png");
+}
+/*-------------------- btnEscanor --------------------*/
 #btnEscanor{
 	background-image:url("Multimedia/btn/search.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 
 }
-
-#btnBack{
-	background-image:url("Multimedia/btn/back.png");
-	background-repeat:no-repeat;
-	background-size: contain;
-
+#btnEscanor:hover{
+	background-image:url("Multimedia/btn/search-Hover.png");
 }
 
+
+/*-------------------- btnNext --------------------*/
 #btnNext{
 	background-image:url("Multimedia/btn/next.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 
 }
+#btnNext:hover{
+	background-image:url("Multimedia/btn/next-Hover.png");
+}
 
+/*-------------------- btnSpeed --------------------*/
 #btnSpeed{
 	background-image:url("Multimedia/btn/fast-forward.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 
 }
+
+#btnSpeed:hover{
+	background-image:url("Multimedia/btn/fast-forward-Hover.png");
+}
+
 /* -------------------- Imputs --------------------*/
+
 
 #inEscanor{
 	color: black;
@@ -313,7 +352,7 @@ body{
 .selectorClass{
 	margin-left: 15px;
 	width: 150px;
-	background-color:rgb(200,200,200);
+	background-color:#1c9b91;
   	border: none;
   	color: rgb(50,50,50);
   	padding: 5px 32px;
@@ -325,7 +364,7 @@ body{
 }
 
 .selectorClass:hover {
-  background-color: #FFFFFF; /* Green */
+  background-color: #45f5e7; /* Green */
   color: #555555;
    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }

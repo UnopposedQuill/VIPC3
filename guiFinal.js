@@ -5,7 +5,9 @@ function ocultarSuperior(){
 	var componente = document.getElementById("divicion1");
 
 	if(superiorOculta){
-
+    
+    $("#btnSuperior").html("▲");
+    document.getElementById("btnSuperior").value="▲";
 		// Cambiar a visible
 		componente.style.visibility='visible';
 
@@ -16,10 +18,14 @@ function ocultarSuperior(){
 		// Eliminar altura requerida por componente
 		document.getElementById("divicion3").style.height = "calc(100% - 120px)";
 		document.getElementById("divicion4").style.height = "calc(100% - 120px)";
+
+
 	}
 	else{
 		// Cambiar a oculto
-		componente.style.visibility='hidden';
+   
+		 $("#btnSuperior").html("▼");
+    componente.style.visibility='hidden';
 
 		// Eliminar espacio por ocultar el componente
 		document.getElementById("divicion3").style.top = "45px";
@@ -28,6 +34,7 @@ function ocultarSuperior(){
 		// Agregar altura extra ya no requerida por componente
 		document.getElementById("divicion3").style.height = "calc(100% - 45px)";
 		document.getElementById("divicion4").style.height = "calc(100% - 45px)";
+
 	}
 
 	superiorOculta=!superiorOculta;
@@ -38,9 +45,11 @@ function ocultarLateral(){
 	var componente = document.getElementById("divicion4");
 
 	if(superiorLateral){
+    $("#btnLateral").html("►");
 		componente.style.visibility='visible';
 	}
 	else{
+    $("#btnLateral").html("◄");
 		componente.style.visibility='hidden';
 	}
 
@@ -139,48 +148,91 @@ function actualizarbtn(){
  *  No seria mejor actualizar los botones solamente cuando han        *
  *  Cambiado, como por ejemplo, en la funcion que los modifica        *
  * ================================================================== */
-
+ var miBtn;
   //si la cacion no se esta ejecunatdo no se realiza el reto de la funcion
   if(!soundMode) return;
 
   //if encargado de recizar si la cancion se esta ejecutando para actualizar el btnPausa
   if(sound.isPlaying()){
     //Se actualiza el la palabra dentro del boton a Play
-    document.getElementById("btnPausa").style.backgroundImage = "url('Multimedia/btn/pause.png')";
+    miBtn=document.getElementById("btnPausa");
+
+    if(validadorHover(miBtn)){
+      miBtn.style.backgroundImage = "url('Multimedia/btn/pause-Hover.png')";  
+    }
+    else{
+      miBtn.style.backgroundImage = "url('Multimedia/btn/pause.png')";  
+    }
+    
   }
 
 
   //else encargado de actualizar el btnPausa
   else {
-    //se actualiza el la palabra dentro del boton a Pause
-    document.getElementById("btnPausa").style.backgroundImage = "url('Multimedia/btn/play.png')";
+    miBtn=document.getElementById("btnPausa");
+
+    if(validadorHover(miBtn)){
+      miBtn.style.backgroundImage = "url('Multimedia/btn/play-Hover.png')";  
+    }
+    else{
+      miBtn.style.backgroundImage = "url('Multimedia/btn/play.png')";  
+    }
+        
   }
 
   //if encargado de recizar si la cancion se esta ejecutando en loop para actualizar el btnLoop
   if(loopActivo){
     //Se actualiza el color del boton con relacion al valor
-    document.getElementById("btnLoop").style.backgroundImage = "url('Multimedia/btn/replay ON.png')";
+     miBtn=document.getElementById("btnLoop");
+
+    if(validadorHover(miBtn)){
+      miBtn.style.backgroundImage = "url('Multimedia/btn/replay ON-Hover.png')";  
+    }
+    else{
+      miBtn.style.backgroundImage = "url('Multimedia/btn/replay ON.png')";  
+    }
+    
 
   }
 
   //else encargado de actualizar el btnLoop
   else {
+    miBtn=document.getElementById("btnLoop");
 
-    //Se actualiza el color del boton con relacion al valor
-    document.getElementById("btnLoop").style.backgroundImage = "url('Multimedia/btn/replay.png')";
-
+    if(validadorHover(miBtn)){
+      miBtn.style.backgroundImage = "url('Multimedia/btn/replay-Hover.png')";  
+    }
+    else{
+      miBtn.style.backgroundImage = "url('Multimedia/btn/replay.png')";  
+    }
   }
 
    //if encargado de recizar si la cancion se esta ejecutando en loop para actualizar el btnReversa
   if(invertidor){
     //Se actualiza el color del boton con relacion al valor
-    document.getElementById("btnReversa").style.backgroundImage = "url('Multimedia/btn/rewind ON.png')";
+  
+    miBtn=document.getElementById("btnReversa");
+
+    if(validadorHover(miBtn)){
+      miBtn.style.backgroundImage = "url('Multimedia/btn/rewind ON-Hover.png')";  
+    }
+    else{
+      miBtn.style.backgroundImage = "url('Multimedia/btn/rewind ON.png')";  
+    }
   }
 
   //else encargado de actualizar el btnReversa
   else {
     //Se actualiza el color del boton con relacion al valor
-    document.getElementById("btnReversa").style.backgroundImage = "url('Multimedia/btn/rewind.png')";
+    
+    miBtn=document.getElementById("btnReversa");
+
+    if(validadorHover(miBtn)){
+      miBtn.style.backgroundImage = "url('Multimedia/btn/rewind-Hover.png')";  
+    }
+    else{
+      miBtn.style.backgroundImage = "url('Multimedia/btn/rewind.png')";  
+    }
   }
 }
 
@@ -322,3 +374,27 @@ function inversorMusical(){
 
   }
 }
+
+function validadorHover(element){
+
+  var rect = element.getBoundingClientRect();
+
+  var minX = rect.x;
+  var maxX = minX + 35;
+  var minY = rect.y;
+  var maxY = minY + 35;
+  
+  console.log( 'X: ' + rect.x + ', ' + 'Y: ' + rect.y + "raton X"+mouseX+ " Y "+mouseY ) ;
+  
+
+  if((minX < mouseX &&  mouseX < maxX) && (minY < mouseY &&  mouseY < maxY)){
+     return true;
+
+  }
+
+  
+
+
+  return false;
+
+} 
