@@ -356,6 +356,10 @@ body{
 
 /* -------------------- Imputs --------------------*/
 
+.fileInputClass{
+	background-color:#1c9b91;
+	width: 90%;
+}
 
 #inEscanor{
 	color: black;

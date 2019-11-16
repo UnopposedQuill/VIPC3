@@ -207,7 +207,6 @@ function actualizarbtn(){
     }
   }
 
-
    //if encargado de recizar si la cancion se esta ejecutando en loop para actualizar el btnReversa
   if(invertidor){
     //Se actualiza el color del boton con relacion al valor
@@ -235,6 +234,28 @@ function actualizarbtn(){
       miBtn.style.backgroundImage = "url('Multimedia/btn/rewind.png')";  
     }
   }
+
+  if(fastForward){
+    miBtn=document.getElementById("btnSpeed");
+
+    if(validadorHover(miBtn)){
+      miBtn.style.backgroundImage = "url('Multimedia/btn/fast-forward ON-Hover.png')";  
+    }
+    else{
+      miBtn.style.backgroundImage = "url('Multimedia/btn/fast-forward ON.png')";  
+    }
+  }
+  else{
+    miBtn=document.getElementById("btnSpeed");
+
+    if(validadorHover(miBtn)){
+      miBtn.style.backgroundImage = "url('Multimedia/btn/fast-forward-Hover.png')";  
+    }
+    else{
+      miBtn.style.backgroundImage = "url('Multimedia/btn/fast-forward.png')";  
+    }
+  }
+
 }
 
 /*funcion encargada de hacer un salto en la cancion a los segundos que el usuario
@@ -384,18 +405,10 @@ function validadorHover(element){
   var maxX = minX + 35;
   var minY = rect.y;
   var maxY = minY + 35;
-  
-  console.log( 'X: ' + rect.x + ', ' + 'Y: ' + rect.y + "raton X"+mouseX+ " Y "+mouseY ) ;
-  
-
   if((minX < mouseX &&  mouseX < maxX) && (minY < mouseY &&  mouseY < maxY)){
      return true;
 
   }
-
-  
-
-
   return false;
 
 } 
