@@ -9,6 +9,9 @@ function ocultarSuperior(){
 		// Cambiar a visible
 		componente.style.visibility='visible';
 
+		// Cambiar la imagen
+		document.getElementById("btnSuperior").innerHTML = "▲";
+
 		// Cambiar tamaño para tomar espacio
 		document.getElementById("divicion3").style.top = "120px";
 		document.getElementById("divicion4").style.top = "120px";
@@ -20,6 +23,9 @@ function ocultarSuperior(){
 	else{
 		// Cambiar a oculto
 		componente.style.visibility='hidden';
+
+		// Cambiar la imagen
+		document.getElementById("btnSuperior").innerHTML = "▼";
 
 		// Eliminar espacio por ocultar el componente
 		document.getElementById("divicion3").style.top = "45px";
