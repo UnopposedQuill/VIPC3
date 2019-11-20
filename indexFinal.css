@@ -141,6 +141,8 @@ body{
 	width: calc(25vw);
 	height: 100%;
 	background-color: rgba(200,200,200,0.5);
+	max-width: calc(25vw);
+	margin: 0 auto;
 }
 
 #espacio{
@@ -391,4 +393,37 @@ body{
 	background-color: #AAAAAA;
 	width: 100%;
 	height: 100%
+}
+
+/*-------------------- Tabla --------------------*/
+table, th, td{
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+
+}
+
+th {
+    font-weight:bold;
+}
+
+.dtHorizontalVerticalExampleWrapper {
+max-width: calc(25vw);
+margin: 0 auto;
+}
+#dtHorizontalVerticalExample th, td {
+white-space: nowrap;
+}
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+bottom: .5em;
 }
