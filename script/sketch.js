@@ -1,6 +1,7 @@
-let volumen, canvas, textCanvas, backPlot,  sel, fileInput, celljunior, ditto;
+let volumen, canvas, textCanvas, backPlot,  sel, fileInput, celljunior, ditto, svgSearches;
 let lineaLoca;
 let puntos=[], curr, past, present, ushade;
+let flag=false;
 /*sound dummy para que no me de errores por no cargar el archivo default*/
 /*Ya me canse de los primeros 10s de Megalovania*/
 let sound = {
@@ -26,7 +27,7 @@ let heightMap = [];
 let small, big;
 let barraDuracionActiva = true;
 let loopActivo = true;
-let invertidor=false;
+let invertidor,fastForward=false;
 let tileWidth, tileHeight;
 
 let peaks = [];
@@ -48,7 +49,7 @@ function setup(){
   /*Archivo de audio por defecto*/
   //sound = loadSound('assets/megalovania.mp3',soundLoaded,soundError);
   /*Input de archivo*/
-  fileInput = createFileInput(fileHandle).parent('#Encapsulador4');
+  fileInput = createFileInput(fileHandle).parent('#encapsuladorArchivos');
   fileInput.class('fileInputClass');
   /*Observer del volumen*/
   amplitude = new p5.Amplitude();
@@ -58,12 +59,14 @@ function setup(){
   fftwave = new p5.FFT(0,1024);
   fftspec = new p5.FFT(0,32);
 
-  canvas = createCanvas(windowWidth,windowHeight,WEBGL);
+  let contenedor = document.getElementById("superContenedor");
+
+  canvas = createCanvas(contenedor.offsetWidth,contenedor.offsetHeight,WEBGL).parent('#superContenedor');;
 
   colorMode(HSB);
   frameRate(24);
   //volumen = createSlider(0,1,0.5,0.1);
-  sel = createSelect().parent('#Encapsulador5');
+  /*sel = createSelect().parent('#Encapsulador2');
   sel.class('selectorClass');
   sel.option("Archivo");
   mic.getSources(ls=>{ //lista de sources de audio
@@ -71,17 +74,18 @@ function setup(){
       sel.option(d.label);
     });
   });
+*/
 
-
-  createSpan("Visualizavion:").parent('#Encapsulador5').class('lbl');
-  sel.changed(selChange);
-  ditto = createSelect().parent('#Encapsulador5');
+  createSpan("Visualización Musica:").parent('#encapsuladorControles').class('lbl');
+  //sel.changed(selChange);
+  ditto = createSelect().parent('#encapsuladorControles');
   ditto.class('selectorClass');
+  ditto.option('Clasic++');
   ditto.option('Colinas');
   ditto.option('Titus');
   ditto.option('Estrellas');
   ditto.option('Gotus');
-  ditto.option('Clasic++');
+
 
   small = min(width,height);
   big = max(width,height);
@@ -200,7 +204,7 @@ function draw(){
   valorTiempoBarraMusica(sound.currentTime());
 
   //metodo encargado de actualizar los botones en ejecucion dependiendo de su estado
-  actualizarbtn();
+  actualizarBotones();
 }
 
 function circulos(amplitude){
@@ -359,7 +363,9 @@ function montanha(spectrum,cBase,cAlto,saturation=100){
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  let contenedor = document.getElementById("superContenedor");
+
+  resizeCanvas(contenedor.offsetWidth, contenedor.offsetHeight);
   tileWidth = width/32, tileHeight = width/50; //constantes magicas
 }
 
@@ -555,3 +561,40 @@ var shaderVert =
 "  positionVec4.xy = positionVec4.xy * 2.0 - 1.0;"+
 "  gl_Position = positionVec4;"+
 "}";
+
+function switcher() {
+
+  if(!flag){
+    let contenedor = document.getElementById("searchGraphic");
+    let hijo = $('#svgSearches').detach();
+    $('#superContenedor').append(hijo);
+    canvas = createCanvas(contenedor.offsetWidth,contenedor.offsetHeight,WEBGL).parent('#searchGraphic');
+    document.getElementById('buttonChange').style.backgroundImage ="url('assets/images/buttons/change ON.png')";
+
+    document.getElementById('buttonChange').addEventListener('mouseenter', function(){
+       document.getElementById('buttonChange').style.backgroundImage ="url('assets/images/buttons/change ON-Hover.png')";
+    });
+
+    document.getElementById('buttonChange').addEventListener('mouseleave', function(){
+       document.getElementById('buttonChange').style.backgroundImage ="url('assets/images/buttons/change ON.png')";
+    });
+
+
+  } else {
+    let contenedor = document.getElementById("superContenedor");
+    let hijo = $('#svgSearches').detach();
+    $('#searchGraphic').append(hijo);
+    canvas = createCanvas(contenedor.offsetWidth,contenedor.offsetHeight,WEBGL).parent('#superContenedor');
+
+     document.getElementById('buttonChange').style.backgroundImage ="url('assets/images/buttons/change.png')";
+
+     document.getElementById('buttonChange').addEventListener('mouseenter', function(){
+       document.getElementById('buttonChange').style.backgroundImage ="url('assets/images/buttons/change-Hover.png')";
+    });
+
+     document.getElementById('buttonChange').addEventListener('mouseleave', function(){
+       document.getElementById('buttonChange').style.backgroundImage ="url('assets/images/buttons/change.png')";
+    });
+  }
+  flag=!flag;
+}

@@ -3,14 +3,14 @@
 <html lang="en">
 	<head>
 		<title>VI Player</title>
-		<link rel="stylesheet" href="indexFinal.css">
+		<link rel="stylesheet" href="proyecto.css">
 	</head>
 
 	<body>
 		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
-		<div class = "Contenedor" id="divicion1">
+		<div class="contenedor" id="divisionControles">
 			<div id="espacio"></div>
-			<div class = "Encapsulador">
+			<div class = "encapsulador" id="encapsuladorSliders">
 		        <label class="lbl">Duracion: </label>
 		        <label class="lbl" id="Duracion1"> 00:00</label>
 		          <input type="range" class="slider" id="seekTime"
@@ -24,16 +24,16 @@
 		        <label class="lbl" id="valorVolumenMusica" >5 </label>
       		</div>
 
-      		<div class="Encapsulador2" id="Encapsulador2">
-      			<button class ="button" title="Back" id= "btnBack" onclick="inversorMusical()"></button>
-      			<button class ="button" title="Rewind" id= "btnReversa" onclick="inversorMusical()"></button>
+      		<div class="encapsuladorCentrado" id="encapsuladorControles">
+      			<button class ="button" title="Back" id= "buttonBack" onclick="inversorMusical()"></button>
+      			<button class ="button" title="Rewind" id= "buttonReversa" onclick="inversorMusical()"></button>
 
-      			<button class ="button" title="Stop" id= "btnStop" onclick="btnStop()"></button>
-		        <button class ="button" title="Play/Pause" id= "btnPausa" onclick="toggleSound()"></button>
-		        <button class ="button" title="Loop" id= "btnLoop" onclick="btnLoopMetodo()"></button>
+      			<button class ="button" title="Stop" id= "buttonStop" onclick="buttonStop()"></button>
+		        <button class ="button" title="Play/Pause" id= "buttonPausa" onclick="toggleSound()"></button>
+		        <button class ="button" title="Loop" id= "buttonLoop" onclick="buttonLoopMetodo()"></button>
 
-		        <button class ="button" title="Fast Forward" id = "btnSpeed" onclick="Velocidad()"></button>
-		        <button class ="button" title="Next" id = "btnNext" onclick="inversorMusical()"></button>
+		        <button class ="button" title="Fast Forward" id = "buttonSpeed" onclick="Velocidad()"></button>
+		        <button class ="button" title="Next" id = "buttonNext" onclick="inversorMusical()"></button>
 
 
       		</div>
@@ -42,28 +42,28 @@
 
 		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
 
-		<div class = "Contenedor" id="divicion2">
-			<button class="misBotones" id="btnSuperior" onclick="ocultarSuperior()" > ▲ </button>
+		<div class = "contenedor" id="divisionOcultarSuperior">
+			<button class="misBotones" id="buttonSuperior" onclick="ocultarSuperior()" > ▲ </button>
 		</div>
 
-		<div class = "Contenedor" id="contenedorCanvas">
+		<div class = "contenedor" id="contenedorCanvas">
 			<div id="superContenedor"></div>
 		</div>
 
 		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
-		<div class = "Contenedor" id="divicion3">
-			<button class="misBotones" id="btnLateral" onclick="ocultarLateral()" > ► </button>
+		<div class = "contenedor" id="divisionOcultarLateral">
+			<button class="misBotones" id="buttonLateral" onclick="ocultarLateral()" > ► </button>
 		</div>
 
 		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
-		<div class = "Contenedor" id="divicion4">
-			<div class="Encapsulador3">
+		<div class = "contenedor" id="divisionBuscador">
+			<div class="encapsuladorTexto" id="encapsuladorBuscador">
 				<input type="text" id="inEscanor" placeholder="Buscar(Artista,Album,...)" />
-			 	<button class ="button" id= "btnEscanor"> </button>
+			 	<button class ="button" id= "buttonEscanor"> </button>
 			</div>
 
-			<div class="Encapsulador5" id="Encapsulador5">
-				<div class="Encapsulador6" id="Encapsulador6"></div>
+			<div class="encapsuladorTexto" id="encapsuladorControlAuxiliar">
+				<div class="encapsuladorTexto" id="encapsuladorArchivos"></div>
 
 				<label class="lbl">Visualizacion: </label>
 				<select class="selectorClass">
@@ -71,10 +71,10 @@
 				  <option value="saab">Solar</option>
 				  <option value="mercedes">Extra</option>
 				</select>
-				<button type="button" onclick="switcher()">Text</button>
+				<button class ="button" title="Change" id= "buttonChange" onclick="switcher()"></button>
 			</div>
 
-			<div class="Encapsulador4">
+			<div class="encapsuladorRaw">
 				<div class="canvasDatos" id="searchGraphic">
 				<svg class="svgSearches" id="svgSearches">
 
@@ -82,13 +82,13 @@
 				</div>
 			</div>
 
-			<div class="Encapsulador5">
+			<div class="encapsuladorTexto">
 				<label class="lbl">Canciones Encontradas: </label>
 			</div>
 
-			<div class="Encapsulador4" id="contenedorDatos">
-				<div class="cuadroDatos">
-					Cuadro de datos
+			<div class="encapsuladorRaw" id="contenedorDatos">
+				<div class="cuadroDatos" id="cuadroDatos">
+					
 				</div>
 			</div>
 
@@ -107,9 +107,8 @@
 		<!-- ----------------------------------------------- -->
 
 		<script src="script/soundManager.js"></script>
-		<script src="guiFinal.js"></script>
-		<!--<script src="script/gui.js"></script> -->
-		<script src="script/sketch final.js">Test Button</script>
-
+		<script src="script/gui.js"></script>
+		<script src="script/sketch.js"></script>
+		<script src="script/infoUI.js"></script>
 	</body>
 </html>

@@ -1,10 +1,10 @@
 @font-face{
 		font-family: 'fontBase';
-		src: url('Font/Overlock-Black.ttf');
+		src: url('assets/fonts/Overlock-Black.ttf');
 }
 
 *{
-	font-family: 'fontBase';
+	font-family: 'assets/fonts/fontBase';
 }
 
 body{
@@ -18,7 +18,7 @@ body{
 }
 /* --------------------Contenedores--------------------*/
 
-.Contenedor{
+.contenedor{
 	z-index: 2;
 	background-color: rgba(0,0,0,0.7);
 	position: absolute;
@@ -27,13 +27,13 @@ body{
 	border-radius: 5px 5px 5px 5px;
 }
 
-#divicion1{
+#divisionControles{
 	height: 75px;
 	top: 35px;
 	border-radius: 0px 0px 5px 5px;
 }
 
-#divicion2{
+#divisionOcultarSuperior{
 	float: top;
 	height: 35px;
 	display: flex;
@@ -55,11 +55,11 @@ body{
 #superContenedor{
 
 	margin:0px;
-	width: 90%;
-	height: 80%;
+	width: 100%;
+	height: 100%;
 }
 
-#divicion3{
+#divisionOcultarLateral{
 	top: 120px;
 	right: 0px;
 	height: calc(100% - 120px);
@@ -70,7 +70,7 @@ body{
 	border-radius: 0px 10px 10px 0px;
 }
 
-#divicion4{
+#divisionBuscador{
 	top: 120px;
 	right: 35px;
 	height: calc(100% - 120px);
@@ -83,14 +83,14 @@ body{
 
 /*-------------------- Encapsuladores --------------------*/
 
-.Encapsulador{
+.encapsulador{
 	margin: 3px;
 	background-color: rgba(150,150,150,0.4);
 	border-radius: 10px;
 	padding: 2px;
 }
 
-.Encapsulador2{
+.encapsuladorCentrado{
 	margin: 0px 5px 5px 5px;
 	padding: 3px;
 	background-color: rgba(150,150,150,0.4);
@@ -98,33 +98,18 @@ body{
 	border-radius:10px;
 }
 
-.Encapsulador3{
-	margin: 5px;
-	padding: 5px;
-	background-color: rgba(150,150,150,0.4);
-	text-align: center;
-	border-radius: 10px 10px 10px 10px ;
-}
-
-.Encapsulador4{
+.encapsuladorRaw{
 	display: flex;
-  	align-items: center;
-  	justify-content: center;
+	align-items: center;
+	justify-content: center;
 }
 
-.Encapsulador5{
+.encapsuladorTexto{
 	margin: 5px;
 	padding: 5px;
 	background-color: rgba(150,150,150,0.4);
 	border-radius: 10px 10px 10px 10px ;
-}
-
-.Encapsulador6{
-	margin: 5px;
-	padding: 5px;
-	background-color: rgba(200,200,200,0.4);
-	border-radius: 10px 10px 10px 10px ;
-
+	text-align: center;
 }
 
 .canvasDatos{
@@ -135,12 +120,19 @@ body{
 
 #contenedorDatos{
     flex: 1;
+    overflow: auto;
 }
 
 .cuadroDatos{
 	width: calc(25vw);
 	height: 100%;
-	background-color: red;
+	background-color: rgba(200,200,200,0.5);
+	max-width: calc(25vw);
+	overflow: auto;
+}
+#cuadroDatos th div {
+     position: absolute;
+     margin-top: -20px;
 }
 
 #espacio{
@@ -157,9 +149,12 @@ body{
   border-radius: 5px;
   background: #AAAAAA;
   outline: none;
-  opacity: 0.7;
+  opacity: 0.4;
   -webkit-transition: .2s;
   transition: opacity .2s;
+}
+.slider:hover {
+	opacity: 1;
 }
 
 .slider::-webkit-slider-thumb {
@@ -168,8 +163,8 @@ body{
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: white;
   cursor: pointer;
+  background:  #45f5e7;
 }
 
 .slider::-moz-range-thumb {
@@ -184,11 +179,10 @@ body{
 	width: 20%;
 }
 
-
 /*-------------------- Bottones --------------------*/
 
 .misBotones{
-	background-color: rgb(200,200,200) /* Green */
+	background-color: #45f5e7; /* Green */
 	border: none;
 	color: #555555;
 	padding: 5px;
@@ -203,7 +197,7 @@ body{
 }
 
 .misBotones:hover {
-  background-color: rgb(230,230,230); /* Gris Claro */
+  background-color: #92f9f6; /* Gris Claro */
   color: #333333;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
@@ -215,11 +209,11 @@ body{
   transform: translateY(2px);
 }
 
-#btnSuperior{
+#buttonSuperior{
 	width: 15%;
 }
 
-#btnLateral{
+#buttonLateral{
 	height: 15%;
 }
 
@@ -236,73 +230,130 @@ body{
 	border-radius: 4px 4px 4px 4px;
 	height: 35px;
 	width: 35px;
+
 }
 
 .button:hover {
-  background-color: rgb(230,230,230); /* Green */
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  /*background-color: #01B2FF;*/
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);transition-duration: 0.4s;
 }
 
 .button:active {
-  background-color: #FFFFFF;
+  /*background-color: #FFFFFF;*/
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-
-#btnPausa{
-	background-image:url("Multimedia/btn/pause.png");
+/*-------------------- buttonStop --------------------*/
+#buttonPausa{
+	background-image:url("assets/images/buttons/pause.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 }
 
-#btnStop{
-	background-image:url("Multimedia/btn/stop-2.png");
+#buttonPausa:hover{
+	background-image:url("assets/images/buttons/pause-Hover.png");
+}
+/*-------------------- buttonStop --------------------*/
+#buttonStop{
+
+	background-image:url("assets/images/buttons/stop-2.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 }
 
-#btnReversa{
+#buttonStop:hover{
+	background-image:url("assets/images/buttons/stop-Hover.png");
+}
 
-	background-image:url("Multimedia/btn/rewind.png");
+/*-------------------- buttonReversa --------------------*/
+#buttonReversa{
+
+	background-image:url("assets/images/buttons/rewind.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+}
+
+#buttonReversa:hover{
+	background-image:url("assets/images/buttons/rewind-Hover.png");
+}
+
+/*-------------------- buttonBack --------------------*/
+
+#buttonBack{
+	background-image:url("assets/images/buttons/back.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+}
+
+#buttonBack:hover{
+	background-image:url("assets/images/buttons/back-Hover.png");
+}
+
+/*-------------------- buttonLoop --------------------*/
+#buttonLoop{
+	background-image:url("assets/images/buttons/replay.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+}
+
+#buttonLoop:hover{
+	background-image:url("assets/images/buttons/replay-Hover.png");
+}
+/*-------------------- buttonEscanor --------------------*/
+#buttonEscanor{
+	background-image:url("assets/images/buttons/search.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+
+}
+#buttonEscanor:hover{
+	background-image:url("assets/images/buttons/search-Hover.png");
+}
+
+
+/*-------------------- buttonNext --------------------*/
+#buttonNext{
+	background-image:url("assets/images/buttons/next.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+
+}
+#buttonNext:hover{
+	background-image:url("assets/images/buttons/next-Hover.png");
+}
+
+/*-------------------- buttonSpeed --------------------*/
+#buttonSpeed{
+	background-image:url("assets/images/buttons/fast-forward.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 
 }
 
-#btnLoop{
-	background-image:url("Multimedia/btn/replay.png");
-	background-repeat:no-repeat;
-	background-size: contain;
+#buttonSpeed:hover{
+	background-image:url("assets/images/buttons/fast-forward-Hover.png");
 }
 
-#btnEscanor{
-	background-image:url("Multimedia/btn/search.png");
-	background-repeat:no-repeat;
-	background-size: contain;
 
-}
-
-#btnBack{
-	background-image:url("Multimedia/btn/back.png");
+/*-------------------- buttonChange --------------------*/
+#buttonChange{
+	background-image:url("assets/images/buttons/change.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 
 }
 
-#btnNext{
-	background-image:url("Multimedia/btn/next.png");
-	background-repeat:no-repeat;
-	background-size: contain;
-
+#buttonChange:hover{
+	background-image:url("assets/images/buttons/change-Hover.png");
 }
 
-#btnSpeed{
-	background-image:url("Multimedia/btn/fast-forward.png");
-	background-repeat:no-repeat;
-	background-size: contain;
 
-}
 /* -------------------- Imputs --------------------*/
+
+.fileInputClass{
+	background-color:#1c9b91;
+	width: 90%;
+}
 
 #inEscanor{
 	color: black;
@@ -313,7 +364,7 @@ body{
 .selectorClass{
 	margin-left: 15px;
 	width: 150px;
-	background-color:rgb(200,200,200);
+	background-color:#1c9b91;
   	border: none;
   	color: rgb(50,50,50);
   	padding: 5px 32px;
@@ -325,7 +376,7 @@ body{
 }
 
 .selectorClass:hover {
-  background-color: #FFFFFF; /* Green */
+  background-color: #45f5e7; /* Green */
   color: #555555;
    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
@@ -334,4 +385,59 @@ body{
 	background-color: #AAAAAA;
 	width: 100%;
 	height: 100%
+}
+
+/*-------------------- Tabla --------------------*/
+table, th, td{
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+            color: #45f5e7;
+}
+
+th {
+    font-weight:bold;
+}
+
+.dtHorizontalVerticalExampleWrapper {
+max-width: calc(25vw);
+margin: 0 auto;
+}
+#dtHorizontalVerticalExample th, td {
+white-space: nowrap;
+}
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+bottom: .5em;
+}
+
+/*-------------------- Scrollbar --------------------*/
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #1c9b91;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #45f5e7;
 }
