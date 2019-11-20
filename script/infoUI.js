@@ -9,7 +9,7 @@ var datos = [
 
 
 function creadorTabla(Informacion){
-	 // EXTRACT VALUE FOR HTML HEADER. 
+	 // EXTRACT VALUE FOR HTML HEADER.
         // ('Book ID', 'Book Name', 'Category' and 'Price')
         var col = [];
         for (var i = 0; i < datos.length; i++) {
@@ -54,11 +54,3 @@ function creadorTabla(Informacion){
     }
 
 creadorTabla(datos);
-
-$(document).ready(function () {
-$('#dtHorizontalVerticalExample').DataTable({
-"scrollX": true,
-"scrollY": 200,
-});
-$('.dataTables_length').addClass('bs-select');
-});

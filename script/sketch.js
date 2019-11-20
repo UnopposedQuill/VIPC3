@@ -569,14 +569,14 @@ function switcher() {
     let hijo = $('#svgSearches').detach();
     $('#superContenedor').append(hijo);
     canvas = createCanvas(contenedor.offsetWidth,contenedor.offsetHeight,WEBGL).parent('#searchGraphic');
-    document.getElementById('btnChange').style.backgroundImage ="url('Multimedia/btn/change ON.png')";
+    document.getElementById('buttonChange').style.backgroundImage ="url('assets/images/buttons/change ON.png')";
 
-    document.getElementById('btnChange').addEventListener('mouseenter', function(){
-       document.getElementById('btnChange').style.backgroundImage ="url('Multimedia/btn/change ON-Hover.png')";
+    document.getElementById('buttonChange').addEventListener('mouseenter', function(){
+       document.getElementById('buttonChange').style.backgroundImage ="url('assets/images/buttons/change ON-Hover.png')";
     });
 
-    document.getElementById('btnChange').addEventListener('mouseleave', function(){
-       document.getElementById('btnChange').style.backgroundImage ="url('Multimedia/btn/change ON.png')";
+    document.getElementById('buttonChange').addEventListener('mouseleave', function(){
+       document.getElementById('buttonChange').style.backgroundImage ="url('assets/images/buttons/change ON.png')";
     });
 
 
@@ -586,14 +586,14 @@ function switcher() {
     $('#searchGraphic').append(hijo);
     canvas = createCanvas(contenedor.offsetWidth,contenedor.offsetHeight,WEBGL).parent('#superContenedor');
 
-     document.getElementById('btnChange').style.backgroundImage ="url('Multimedia/btn/change.png')";
+     document.getElementById('buttonChange').style.backgroundImage ="url('assets/images/buttons/change.png')";
 
-     document.getElementById('btnChange').addEventListener('mouseenter', function(){
-       document.getElementById('btnChange').style.backgroundImage ="url('Multimedia/btn/change-Hover.png')";
+     document.getElementById('buttonChange').addEventListener('mouseenter', function(){
+       document.getElementById('buttonChange').style.backgroundImage ="url('assets/images/buttons/change-Hover.png')";
     });
 
-     document.getElementById('btnChange').addEventListener('mouseleave', function(){
-       document.getElementById('btnChange').style.backgroundImage ="url('Multimedia/btn/change.png')";
+     document.getElementById('buttonChange').addEventListener('mouseleave', function(){
+       document.getElementById('buttonChange').style.backgroundImage ="url('assets/images/buttons/change.png')";
     });
   }
   flag=!flag;
