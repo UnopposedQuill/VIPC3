@@ -12,6 +12,7 @@ let sound = {
   stop:function(){},
   play:function(){},
   loop:function(){},
+  setPath:function(u,l,e){ sound = new p5.SoundFile(u,l,e); }
 }
 let fftwave, fftspec, amplitude, mic;
 let soundMode = true; //true=>archivo, false=>audio de la computadora/microfono

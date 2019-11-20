@@ -3,6 +3,22 @@
  * de manipular o controlar el audio
  * ================================================================== */
 
+const localURL = window.location.href;
+let url = new URL(localURL);
+
+let token = {};
+
+let sparams = new URLSearchParams(url.search);
+if(sparams.has('error')) console.error('Usuario no ha aceptado');
+else {
+  url.hash.substr(1).split('&').forEach(v=>{
+    let lo = v.split('=');
+    token[lo[0]] = lo[1];
+  });
+  //console.log(token);
+  //console.log(token.access_token);
+}
+
 function soundLoaded(){
   
   const tw = (width/2)/32;
