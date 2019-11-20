@@ -135,6 +135,7 @@ body{
 
 #contenedorDatos{
     flex: 1;
+    overflow: auto;
 }
 
 .cuadroDatos{
@@ -142,7 +143,11 @@ body{
 	height: 100%;
 	background-color: rgba(200,200,200,0.5);
 	max-width: calc(25vw);
-	margin: 0 auto;
+	overflow: auto;
+}
+#cuadroDatos th div {
+     position: absolute; 
+     margin-top: -20px;
 }
 
 #espacio{
