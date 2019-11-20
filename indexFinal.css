@@ -1,10 +1,10 @@
 @font-face{
 		font-family: 'fontBase';
-		src: url('assets/fonts/Overlock-Black.ttf');
+		src: url('Font/Overlock-Black.ttf');
 }
 
 *{
-	font-family: 'assets/fonts/fontBase';
+	font-family: 'fontBase';
 }
 
 body{
@@ -18,7 +18,7 @@ body{
 }
 /* --------------------Contenedores--------------------*/
 
-.contenedor{
+.Contenedor{
 	z-index: 2;
 	background-color: rgba(0,0,0,0.7);
 	position: absolute;
@@ -27,13 +27,13 @@ body{
 	border-radius: 5px 5px 5px 5px;
 }
 
-#divisionControles{
+#divicion1{
 	height: 75px;
 	top: 35px;
 	border-radius: 0px 0px 5px 5px;
 }
 
-#divisionOcultarSuperior{
+#divicion2{
 	float: top;
 	height: 35px;
 	display: flex;
@@ -59,7 +59,7 @@ body{
 	height: 100%;
 }
 
-#divisionOcultarLateral{
+#divicion3{
 	top: 120px;
 	right: 0px;
 	height: calc(100% - 120px);
@@ -70,7 +70,7 @@ body{
 	border-radius: 0px 10px 10px 0px;
 }
 
-#divisionBuscador{
+#divicion4{
 	top: 120px;
 	right: 35px;
 	height: calc(100% - 120px);
@@ -83,14 +83,14 @@ body{
 
 /*-------------------- Encapsuladores --------------------*/
 
-.encapsulador{
+.Encapsulador{
 	margin: 3px;
 	background-color: rgba(150,150,150,0.4);
 	border-radius: 10px;
 	padding: 2px;
 }
 
-.encapsuladorCentrado{
+.Encapsulador2{
 	margin: 0px 5px 5px 5px;
 	padding: 3px;
 	background-color: rgba(150,150,150,0.4);
@@ -98,18 +98,33 @@ body{
 	border-radius:10px;
 }
 
-.encapsuladorRaw{
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.Encapsulador3{
+	margin: 5px;
+	padding: 5px;
+	background-color: rgba(150,150,150,0.4);
+	text-align: center;
+	border-radius: 10px 10px 10px 10px ;
 }
 
-.encapsuladorTexto{
+.Encapsulador4{
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+}
+
+.Encapsulador5{
 	margin: 5px;
 	padding: 5px;
 	background-color: rgba(150,150,150,0.4);
 	border-radius: 10px 10px 10px 10px ;
-	text-align: center;
+}
+
+.Encapsulador6{
+	margin: 5px;
+	padding: 5px;
+	background-color: rgba(200,200,200,0.4);
+	border-radius: 10px 10px 10px 10px ;
+
 }
 
 .canvasDatos{
@@ -131,7 +146,7 @@ body{
 	overflow: auto;
 }
 #cuadroDatos th div {
-     position: absolute;
+     position: absolute; 
      margin-top: -20px;
 }
 
@@ -177,6 +192,7 @@ body{
 	width: 20%;
 }
 
+
 /*-------------------- Bottones --------------------*/
 
 .misBotones{
@@ -207,11 +223,11 @@ body{
   transform: translateY(2px);
 }
 
-#buttonSuperior{
+#btnSuperior{
 	width: 15%;
 }
 
-#buttonLateral{
+#btnLateral{
 	height: 15%;
 }
 
@@ -241,108 +257,107 @@ body{
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-/*-------------------- buttonStop --------------------*/
-#buttonPausa{
-	background-image:url("assets/images/buttons/pause.png");
+/*-------------------- btnStop --------------------*/
+#btnPausa{
+	background-image:url("Multimedia/btn/pause.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 }
 
-#buttonPausa:hover{
-	background-image:url("assets/images/buttons/pause-Hover.png");
+#btnPausa:hover{
+	background-image:url("Multimedia/btn/pause-Hover.png");
 }
-/*-------------------- buttonStop --------------------*/
-#buttonStop{
-
-	background-image:url("assets/images/buttons/stop-2.png");
+/*-------------------- btnStop --------------------*/
+#btnStop{
+	background-image:url("Multimedia/btn/stop-2.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 }
 
-#buttonStop:hover{
-	background-image:url("assets/images/buttons/stop-Hover.png");
+#btnStop:hover{
+	background-image:url("Multimedia/btn/stop-Hover.png");
 }
 
-/*-------------------- buttonReversa --------------------*/
-#buttonReversa{
+/*-------------------- btnReversa --------------------*/
+#btnReversa{
 
-	background-image:url("assets/images/buttons/rewind.png");
+	background-image:url("Multimedia/btn/rewind.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 }
 
-#buttonReversa:hover{
-	background-image:url("assets/images/buttons/rewind-Hover.png");
+#btnReversa:hover{
+	background-image:url("Multimedia/btn/rewind-Hover.png");
 }
 
-/*-------------------- buttonBack --------------------*/
+/*-------------------- btnBack --------------------*/
 
-#buttonBack{
-	background-image:url("assets/images/buttons/back.png");
+#btnBack{
+	background-image:url("Multimedia/btn/back.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 }
 
-#buttonBack:hover{
-	background-image:url("assets/images/buttons/back-Hover.png");
+#btnBack:hover{
+	background-image:url("Multimedia/btn/back-Hover.png");
 }
 
-/*-------------------- buttonLoop --------------------*/
-#buttonLoop{
-	background-image:url("assets/images/buttons/replay.png");
+/*-------------------- btnLoop --------------------*/
+#btnLoop{
+	background-image:url("Multimedia/btn/replay.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 }
 
-#buttonLoop:hover{
-	background-image:url("assets/images/buttons/replay-Hover.png");
+#btnLoop:hover{
+	background-image:url("Multimedia/btn/replay-Hover.png");
 }
-/*-------------------- buttonEscanor --------------------*/
-#buttonEscanor{
-	background-image:url("assets/images/buttons/search.png");
+/*-------------------- btnEscanor --------------------*/
+#btnEscanor{
+	background-image:url("Multimedia/btn/search.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 
 }
-#buttonEscanor:hover{
-	background-image:url("assets/images/buttons/search-Hover.png");
+#btnEscanor:hover{
+	background-image:url("Multimedia/btn/search-Hover.png");
 }
 
 
-/*-------------------- buttonNext --------------------*/
-#buttonNext{
-	background-image:url("assets/images/buttons/next.png");
+/*-------------------- btnNext --------------------*/
+#btnNext{
+	background-image:url("Multimedia/btn/next.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 
 }
-#buttonNext:hover{
-	background-image:url("assets/images/buttons/next-Hover.png");
+#btnNext:hover{
+	background-image:url("Multimedia/btn/next-Hover.png");
 }
 
-/*-------------------- buttonSpeed --------------------*/
-#buttonSpeed{
-	background-image:url("assets/images/buttons/fast-forward.png");
-	background-repeat:no-repeat;
-	background-size: contain;
-
-}
-
-#buttonSpeed:hover{
-	background-image:url("assets/images/buttons/fast-forward-Hover.png");
-}
-
-
-/*-------------------- buttonChange --------------------*/
-#buttonChange{
-	background-image:url("assets/images/buttons/change.png");
+/*-------------------- btnSpeed --------------------*/
+#btnSpeed{
+	background-image:url("Multimedia/btn/fast-forward.png");
 	background-repeat:no-repeat;
 	background-size: contain;
 
 }
 
-#buttonChange:hover{
-	background-image:url("assets/images/buttons/change-Hover.png");
+#btnSpeed:hover{
+	background-image:url("Multimedia/btn/fast-forward-Hover.png");
+}
+
+
+/*-------------------- btnChange --------------------*/
+#btnChange{
+	background-image:url("Multimedia/btn/change.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+
+}
+
+#btnChange:hover{
+	background-image:url("Multimedia/btn/change-Hover.png");
 }
 
 
@@ -418,7 +433,7 @@ table.dataTable thead .sorting_desc_disabled:before {
 bottom: .5em;
 }
 
-
+/*-------------------- Tabla --------------------*/
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -431,10 +446,10 @@ bottom: .5em;
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #1c9b91;
+  background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #45f5e7;
+  background: #555;
 }

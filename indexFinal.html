@@ -1,0 +1,115 @@
+
+</!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>VI Player</title>
+		<link rel="stylesheet" href="indexFinal.css">
+	</head>
+
+	<body>
+		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
+		<div class = "Contenedor" id="divicion1">
+			<div id="espacio"></div>
+			<div class = "Encapsulador">
+		        <label class="lbl">Duracion: </label>
+		        <label class="lbl" id="Duracion1"> 00:00</label>
+		          <input type="range" class="slider" id="seekTime"
+		          onchange="tiempoBarraMusica(this)" value="0" max="300" min="0"/>
+		        <label class="lbl">Total: </label>
+		        <label class="lbl" id="Duracion2">  00:00</label>
+      			<label class="lbl">  //</label>
+      			<label class="lbl">Volumen: </label>
+		        <input type="range" id="tamanhoFigura" class="slider"
+		          onchange="volumenMusica(this)" , value="5" max="10" min="0"/>
+		        <label class="lbl" id="valorVolumenMusica" >5 </label>
+      		</div>
+
+      		<div class="Encapsulador2" id="Encapsulador2">
+      			<button class ="button" title="Back" id= "btnBack" onclick="inversorMusical()"></button>
+      			<button class ="button" title="Rewind" id= "btnReversa" onclick="inversorMusical()"></button>
+
+      			<button class ="button" title="Stop" id= "btnStop" onclick="btnStop()"></button>
+		        <button class ="button" title="Play/Pause" id= "btnPausa" onclick="toggleSound()"></button>
+		        <button class ="button" title="Loop" id= "btnLoop" onclick="btnLoopMetodo()"></button>
+
+		        <button class ="button" title="Fast Forward" id = "btnSpeed" onclick="Velocidad()"></button>
+		        <button class ="button" title="Next" id = "btnNext" onclick="inversorMusical()"></button>
+
+
+      		</div>
+
+		</div>
+
+		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
+
+		<div class = "Contenedor" id="divicion2">
+			<button class="misBotones" id="btnSuperior" onclick="ocultarSuperior()" > ▲ </button>
+		</div>
+
+		<div class = "Contenedor" id="contenedorCanvas">
+			<div id="superContenedor"></div>
+		</div>
+
+		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
+		<div class = "Contenedor" id="divicion3">
+			<button class="misBotones" id="btnLateral" onclick="ocultarLateral()" > ► </button>
+		</div>
+
+		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
+		<div class = "Contenedor" id="divicion4">
+			<div class="Encapsulador3">
+				<input type="text" id="inEscanor" placeholder="Buscar(Artista,Album,...)" />
+			 	<button class ="button" id= "btnEscanor"> </button>
+			</div>
+
+			<div class="Encapsulador5" id="Encapsulador5">
+				<div class="Encapsulador6" id="Encapsulador6"></div>
+
+				<label class="lbl">Visualizacion: </label>
+				<select class="selectorClass">
+				  <option value="volvo">Heat Map</option>
+				  <option value="saab">Solar</option>
+				  <option value="mercedes">Extra</option>
+				</select>
+				<button class ="button" title="Change" id= "btnChange" onclick="switcher()"></button>
+			</div>
+
+			<div class="Encapsulador4">
+				<div class="canvasDatos" id="searchGraphic">
+				<svg class="svgSearches" id="svgSearches">
+
+				</svg>
+				</div>
+			</div>
+
+			<div class="Encapsulador5">
+				<label class="lbl">Canciones Encontradas: </label>
+			</div>
+
+			<div class="Encapsulador4" id="contenedorDatos">
+				<div class="cuadroDatos" id="cuadroDatos">
+					
+				</div>
+			</div>
+
+		</div>
+
+		<!-- ----------------------------------------------- -->
+		<!-- --------------------Librerias------------------ -->
+		<!-- ----------------------------------------------- -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.0/jsmediatags.js"></script>
+		<script src="lib/jquery.slim.min.js"></script>
+		<script src="lib/p5.min.js"></script>
+		<script src="lib/p5.sound.min.js"></script>
+
+		<!-- ----------------------------------------------- -->
+		<!-- --------------------Scripts-------------------- -->
+		<!-- ----------------------------------------------- -->
+
+		<script src="script/soundManager.js"></script>
+		<script src="guiFinal.js"></script>
+		<!--<script src="script/gui.js"></script> -->
+		<script src="script/sketch final.js"></script>
+		<script src="script/infoUI.js"></script>
+	</body>
+</html>
