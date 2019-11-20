@@ -76,7 +76,7 @@ function setup(){
   });
 */
 
-  createSpan("Visualizavion Musica:").parent('#encapsuladorControles').class('lbl');
+  createSpan("Visualización Musica:").parent('#encapsuladorControles').class('lbl');
   //sel.changed(selChange);
   ditto = createSelect().parent('#encapsuladorControles');
   ditto.class('selectorClass');

@@ -1,6 +1,6 @@
 @font-face{
 		font-family: 'fontBase';
-		src: url('Font/Overlock-Black.ttf');
+		src: url('assets/fonts/Overlock-Black.ttf');
 }
 
 *{
@@ -131,7 +131,7 @@ body{
 	overflow: auto;
 }
 #cuadroDatos th div {
-     position: absolute; 
+     position: absolute;
      margin-top: -20px;
 }
 
