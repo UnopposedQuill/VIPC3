@@ -1,5 +1,56 @@
 let superiorOculta,superiorLateral= false;
 
+function cambioSongSpoti(uri,imagen){
+  if(sound) sound.setPath(uri,soundLoaded,soundError);
+  else sound = new p5.SoundFile(uri,soundLoaded,soundError);
+  arteAlbum = loadImage(imagen);
+}
+
+var retornoSpotify = [];
+function buscar(){
+  retornoSpotify = [];
+  //document.getElementById('r').innerHTML = "";
+  const uri = 'https://api.spotify.com/v1';
+  const consulta = '/search?q=' + document.getElementById('inEscanor').value + '&type=track&limit=50';
+  fetch(uri+consulta, {
+    method : 'GET',
+    headers : {'Authorization' : token.token_type + ' ' + token.access_token}
+  }).then(r=>r.json()).catch(e=>console.error(e)).then(r=>{
+    let d = document.getElementById('r');
+    if(r.error) {
+  //    d.innerHTML = r.error;
+      console.error(r.error);
+    } else {
+      console.log(r.tracks.items);
+      for(let lk in r['tracks']['items']){
+        /*let spolink = '<a href=' + r['tracks']['items'][lk].external_urls.spotify + '>'
+          + r['tracks']['items'][lk].name
+          + " - "
+          + r['tracks']['items'][lk].album.name
+          + " - "
+          + r['tracks']['items'][lk].artists[0].name
+          + '</a>';
+        let imagen = r['tracks']['items'][lk].album.images[0].url//.forEach(v=>{if});
+        let prevurl = r['tracks']['items'][lk].preview_url;
+        let spobutton = r['tracks']['items'][lk].preview_url?'<button onclick="cambioSongSpoti(\''+prevurl+"','"+imagen+'\')">Play It</button>':'<label>No hay vista previa disponible</label>'
+        d.insertAdjacentHTML('beforeend','<div>' + spolink + '  ' + spobutton + '</div>');
+        */
+        let imagen = r['tracks']['items'][lk].album.images[0].url//.forEach(v=>{if});
+        let prevurl = r['tracks']['items'][lk].preview_url;
+        let spobutton = r['tracks']['items'][lk].preview_url?'<button onclick="cambioSongSpoti(\''+prevurl+"','"+imagen+'\')">Play It</button>':'<label>N/A</label>'
+        let cancion = {
+          'Titulo' : r.tracks.items[lk].name,
+          'Artista' : r['tracks']['items'][lk].artists[0].name,
+          'Album' : r['tracks']['items'][lk].album.name,
+          'PlayIt' : spobutton,
+        }
+        retornoSpotify.push(cancion);
+      }
+      creadorTabla(retornoSpotify);
+    }
+  });
+}
+
 function ocultarSuperior(){
 
 	var componente = document.getElementById("divisionControles");
