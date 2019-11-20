@@ -391,7 +391,7 @@ table, th, td{
             border-collapse: collapse;
             padding: 2px 3px;
             text-align: center;
-
+            color: #45f5e7;
 }
 
 th {
@@ -418,6 +418,7 @@ table.dataTable thead .sorting_desc_disabled:before {
 bottom: .5em;
 }
 
+/*-------------------- Scrollbar --------------------*/
 
 /* width */
 ::-webkit-scrollbar {
