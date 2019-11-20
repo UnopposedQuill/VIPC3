@@ -8,9 +8,9 @@
 
 	<body>
 		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
-		<div class = "Contenedor" id="divisionControles">
+		<div class="contenedor" id="divisionControles">
 			<div id="espacio"></div>
-			<div class = "Encapsulador">
+			<div class = "encapsulador" id="encapsuladorSliders">
 		        <label class="lbl">Duracion: </label>
 		        <label class="lbl" id="Duracion1"> 00:00</label>
 		          <input type="range" class="slider" id="seekTime"
@@ -24,7 +24,7 @@
 		        <label class="lbl" id="valorVolumenMusica" >5 </label>
       		</div>
 
-      		<div class="Encapsulador2" id="Encapsulador2">
+      		<div class="encapsuladorCentrado" id="encapsuladorControles">
       			<button class ="button" title="Back" id= "buttonBack" onclick="inversorMusical()"></button>
       			<button class ="button" title="Rewind" id= "buttonReversa" onclick="inversorMusical()"></button>
 
@@ -42,28 +42,28 @@
 
 		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
 
-		<div class = "Contenedor" id="divisionOcultarSuperior">
+		<div class = "contenedor" id="divisionOcultarSuperior">
 			<button class="misBotones" id="buttonSuperior" onclick="ocultarSuperior()" > ▲ </button>
 		</div>
 
-		<div class = "Contenedor" id="contenedorCanvas">
+		<div class = "contenedor" id="contenedorCanvas">
 			<div id="superContenedor"></div>
 		</div>
 
 		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
-		<div class = "Contenedor" id="divisionOcultarLateral">
+		<div class = "contenedor" id="divisionOcultarLateral">
 			<button class="misBotones" id="buttonLateral" onclick="ocultarLateral()" > ► </button>
 		</div>
 
 		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
-		<div class = "Contenedor" id="divisionBuscador">
-			<div class="Encapsulador3">
+		<div class = "contenedor" id="divisionBuscador">
+			<div class="encapsuladorTexto" id="encapsuladorBuscador">
 				<input type="text" id="inEscanor" placeholder="Buscar(Artista,Album,...)" />
 			 	<button class ="button" id= "buttonEscanor"> </button>
 			</div>
 
-			<div class="Encapsulador5" id="Encapsulador5">
-				<div class="Encapsulador6" id="Encapsulador6"></div>
+			<div class="encapsuladorTexto" id="encapsuladorControlAuxiliar">
+				<div class="encapsuladorTexto" id="encapsuladorArchivos"></div>
 
 				<label class="lbl">Visualizacion: </label>
 				<select class="selectorClass">
@@ -74,7 +74,7 @@
 				<button class ="button" title="Change" id= "buttonChange" onclick="switcher()"></button>
 			</div>
 
-			<div class="Encapsulador4">
+			<div class="encapsuladorRaw">
 				<div class="canvasDatos" id="searchGraphic">
 				<svg class="svgSearches" id="svgSearches">
 
@@ -82,11 +82,11 @@
 				</div>
 			</div>
 
-			<div class="Encapsulador5">
+			<div class="encapsuladorTexto">
 				<label class="lbl">Canciones Encontradas: </label>
 			</div>
 
-			<div class="Encapsulador4" id="contenedorDatos">
+			<div class="encapsuladorRaw" id="contenedorDatos">
 				<div class="cuadroDatos">
 					Cuadro de datos
 				</div>

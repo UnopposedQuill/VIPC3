@@ -49,7 +49,7 @@ function setup(){
   /*Archivo de audio por defecto*/
   //sound = loadSound('assets/megalovania.mp3',soundLoaded,soundError);
   /*Input de archivo*/
-  fileInput = createFileInput(fileHandle).parent('#Encapsulador6');
+  fileInput = createFileInput(fileHandle).parent('#encapsuladorArchivos');
   fileInput.class('fileInputClass');
   /*Observer del volumen*/
   amplitude = new p5.Amplitude();
@@ -76,9 +76,9 @@ function setup(){
   });
 */
 
-  createSpan("Visualizavion Musica:").parent('#Encapsulador2').class('lbl');
+  createSpan("Visualizavion Musica:").parent('#encapsuladorControles').class('lbl');
   //sel.changed(selChange);
-  ditto = createSelect().parent('#Encapsulador2');
+  ditto = createSelect().parent('#encapsuladorControles');
   ditto.class('selectorClass');
   ditto.option('Clasic++');
   ditto.option('Colinas');

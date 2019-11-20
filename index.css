@@ -18,7 +18,7 @@ body{
 }
 /* --------------------Contenedores--------------------*/
 
-.Contenedor{
+.contenedor{
 	z-index: 2;
 	background-color: rgba(0,0,0,0.7);
 	position: absolute;
@@ -83,14 +83,14 @@ body{
 
 /*-------------------- Encapsuladores --------------------*/
 
-.Encapsulador{
+.encapsulador{
 	margin: 3px;
 	background-color: rgba(150,150,150,0.4);
 	border-radius: 10px;
 	padding: 2px;
 }
 
-.Encapsulador2{
+.encapsuladorCentrado{
 	margin: 0px 5px 5px 5px;
 	padding: 3px;
 	background-color: rgba(150,150,150,0.4);
@@ -98,33 +98,18 @@ body{
 	border-radius:10px;
 }
 
-.Encapsulador3{
-	margin: 5px;
-	padding: 5px;
-	background-color: rgba(150,150,150,0.4);
-	text-align: center;
-	border-radius: 10px 10px 10px 10px ;
-}
-
-.Encapsulador4{
+.encapsuladorRaw{
 	display: flex;
-  	align-items: center;
-  	justify-content: center;
+	align-items: center;
+	justify-content: center;
 }
 
-.Encapsulador5{
+.encapsuladorTexto{
 	margin: 5px;
 	padding: 5px;
 	background-color: rgba(150,150,150,0.4);
 	border-radius: 10px 10px 10px 10px ;
-}
-
-.Encapsulador6{
-	margin: 5px;
-	padding: 5px;
-	background-color: rgba(200,200,200,0.4);
-	border-radius: 10px 10px 10px 10px ;
-
+	text-align: center;
 }
 
 .canvasDatos{
