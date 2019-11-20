@@ -149,9 +149,12 @@ body{
   border-radius: 5px;
   background: #AAAAAA;
   outline: none;
-  opacity: 0.7;
+  opacity: 0.4;
   -webkit-transition: .2s;
   transition: opacity .2s;
+}
+.slider:hover {
+	opacity: 1;
 }
 
 .slider::-webkit-slider-thumb {
@@ -160,7 +163,6 @@ body{
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: white;
   cursor: pointer;
   background:  #45f5e7;
 }
