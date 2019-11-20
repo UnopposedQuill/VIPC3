@@ -1,79 +1,114 @@
-<!DOCTYPE HTML>
+
+</!DOCTYPE html>
 <html lang="en">
-<head>
-  <link rel="stylesheet" href="index.css">
-</head>
-<body>
-  <!-- <div id="contenedorCanvas"></div> -->
+	<head>
+		<title>VI Player</title>
+		<link rel="stylesheet" href="index.css">
+	</head>
 
-  <!-- ------------------------------------------------------------ -->
-  <!-- --------------------Contenedor Controles-------------------- -->
-  <!-- ------------------------------------------------------------ -->
-  <div id="Contenedor">
-    
-    <div class="Separador"></div>
+	<body>
+		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
+		<div class = "Contenedor" id="divisionControles">
+			<div id="espacio"></div>
+			<div class = "Encapsulador">
+		        <label class="lbl">Duracion: </label>
+		        <label class="lbl" id="Duracion1"> 00:00</label>
+		          <input type="range" class="slider" id="seekTime"
+		          onchange="tiempoBarraMusica(this)" value="0" max="300" min="0"/>
+		        <label class="lbl">Total: </label>
+		        <label class="lbl" id="Duracion2">  00:00</label>
+      			<label class="lbl">  //</label>
+      			<label class="lbl">Volumen: </label>
+		        <input type="range" id="tamanhoFigura" class="slider"
+		          onchange="volumenMusica(this)" , value="5" max="10" min="0"/>
+		        <label class="lbl" id="valorVolumenMusica" >5 </label>
+      		</div>
 
-    <!-- ------------------------------------------------------------ -->
-    <!-- --------------------Separadores internos-------------------- -->
-    <!-- ------------------------------------------------------------ -->
-    <div id="song-controls" style="background:none;margin:0;padding:0;border:none;box-sizing:border-box;">
-      <div class = "Encapsulador">
-        <label class="lbl">Duracion: </label>
-        <label class="lbl" id="Duracion1"> 00:00</label>
-          <input type="range" class="slider" id="seekTime" 
-          onchange="tiempoBarraMusica(this)" value="0" max="300" min="0"/>
-        <label class="lbl">Total: </label>
-        <label class="lbl" id="Duracion2">  00:00</label>
-      </div>
-      
-      <div class = "Encapsulador2">
-        <label class="lbl">Volumen: </label>
-        <input type="range" id="tamanhoFigura" class="slider" 
-          onchange="volumenMusica(this)" , value="5" max="10" min="0"/>
-        <label class="lbl" id="valorVolumenMusica" >5 </label>
-      </div>
-      
-      <div class = "Encapsulador2">
-        <label class="lbl">Velocidad: </label>
-        <input type="range" id="barraVelocidad" class="slider" 
-          onchange="Velocidad(this)" , value="1" max="6" min="1"/>
-        <label class="lbl" id="valorVelocidadMusica" >1 </label>
-      </div>
+      		<div class="Encapsulador2" id="Encapsulador2">
+      			<button class ="button" title="Back" id= "buttonBack" onclick="inversorMusical()"></button>
+      			<button class ="button" title="Rewind" id= "buttonReversa" onclick="inversorMusical()"></button>
 
-      <div class="Encapsulador2" id="Encapsulador4"><!--Aqui se mete el fileInput--></div>
+      			<button class ="button" title="Stop" id= "buttonStop" onclick="buttonStop()"></button>
+		        <button class ="button" title="Play/Pause" id= "buttonPausa" onclick="toggleSound()"></button>
+		        <button class ="button" title="Loop" id= "buttonLoop" onclick="buttonLoopMetodo()"></button>
 
-      <div class="Encapsulador3">
-        <button class ="button" id = "btnPausa" onclick="toggleSound()">Pausa</button>
-        <button class ="button" id = "btnStop" onclick="btnStop()">Stop</button>
-        <button class ="button" id = "btnLoop" onclick="btnLoopMetodo()">Loop</button>
-        <button class ="button" id = "btnReversa" onclick="inversorMusical()">Reversa OFF</button>
-      </div>
-     
-    </div>
-    
-    <div class="Encapsulador5" id="Encapsulador5"> 
-        <label class="lbl">Entrada: </label>
-        <!--Aqui se mete el select -->
-      </div>
-    
-  </div>
+		        <button class ="button" title="Fast Forward" id = "buttonSpeed" onclick="Velocidad()"></button>
+		        <button class ="button" title="Next" id = "buttonNext" onclick="inversorMusical()"></button>
 
-  <!-- ----------------------------------------------- -->
-  <!-- --------------------Librerias------------------ -->
-  <!-- ----------------------------------------------- -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.0/jsmediatags.js"></script>
-  <script src="lib/jquery.slim.min.js"></script>
-  <script src="lib/p5.min.js"></script>
-  <script src="lib/p5.sound.min.js"></script>
-  
-  <!-- ----------------------------------------------- -->
-  <!-- --------------------Scripts-------------------- -->
-  <!-- ----------------------------------------------- -->
 
-  <script src="script/soundManager.js"></script>
-  <script src="script/gui.js"></script>
-  <script src="script/sketch.js"></script>
-  
-  
-</body>
+      		</div>
+
+		</div>
+
+		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
+
+		<div class = "Contenedor" id="divisionOcultarSuperior">
+			<button class="misBotones" id="buttonSuperior" onclick="ocultarSuperior()" > ▲ </button>
+		</div>
+
+		<div class = "Contenedor" id="contenedorCanvas">
+			<div id="superContenedor"></div>
+		</div>
+
+		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
+		<div class = "Contenedor" id="divisionOcultarLateral">
+			<button class="misBotones" id="buttonLateral" onclick="ocultarLateral()" > ► </button>
+		</div>
+
+		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
+		<div class = "Contenedor" id="divisionBuscador">
+			<div class="Encapsulador3">
+				<input type="text" id="inEscanor" placeholder="Buscar(Artista,Album,...)" />
+			 	<button class ="button" id= "buttonEscanor"> </button>
+			</div>
+
+			<div class="Encapsulador5" id="Encapsulador5">
+				<div class="Encapsulador6" id="Encapsulador6"></div>
+
+				<label class="lbl">Visualizacion: </label>
+				<select class="selectorClass">
+				  <option value="volvo">Heat Map</option>
+				  <option value="saab">Solar</option>
+				  <option value="mercedes">Extra</option>
+				</select>
+				<button class ="button" title="Change" id= "buttonChange" onclick="switcher()"></button>
+			</div>
+
+			<div class="Encapsulador4">
+				<div class="canvasDatos" id="searchGraphic">
+				<svg class="svgSearches" id="svgSearches">
+
+				</svg>
+				</div>
+			</div>
+
+			<div class="Encapsulador5">
+				<label class="lbl">Canciones Encontradas: </label>
+			</div>
+
+			<div class="Encapsulador4" id="contenedorDatos">
+				<div class="cuadroDatos">
+					Cuadro de datos
+				</div>
+			</div>
+
+		</div>
+
+		<!-- ----------------------------------------------- -->
+		<!-- --------------------Librerias------------------ -->
+		<!-- ----------------------------------------------- -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jsmediatags/3.9.0/jsmediatags.js"></script>
+		<script src="lib/jquery.slim.min.js"></script>
+		<script src="lib/p5.min.js"></script>
+		<script src="lib/p5.sound.min.js"></script>
+
+		<!-- ----------------------------------------------- -->
+		<!-- --------------------Scripts-------------------- -->
+		<!-- ----------------------------------------------- -->
+
+		<script src="script/soundManager.js"></script>
+		<script src="script/gui.js"></script>
+		<script src="script/sketch.js">Test Button</script>
+
+	</body>
 </html>
