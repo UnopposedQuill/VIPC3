@@ -57,8 +57,11 @@ function ocultarSuperior(){
 
 	if(superiorOculta){
 
-        $("#buttonSuperior").html("▲");
-        document.getElementById("buttonSuperior").value="▲";
+       
+      miBtn=document.getElementById("buttonSuperior");
+      miBtn.style.backgroundImage = "url('assets/images/buttons/Up.png')";
+      miBtn.onmouseover = function(){miBtn.style.backgroundImage = "url('assets/images/buttons/Up-Hover.png')";};
+      miBtn.onmouseout = function(){miBtn.style.backgroundImage = "url('assets/images/buttons/Up.png')";};
 		// Cambiar a visible
 		componente.style.visibility='visible';
 
@@ -75,7 +78,10 @@ function ocultarSuperior(){
 	else{
 		// Cambiar a oculto
 
-		 $("#buttonSuperior").html("▼");
+		  miBtn=document.getElementById("buttonSuperior");
+      miBtn.style.backgroundImage = "url('assets/images/buttons/Down.png')";
+      miBtn.onmouseover = function(){miBtn.style.backgroundImage = "url('assets/images/buttons/Down-Hover.png')";};
+      miBtn.onmouseout = function(){miBtn.style.backgroundImage = "url('assets/images/buttons/Down.png')";};
          componente.style.visibility='hidden';
 
 		// Eliminar espacio por ocultar el componente
@@ -96,11 +102,18 @@ function ocultarLateral(){
 	var componente = document.getElementById("divisionBuscador");
 
 	if(superiorLateral){
-    $("#buttonLateral").html("►");
-		componente.style.visibility='visible';
+    miBtn2=document.getElementById("buttonLateral");
+    miBtn2.style.backgroundImage = "url('assets/images/buttons/Der.png')";
+    miBtn2.onmouseover = function(){miBtn2.style.backgroundImage = "url('assets/images/buttons/Der-Hover.png')";};
+    miBtn2.onmouseout = function(){miBtn2.style.backgroundImage = "url('assets/images/buttons/Der.png')";};
+		
+    componente.style.visibility='visible';
 	}
 	else{
-    $("#buttonLateral").html("◄");
+    miBtn2=document.getElementById("buttonLateral");
+    miBtn2.style.backgroundImage = "url('assets/images/buttons/Izq.png')";
+    miBtn2.onmouseover = function(){miBtn2.style.backgroundImage = "url('assets/images/buttons/Izq-Hover.png')";};
+    miBtn2.onmouseout = function(){miBtn2.style.backgroundImage = "url('assets/images/buttons/Izq.png')";};
 		componente.style.visibility='hidden';
 	}
 
