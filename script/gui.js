@@ -3,7 +3,7 @@ let superiorOculta,superiorLateral= false;
 function cambioSongSpoti(uri,imagen){
   if(sound) sound.setPath(uri,soundLoaded,soundError);
   else sound = new p5.SoundFile(uri,soundLoaded,soundError);
-  arteAlbum = loadImage(imagen);
+  arteAlbum = loadImage(imagen,i=>i.resize(width/2,0));
 }
 
 var retornoSpotify = [];
@@ -21,32 +21,27 @@ function buscar(){
   //    d.innerHTML = r.error;
       console.error(r.error);
     } else {
-      console.log(r.tracks.items);
-      for(let lk in r['tracks']['items']){
-        /*let spolink = '<a href=' + r['tracks']['items'][lk].external_urls.spotify + '>'
-          + r['tracks']['items'][lk].name
-          + " - "
-          + r['tracks']['items'][lk].album.name
-          + " - "
-          + r['tracks']['items'][lk].artists[0].name
-          + '</a>';
-        let imagen = r['tracks']['items'][lk].album.images[0].url//.forEach(v=>{if});
-        let prevurl = r['tracks']['items'][lk].preview_url;
-        let spobutton = r['tracks']['items'][lk].preview_url?'<button onclick="cambioSongSpoti(\''+prevurl+"','"+imagen+'\')">Play It</button>':'<label>No hay vista previa disponible</label>'
-        d.insertAdjacentHTML('beforeend','<div>' + spolink + '  ' + spobutton + '</div>');
-        */
-        let imagen = r['tracks']['items'][lk].album.images[0].url//.forEach(v=>{if});
-        let prevurl = r['tracks']['items'][lk].preview_url;
-        let spobutton = r['tracks']['items'][lk].preview_url?'<button onclick="cambioSongSpoti(\''+prevurl+"','"+imagen+'\')">Play It</button>':'<label>N/A</label>'
+      console.log(r.tracks.items.length);
+      if(r.tracks.items.length == 0) retornoSpotify.push({
+          'Titulo' : 'N/A',
+          'Artista' : 'N/A',
+          'Album' : 'N/A',
+          'PlayIt' : 'N/A',
+        });
+      else r.tracks.items.forEach(lk=>{
+        let imagen = lk.album.images[0].url; //filtrar imagen a una de tamaño aceptable
+        let prevurl = lk.preview_url;
+        let spobutton = prevurl?'<button onclick="cambioSongSpoti(\''+prevurl+"','"+imagen+'\')">Play It</button>':'<label>N/A</label>'
         let cancion = {
-          'Titulo' : r.tracks.items[lk].name,
-          'Artista' : r['tracks']['items'][lk].artists[0].name,
-          'Album' : r['tracks']['items'][lk].album.name,
+          'Titulo' : lk.name,
+          'Artista' : lk.artists[0].name,
+          'Album' : lk.album.name,
           'PlayIt' : spobutton,
         }
         retornoSpotify.push(cancion);
-      }
+      });
       creadorTabla(retornoSpotify);
+      
     }
   });
 }

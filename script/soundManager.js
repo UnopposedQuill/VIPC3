@@ -36,8 +36,8 @@ function soundLoaded(){
   amplitude.setInput(sound);
   peaks = sound.getPeaks();
   sound.playMode('restart');
-  sound.setLoop(true);
-  loopActivo = true;
+  sound.setLoop(false);
+  loopActivo = false;
   sound.play();
   //Se le asigna como valor maximo al slider de tiempo la duracion total de la cancion
   document.getElementById("seekTime").max = parseInt(sound.duration());

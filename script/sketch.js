@@ -1,5 +1,5 @@
 let volumen, canvas, textCanvas, backPlot,  sel, fileInput, celljunior, ditto, svgSearches;
-let lineaLoca;
+let lineaLoca, arteAlbum;
 let puntos=[], curr, past, present, ushade;
 let flag=false;
 /*sound dummy para que no me de errores por no cargar el archivo default*/
@@ -81,6 +81,7 @@ function setup(){
   //sel.changed(selChange);
   ditto = createSelect().parent('#encapsuladorControles');
   ditto.class('selectorClass');
+  ditto.option('Album Art');
   ditto.option('Clasic++');
   ditto.option('Colinas');
   ditto.option('Titus');
@@ -198,6 +199,12 @@ function draw(){
       lineFactory(waveform,spectrumfull);
       image(lineaLoca,0,0);
     pop();
+  } else if(ditto.value()==="Album Art") {
+      if(arteAlbum){ image(arteAlbum,-arteAlbum.width/2,-arteAlbum.height/2); }
+      else { 
+        textCanvas.text('Arte no disponible',200,200);
+        image(textCanvas,-200,-200);
+      }
   }
   //Actualizaciones de los UI de la demostracion Grafia
 
