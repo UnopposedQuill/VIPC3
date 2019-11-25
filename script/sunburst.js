@@ -17,7 +17,7 @@ function sunburst(lraiz){
     .data(lraiz.descendants().filter(d=>d.parent===lraiz||d===lraiz))
     .join('path')
       .attr('d',arc)
-      .style('fill',d=>d.children?'#555':(d._children?'#999':(d.data._prev?'#090':'#900'))) //para este ternario, vease cluster.js
+      .style('fill',d=>d.children?'#555':(d.data._prev?'#999':'#555')) //para este ternario, vease cluster.js
       .style('stroke','#000')
       .on('click',inspeccionar)
     .append('title')

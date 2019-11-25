@@ -8,7 +8,7 @@ function cluster(lraiz){
   cluster_maker(lraiz);
   grafo_result.append('g')
     .attr('fill','none')
-    .attr('stroke','#555')
+    .attr('stroke','#45f5e7')
     .attr('stroke-opacity',0.4)
     .attr('stroke-width',1.5)
     .selectAll('path')
@@ -26,7 +26,7 @@ function cluster(lraiz){
     .join('g')
     .attr('transform',d=>`translate(${d.y},${d.x})`);
   nodo.append('circle')
-    .attr('fill',d=>d.children?'#555':(d._children?'#999':(d.data._prev?'#090':'#900')))
+    .attr('fill',d=>d.children?'#1c9b91':(d._children?'green':(d.data._prev?'red':'blue')))
       //arriba: el ternario más cerdo del mundo, pregunta si tiene hijos (esta abierto)
       //luego si no (cerrado) pregunta si tiene hijos en stash
       //si no, no tiene hijos por ningun lado, asi que es hoja, y pregunta si tiene preview o no
