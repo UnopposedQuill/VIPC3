@@ -100,7 +100,7 @@ body{
 	position: absolute;
     bottom: 8;
     height: 50px;
-    width: 250px;
+    width: auto;
     color: #45f5e7;
     background-color: rgba(0,0,0,0.2);
     float: left;

@@ -66,10 +66,10 @@
 				<div class="encapsuladorTexto" id="encapsuladorArchivos"></div>
 
 				<label class="lbl">Display: </label>
-				<select class="selectorClass">
-				  <option value="volvo">Heat Map</option>
-				  <option value="saab">Solar</option>
-				  <option value="mercedes">Extra</option>
+				<select class="selectorClass" id="svg_selected" onChange="select_svg()">
+				  <option value="solar">Sunburst</option>
+				  <option value="heat">HeatMap</option>
+				  <option value="cluster">Cluster</option>
 				</select>
 				<button class ="button" title="Change" id= "buttonChange" onclick="switcher()"></button>
 			</div>
@@ -77,7 +77,7 @@
 			<div class="encapsuladorRaw">
 				<div class="canvasDatos" id="searchGraphic">
 				<div class="svgSearches" id="svgSearches">
-
+          <svg></svg>
 				</div>
 				</div>
 			</div>
@@ -108,6 +108,7 @@
 		<script src="lib/jquery.slim.min.js"></script>
 		<script src="lib/p5.min.js"></script>
 		<script src="lib/p5.sound.min.js"></script>
+		<script src="lib/underscore.min.js"></script>
 
 		<!-- ----------------------------------------------- -->
 		<!-- --------------------Scripts-------------------- -->
@@ -121,12 +122,15 @@
 
 
 		<!-- Load d3.js -->
-		<script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
 
 		<!-- Load color palettes -->
 		<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
 		<script src="script/heapmap.js"></script>
+		<script src="script/jerarquia.js"></script>
+		<script src="script/sunburst.js"></script>
+		<script src="script/cluster.js"></script>
 	</body>
 </html>
 
