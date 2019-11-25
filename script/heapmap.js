@@ -127,7 +127,7 @@ function heapmap (){
   $('svg').html('');
   console.log(retornoSpotify)
   var colorDomain = d3.extent(retornoSpotify, function(d){
-      return d.value;
+      return 3;//d.value;
     });
 
 
@@ -153,14 +153,14 @@ var svg = d3.select("svg")
 
     rectangles
     .attr("x", function(d){
-      return d.titulo * 50; 
+      return 3 *3;//d.titulo * 50; 
 
     })
     .attr("y", function(d){
-      return d.artista * 50; 
+      return 3 *3;//d.artista * 50; 
     })
-    .attr("width", 10)
-    .attr("height", 10). 
+    .attr("width", 3)
+    .attr("height", 3). 
     style("fill", function(d){
       return colorScale(d.value); 
     });
