@@ -26,7 +26,7 @@ function cluster(lraiz){
     .join('g')
     .attr('transform',d=>`translate(${d.y},${d.x})`);
   nodo.append('circle')
-    .attr('fill',d=>d.children?'#1c9b91':(d._children?'green':(d.data._prev?'red':'blue')))
+    .attr('fill',d=>d.children?'#45f5e7':(d._children?'#1c9b91':(d.data._prev?'#14ff6a':'blue')))
       //arriba: el ternario más cerdo del mundo, pregunta si tiene hijos (esta abierto)
       //luego si no (cerrado) pregunta si tiene hijos en stash
       //si no, no tiene hijos por ningun lado, asi que es hoja, y pregunta si tiene preview o no
