@@ -17,7 +17,7 @@ function sunburst(lraiz){
     .data(lraiz.descendants().filter(d=>d.parent===lraiz||d===lraiz))
     .join('path')
       .attr('d',arc)
-      .style('fill','#999')
+      .style('fill',d=>d.children?'#555':(d._children?'#999':(d.data._prev?'#090':'#900'))) //para este ternario, vease cluster.js
       .style('stroke','#000')
       .on('click',inspeccionar)
     .append('title')
@@ -38,9 +38,11 @@ function sunburst(lraiz){
       .text(d=>(d.data.name?d.data.name:d.data.Titulo));
 }
 function inspeccionar(d){
-  if(!d.children) cambioSongSpoti(d.data._prev,d.data._cover,d.data._id);
-  else if(d===nodo_selecto && d!=sunburst_raiz) nodo_selecto = d.parent;
-  else {
+  if(!d.children) {
+    if(d.data._prev) cambioSongSpoti(d.data._prev,d.data._cover,d.data._id);
+  } else if(d===nodo_selecto && d!=sunburst_raiz) {
+    nodo_selecto = d.parent;
+  } else {
     nodo_selecto = d;
   }
   sunburst(nodo_selecto);

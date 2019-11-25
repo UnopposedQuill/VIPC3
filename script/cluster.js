@@ -26,7 +26,10 @@ function cluster(lraiz){
     .join('g')
     .attr('transform',d=>`translate(${d.y},${d.x})`);
   nodo.append('circle')
-    .attr('fill',d=>d.children?'#555':'#999')
+    .attr('fill',d=>d.children?'#555':(d._children?'#999':(d.data._prev?'#090':'#900')))
+      //arriba: el ternario más cerdo del mundo, pregunta si tiene hijos (esta abierto)
+      //luego si no (cerrado) pregunta si tiene hijos en stash
+      //si no, no tiene hijos por ningun lado, asi que es hoja, y pregunta si tiene preview o no
     .attr('r',6)
     .on('click',rama_inspeccionar);
   nodo.append('text')
@@ -43,7 +46,7 @@ function rama_inspeccionar(d,i,n){
     d._children = d.children;
     d.children = null;
   } else {
-    if(!d._children) cambioSongSpoti(d.data._prev,d.data._cover,d.data._id);
+    if(!d._children && d.data._prev) cambioSongSpoti(d.data._prev,d.data._cover,d.data._id);
     else {
       d.children = d._children;
       d._children = null;
