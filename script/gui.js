@@ -488,7 +488,7 @@ function select_svg(){
       value = value.options[value.selectedIndex].value;
   $('div.tooltip').remove();
   if(value==='solar'){
-    sunburst();
+    sunburst(nodo_selecto);
   } else if(value==='cluster'){
     cluster();
   } else {
