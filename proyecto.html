@@ -43,7 +43,7 @@
 		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
 
 		<div class = "contenedor" id="divisionOcultarSuperior">
-			<button class="misBotones" id="buttonSuperior" onclick="ocultarSuperior()" > ▲ </button>
+			<button class="button" id="buttonSuperior" onclick="ocultarSuperior()" > </button>
 		</div>
 
 		<div class = "contenedor" id="contenedorCanvas">
@@ -52,20 +52,20 @@
 
 		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
 		<div class = "contenedor" id="divisionOcultarLateral">
-			<button class="misBotones" id="buttonLateral" onclick="ocultarLateral()" > ► </button>
+			<button class="button" id="buttonLateral" onclick="ocultarLateral()" ></button>
 		</div>
 
 		<!--/*--------------------*//*--------------------*//*--------------------*/ -->
 		<div class = "contenedor" id="divisionBuscador">
 			<div class="encapsuladorTexto" id="encapsuladorBuscador">
 				<input type="text" id="inEscanor" placeholder="Buscar(Artista,Album,...)" />
-			 	<button class ="button" id= "buttonEscanor"> </button>
+			 	<button class ="button" id= "buttonEscanor" onclick="buscar()"> </button>
 			</div>
 
 			<div class="encapsuladorTexto" id="encapsuladorControlAuxiliar">
 				<div class="encapsuladorTexto" id="encapsuladorArchivos"></div>
 
-				<label class="lbl">Visualizacion: </label>
+				<label class="lbl">Display: </label>
 				<select class="selectorClass">
 				  <option value="volvo">Heat Map</option>
 				  <option value="saab">Solar</option>
@@ -76,9 +76,9 @@
 
 			<div class="encapsuladorRaw">
 				<div class="canvasDatos" id="searchGraphic">
-				<svg class="svgSearches" id="svgSearches">
+				<div class="svgSearches" id="svgSearches">
 
-				</svg>
+				</div>
 				</div>
 			</div>
 
@@ -91,8 +91,15 @@
 					
 				</div>
 			</div>
-
+			
 		</div>
+
+		<div class = "contenedor" id="divisionNombreCancion">
+			
+			<label id="lblNowPlaying">Now Playing: </label> <br>
+			<label id="tagCancion" >Cancion </label>
+		</div>
+		
 
 		<!-- ----------------------------------------------- -->
 		<!-- --------------------Librerias------------------ -->
@@ -110,5 +117,18 @@
 		<script src="script/gui.js"></script>
 		<script src="script/sketch.js"></script>
 		<script src="script/infoUI.js"></script>
+		
+
+
+		<!-- Load d3.js -->
+		<script src="https://d3js.org/d3.v4.js"></script>
+
+		<!-- Load color palettes -->
+		<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+		<script src="script/heapmap.js"></script>
 	</body>
 </html>
+
+
+

@@ -16,6 +16,18 @@ body{
 	color: rgb(230,230,230);
 	margin-left: 7px;
 }
+
+#lblNowPlaying{
+	font-size: 15px;
+	margin-left: 5px;
+
+}
+
+#tagCancion{
+	font-size: 35px;
+	margin-left: 15px;
+
+}
 /* --------------------Contenedores--------------------*/
 
 .contenedor{
@@ -33,14 +45,7 @@ body{
 	border-radius: 0px 0px 5px 5px;
 }
 
-#divisionOcultarSuperior{
-	float: top;
-	height: 35px;
-	display: flex;
-  	align-items: center;
-  	justify-content: center;
-	border-radius: 5px 5px 0px 0px;
-}
+
 
 #contenedorCanvas{
 	z-index: -1;
@@ -67,7 +72,17 @@ body{
 	display: flex;
   	align-items: center;
   	justify-content: center;
-	border-radius: 0px 10px 10px 0px;
+	border-radius: 0px 5px 5px 0px;
+
+}
+
+#divisionOcultarSuperior{
+	float: top;
+	height: 35px;
+	display: flex;
+  	align-items: center;
+  	justify-content: center;
+	border-radius: 5px 5px 0px 0px;
 }
 
 #divisionBuscador{
@@ -81,6 +96,17 @@ body{
 
 }
 
+#divisionNombreCancion{
+	position: absolute;
+    bottom: 8;
+    height: 50px;
+    width: 250px;
+    color: #45f5e7;
+    background-color: rgba(0,0,0,0.2);
+    float: left;
+
+
+}
 /*-------------------- Encapsuladores --------------------*/
 
 .encapsulador{
@@ -181,41 +207,6 @@ body{
 
 /*-------------------- Bottones --------------------*/
 
-.misBotones{
-	background-color: #45f5e7; /* Green */
-	border: none;
-	color: #555555;
-	padding: 5px;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
-	transition-duration: 0.4s;
-	margin-left: 10px;
-	border-radius: 5px 5px 5px 5px;
-	margin: 0 auto;
-}
-
-.misBotones:hover {
-  background-color: #92f9f6; /* Gris Claro */
-  color: #333333;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
-
-.misBotones:active {
-  background-color: #555555;
-  color: white;
-  box-shadow: 0 5px #666;
-  transform: translateY(2px);
-}
-
-#buttonSuperior{
-	width: 15%;
-}
-
-#buttonLateral{
-	height: 15%;
-}
 
 .button {
   	background-color:rgba(0,0,0,0); /*#4CAF50; /* Green */
@@ -347,6 +338,30 @@ body{
 	background-image:url("assets/images/buttons/change-Hover.png");
 }
 
+/*-------------------- buttonSuperior --------------------*/
+#buttonSuperior{
+	background-image:url("assets/images/buttons/Up.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+}
+
+#buttonSuperior:hover{
+	background-image:url("assets/images/buttons/Up-Hover.png");
+}
+
+/*-------------------- buttonLateral --------------------*/
+
+#buttonLateral{
+	background-image:url("assets/images/buttons/Der.png");
+	background-repeat:no-repeat;
+	background-size: contain;
+	height: 20px;
+	
+}
+
+#buttonLateral:hover{
+	background-image:url("assets/images/buttons/Der-Hover.png");
+}
 
 /* -------------------- Imputs --------------------*/
 

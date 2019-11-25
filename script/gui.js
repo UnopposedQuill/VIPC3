@@ -1,13 +1,67 @@
 let superiorOculta,superiorLateral= false;
 
+function cambioSongSpoti(uri,imagen){
+  if(sound) sound.setPath(uri,soundLoaded,soundError);
+  else sound = new p5.SoundFile(uri,soundLoaded,soundError);
+  arteAlbum = loadImage(imagen);
+}
+
+var retornoSpotify = [];
+function buscar(){
+  retornoSpotify = [];
+  //document.getElementById('r').innerHTML = "";
+  const uri = 'https://api.spotify.com/v1';
+  const consulta = '/search?q=' + document.getElementById('inEscanor').value + '&type=track&limit=50';
+  fetch(uri+consulta, {
+    method : 'GET',
+    headers : {'Authorization' : token.token_type + ' ' + token.access_token}
+  }).then(r=>r.json()).catch(e=>console.error(e)).then(r=>{
+    let d = document.getElementById('r');
+    if(r.error) {
+  //    d.innerHTML = r.error;
+      console.error(r.error);
+    } else {
+      console.log(r.tracks.items);
+      for(let lk in r['tracks']['items']){
+        /*let spolink = '<a href=' + r['tracks']['items'][lk].external_urls.spotify + '>'
+          + r['tracks']['items'][lk].name
+          + " - "
+          + r['tracks']['items'][lk].album.name
+          + " - "
+          + r['tracks']['items'][lk].artists[0].name
+          + '</a>';
+        let imagen = r['tracks']['items'][lk].album.images[0].url//.forEach(v=>{if});
+        let prevurl = r['tracks']['items'][lk].preview_url;
+        let spobutton = r['tracks']['items'][lk].preview_url?'<button onclick="cambioSongSpoti(\''+prevurl+"','"+imagen+'\')">Play It</button>':'<label>No hay vista previa disponible</label>'
+        d.insertAdjacentHTML('beforeend','<div>' + spolink + '  ' + spobutton + '</div>');
+        */
+        let imagen = r['tracks']['items'][lk].album.images[0].url//.forEach(v=>{if});
+        let prevurl = r['tracks']['items'][lk].preview_url;
+        let spobutton = r['tracks']['items'][lk].preview_url?'<button onclick="cambioSongSpoti(\''+prevurl+"','"+imagen+'\')">Play It</button>':'<label>N/A</label>'
+        let cancion = {
+          'Titulo' : r.tracks.items[lk].name,
+          'Artista' : r['tracks']['items'][lk].artists[0].name,
+          'Album' : r['tracks']['items'][lk].album.name,
+          'PlayIt' : spobutton,
+        }
+        retornoSpotify.push(cancion);
+      }
+      creadorTabla(retornoSpotify);
+    }
+  });
+}
+
 function ocultarSuperior(){
 
 	var componente = document.getElementById("divisionControles");
 
 	if(superiorOculta){
 
-        $("#buttonSuperior").html("▲");
-        document.getElementById("buttonSuperior").value="▲";
+       
+      miBtn=document.getElementById("buttonSuperior");
+      miBtn.style.backgroundImage = "url('assets/images/buttons/Up.png')";
+      miBtn.onmouseover = function(){miBtn.style.backgroundImage = "url('assets/images/buttons/Up-Hover.png')";};
+      miBtn.onmouseout = function(){miBtn.style.backgroundImage = "url('assets/images/buttons/Up.png')";};
 		// Cambiar a visible
 		componente.style.visibility='visible';
 
@@ -24,7 +78,10 @@ function ocultarSuperior(){
 	else{
 		// Cambiar a oculto
 
-		 $("#buttonSuperior").html("▼");
+		  miBtn=document.getElementById("buttonSuperior");
+      miBtn.style.backgroundImage = "url('assets/images/buttons/Down.png')";
+      miBtn.onmouseover = function(){miBtn.style.backgroundImage = "url('assets/images/buttons/Down-Hover.png')";};
+      miBtn.onmouseout = function(){miBtn.style.backgroundImage = "url('assets/images/buttons/Down.png')";};
          componente.style.visibility='hidden';
 
 		// Eliminar espacio por ocultar el componente
@@ -45,11 +102,18 @@ function ocultarLateral(){
 	var componente = document.getElementById("divisionBuscador");
 
 	if(superiorLateral){
-    $("#buttonLateral").html("►");
-		componente.style.visibility='visible';
+    miBtn2=document.getElementById("buttonLateral");
+    miBtn2.style.backgroundImage = "url('assets/images/buttons/Der.png')";
+    miBtn2.onmouseover = function(){miBtn2.style.backgroundImage = "url('assets/images/buttons/Der-Hover.png')";};
+    miBtn2.onmouseout = function(){miBtn2.style.backgroundImage = "url('assets/images/buttons/Der.png')";};
+		
+    componente.style.visibility='visible';
 	}
 	else{
-    $("#buttonLateral").html("◄");
+    miBtn2=document.getElementById("buttonLateral");
+    miBtn2.style.backgroundImage = "url('assets/images/buttons/Izq.png')";
+    miBtn2.onmouseover = function(){miBtn2.style.backgroundImage = "url('assets/images/buttons/Izq-Hover.png')";};
+    miBtn2.onmouseout = function(){miBtn2.style.backgroundImage = "url('assets/images/buttons/Izq.png')";};
 		componente.style.visibility='hidden';
 	}
 

@@ -8,12 +8,14 @@ var datos = [
 ];
 
 
-function creadorTabla(Informacion){
+function creadorTabla(datos){
 	 // EXTRACT VALUE FOR HTML HEADER.
         // ('Book ID', 'Book Name', 'Category' and 'Price')
+        console.log(datos);
         var col = [];
         for (var i = 0; i < datos.length; i++) {
             for (var key in datos[i]) {
+                console.log(datos[i][key]);
                 if (col.indexOf(key) === -1) {
                     col.push(key);
                 }
@@ -53,4 +55,4 @@ function creadorTabla(Informacion){
         divContainer.appendChild(table);
     }
 
-creadorTabla(datos);
+//creadorTabla(datos);

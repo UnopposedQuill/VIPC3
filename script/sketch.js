@@ -12,6 +12,7 @@ let sound = {
   stop:function(){},
   play:function(){},
   loop:function(){},
+  setPath:function(u,l,e){ sound = new p5.SoundFile(u,l,e); }
 }
 let fftwave, fftspec, amplitude, mic;
 let soundMode = true; //true=>archivo, false=>audio de la computadora/microfono
@@ -76,7 +77,7 @@ function setup(){
   });
 */
 
-  createSpan("Visualización Musica:").parent('#encapsuladorControles').class('lbl');
+  createSpan("Music Display:").parent('#encapsuladorControles').class('lbl');
   //sel.changed(selChange);
   ditto = createSelect().parent('#encapsuladorControles');
   ditto.class('selectorClass');
