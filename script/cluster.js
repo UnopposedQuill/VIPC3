@@ -8,7 +8,7 @@ function cluster(lraiz){
   cluster_maker(lraiz);
   grafo_result.append('g')
     .attr('fill','none')
-    .attr('stroke','#555')
+    .attr('stroke','#45f5e7')
     .attr('stroke-opacity',0.4)
     .attr('stroke-width',1.5)
     .selectAll('path')
@@ -26,7 +26,7 @@ function cluster(lraiz){
     .join('g')
     .attr('transform',d=>`translate(${d.y},${d.x})`);
   nodo.append('circle')
-    .attr('fill',d=>d.children?'#555':'#999')
+    .attr('fill',d=>d.children?'#1c9b91':'#999')
     .attr('r',6)
     .on('click',rama_inspeccionar);
   nodo.append('text')
