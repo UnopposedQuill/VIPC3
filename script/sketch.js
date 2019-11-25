@@ -586,8 +586,8 @@ function switcher() {
     document.getElementById('buttonChange').addEventListener('mouseleave', function(){
        document.getElementById('buttonChange').style.backgroundImage ="url('assets/images/buttons/change ON.png')";
     });
-
-
+    contenedor = document.getElementById("superContenedor");
+    svg_resize( contenedor.offsetHeight, contenedor.offsetWidth);
   } else {
     let contenedor = document.getElementById("superContenedor");
     let hijo = $('#svgSearches').detach();
@@ -603,6 +603,10 @@ function switcher() {
      document.getElementById('buttonChange').addEventListener('mouseleave', function(){
        document.getElementById('buttonChange').style.backgroundImage ="url('assets/images/buttons/change.png')";
     });
+    contenedor = document.getElementById("searchGraphic");
+    svg_resize( contenedor.offsetHeight, contenedor.offsetWidth);
   }
   flag=!flag;
+  $('canvas:not([class])').remove();
+  select_svg();
 }

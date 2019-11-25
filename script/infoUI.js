@@ -14,6 +14,7 @@ function creadorTabla(datos){
         var col = [];
         for (var i = 0; i < datos.length; i++) {
             for (var key in datos[i]) {
+              if(key[0]==='_') continue;
                 if (col.indexOf(key) === -1) {
                     col.push(key);
                 }

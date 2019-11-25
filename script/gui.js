@@ -1,9 +1,10 @@
 let superiorOculta,superiorLateral= false;
 
-function cambioSongSpoti(uri,imagen){
+function cambioSongSpoti(uri,imagen,index){
   if(sound) sound.setPath(uri,soundLoaded,soundError);
   else sound = new p5.SoundFile(uri,soundLoaded,soundError);
   arteAlbum = loadImage(imagen,i=>i.resize(width/2,0));
+  $('#tagCancion').html(`${retornoSpotify[index].Titulo} - ${retornoSpotify[index].Artista}`);
 }
 
 var retornoSpotify = [];
@@ -18,8 +19,9 @@ function buscar(){
   }).then(r=>r.json()).catch(e=>console.error(e)).then(r=>{
     let d = document.getElementById('r');
     if(r.error) {
-  //    d.innerHTML = r.error;
       console.error(r.error);
+      alert(r.error.message);
+      if(r.error.status===401) window.location.replace('http://localhost:8000');
     } else {
       console.log(r.tracks.items.length);
       if(r.tracks.items.length == 0) retornoSpotify.push({
@@ -31,18 +33,26 @@ function buscar(){
       else r.tracks.items.forEach(lk=>{
         let imagen = lk.album.images[0].url; //filtrar imagen a una de tamaño aceptable
         let prevurl = lk.preview_url;
-        let spobutton = prevurl?'<button onclick="cambioSongSpoti(\''+prevurl+"','"+imagen+'\')">Play It</button>':'<label>N/A</label>'
+        let spobutton = prevurl?'<button onclick="cambioSongSpoti(\''+prevurl+"','"+imagen+'\','+retornoSpotify.length+')">Play It</button>':'<label>N/A</label>'
         let cancion = {
           'Titulo' : lk.name,
           'Artista' : lk.artists[0].name,
           'Album' : lk.album.name,
           'PlayIt' : spobutton,
+          '_id' : retornoSpotify.length,
+          '_prev' : prevurl,
+          '_cover' : imagen,
         }
         retornoSpotify.push(cancion);
       });
-      creadorTabla(retornoSpotify);
-      
-    }
+      creadorTabla(retornoSpotify);    
+    } 
+    let gruped = agrupar(retornoSpotify);
+    sunburst_raiz = jerarquicar(gruped,document.getElementById('inEscanor').value);
+    cluster_raiz = sunburst_raiz.copy();
+    cluster_raiz.eachAfter(d=>{d._children=d.children;d.children=null;})
+    cluster_raiz.children = cluster_raiz._children;
+    sunburst(sunburst_raiz);
   });
 }
 
@@ -470,4 +480,18 @@ function validadorHover(element){
   }
   return false;
 
+}
+
+
+function select_svg(){
+  let value = document.getElementById('svg_selected');
+      value = value.options[value.selectedIndex].value;
+  $('div.tooltip').remove();
+  if(value==='solar'){
+    sunburst();
+  } else if(value==='cluster'){
+    cluster();
+  } else {
+    heapmap();
+  }
 }
