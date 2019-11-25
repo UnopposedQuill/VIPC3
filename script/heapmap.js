@@ -1,5 +1,7 @@
-function heapmap (){	
-$('svg').html("");	
+function heapmap1 (){	
+$('svg').html("");
+
+console.log(retornoSpotify);	
 // set the dimensions and margins of the graph
 var margin = {top: 80, right: 25, bottom: 30, left: 40},
   width = 450 - margin.left - margin.right,
@@ -14,7 +16,7 @@ var svg = d3.select("svg")
         "translate(" + margin.left + "," + margin.top + ")");
 
 //Read the data
-d3.csv("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/heatmap_data.csv", function(data) {
+d3.json(retornoSpotify, function(data) {
 
   // Labels of row and columns -> unique identifier of the column called 'group' and 'variable'
   var myGroups = d3.map(data, function(d){return d.group;}).keys()
@@ -104,8 +106,9 @@ svg.append("text")
         .attr("x", 0)
         .attr("y", -50)
         .attr("text-anchor", "left")
+        .style("fill", "#45f5e7")
         .style("font-size", "22px")
-        .text("A d3.js heatmap");
+        .text("heatmap");
 
 // Add subtitle to graph
 svg.append("text")
@@ -113,11 +116,54 @@ svg.append("text")
         .attr("y", -20)
         .attr("text-anchor", "left")
         .style("font-size", "14px")
-        .style("fill", "grey")
+        .style("fill", "#1c9b91")
         .style("max-width", 400)
-        .text("A short description of the take-away message of this chart.");
+        .text("information.");
 
 
 }
 
-heapmap();
+function heapmap (){  
+  $('svg').html('');
+  console.log(retornoSpotify)
+  var colorDomain = d3.extent(retornoSpotify, function(d){
+      return d.value;
+    });
+
+
+    var colorScale = d3.scaleLinear()
+      .domain(colorDomain)
+      .range(["lightblue","blue"]);
+
+var margin = {top: 80, right: 25, bottom: 30, left: 40},
+  width = 450 - margin.left - margin.right,
+  height = 450 - margin.top - margin.bottom;
+    // append the svg object to the body of the page
+var svg = d3.select("svg")
+  .attr("width", width + margin.left + margin.right)
+  .attr("height", height + margin.top + margin.bottom)
+.append("g")
+  .attr("transform",
+        "translate(" + margin.left + "," + margin.top + ")");
+
+    var rectangles = svg.selectAll("rect")
+      .data(retornoSpotify)
+      .enter()
+      .append("rect"); 
+
+    rectangles
+    .attr("x", function(d){
+      return d.titulo * 50; 
+
+    })
+    .attr("y", function(d){
+      return d.artista * 50; 
+    })
+    .attr("width", 10)
+    .attr("height", 10). 
+    style("fill", function(d){
+      return colorScale(d.value); 
+    });
+}
+
+
